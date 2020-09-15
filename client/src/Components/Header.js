@@ -11,7 +11,7 @@ function Header() {
     return(
         <ContainerHeader>
             <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-                <a className="navbar-brand" href="#">Survey App</a>
+                <a className="navbar-brand" href="/">Survey App</a>
             </nav>
         </ContainerHeader>
     );

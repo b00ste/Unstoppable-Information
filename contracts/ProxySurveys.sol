@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: MIT
 
 pragma solidity ^0.6.0;
-pragma experimental ABIEncoderV2;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
@@ -18,7 +17,7 @@ contract ProxySurveys is StorageSurveys, ERC20, Ownable
     _mint(msg.sender, internalInitialSupply);
   }
 
-  function update(address _newAddress) public
+  function update(address _newAddress) onlyOwner public
   {
     currentAddress = _newAddress;
   }

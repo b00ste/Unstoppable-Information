@@ -7,16 +7,16 @@ contract StorageSurveys
   struct Survey
   {
     address surveyOwner;
-    string[] choices;
+    string questions;
+    string answers;
     bool stoppedStatus;
     uint256 valueOfSurvey;
-    uint256 possibleVotes;
-    uint256 votedTimes;
-    mapping (string => address[]) votesOfEachChoice;
+    uint256 participantsAllowed;
+    uint256 totalParticipants;
   }
 
   //an array of strings, titles of surveys
-  string[] internal questions;
+  string[] internal surveys;
 
   //saving the surveys at which a certain user did participate
   mapping (address => mapping (string => bool)) internal userVotes;

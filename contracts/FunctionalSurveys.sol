@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: MIT
 
 pragma solidity ^0.6.0;
-pragma experimental ABIEncoderV2;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
@@ -9,6 +8,8 @@ import "./StorageSurveys.sol";
 
 contract FunctionalSurveys is StorageSurveys, ERC20, Ownable
 {
+// Initializing the contract
+
   constructor(uint256 initialSupply) public ERC20("SurveyToken", "SVT")
   {
     initialize(initialSupply);
@@ -22,44 +23,51 @@ contract FunctionalSurveys is StorageSurveys, ERC20, Ownable
     _initialized = true;
   }
 
-  function getSurveys() public view returns(string[] memory)
+// Events
+
+  event surveyNumber(uint256 nr);
+
+// General app functions
+
+  function getSurveyName(uint256 _ofNumber) public view returns(string memory)
   {
-    return(questions);
+    return(surveys[_ofNumber]);
   }
 
-  function getChoices(string memory _name) public view returns(string[] memory)
+  function getChoices(string memory _name) public view returns(string memory)
   {
-    return(surveyProps[_name].choices);
+    return(surveyProps[_name].questions);
   }
 
-  function getVotes(string memory _name, string memory _choice) public view returns(uint256, address[] memory)
-  {
-    return(surveyProps[_name].votesOfEachChoice[_choice].length, surveyProps[_name].votesOfEachChoice[_choice]);
-  }
-
-  function setSurevey(string memory _name, string[] memory _choices, uint256 _possibleVotes, uint256 _valueOfSurvey) public payable
+  function setSurevey(string memory _name, string memory _questions, uint256 _participantsAllowed, uint256 _valueOfSurvey) public payable
   {
     uint256 _actualValueOfSurvey = _valueOfSurvey * (10**18);
-    require(_actualValueOfSurvey/_possibleVotes >= 10**14);
+    require(_actualValueOfSurvey/_participantsAllowed >= 10**14);
     address msgSender = msg.sender;
-    questions.push(_name);
+    surveys.push(_name);
     surveyProps[_name].surveyOwner = msg.sender;
-    surveyProps[_name].choices = _choices;
+    surveyProps[_name].questions = _questions;
     surveyProps[_name].stoppedStatus = false;
     surveyProps[_name].valueOfSurvey = _actualValueOfSurvey - _actualValueOfSurvey/100*10;
-    surveyProps[_name].possibleVotes = _possibleVotes;
-    surveyProps[_name].votedTimes = 0;
+    surveyProps[_name].participantsAllowed = _participantsAllowed;
+    surveyProps[_name].totalParticipants = 0;
     _transfer(msgSender, Ownable.owner(), _actualValueOfSurvey/100*10);
     _transfer(msgSender, address(this), surveyProps[_name].valueOfSurvey);
+    emit surveyNumber(surveys.length);
   }
 
-  /*function toggleStopOfSurvey(string memory _name) public
+  function setAnswers(string memory _name, string memory _answers) public
   {
-      require(msg.sender == surveyProps[_name].surveyOwner);
-      surveyProps[_name].stoppedStatus = !surveyProps[_name].stoppedStatus;
-  }*/
+    require(!userVotes[msg.sender][_name]);
+    userVotes[msg.sender][_name] = true;
+    require(!surveyProps[_name].stoppedStatus);
+    surveyProps[_name].answers = _answers;
+    surveyProps[_name].totalParticipants++;
+    _transfer(address(this), msg.sender, surveyProps[_name].valueOfSurvey / surveyProps[_name].participantsAllowed);
+    if(surveyProps[_name].totalParticipants == surveyProps[_name].participantsAllowed) surveyProps[_name].stoppedStatus = true;
+  }
 
-  function vote(string memory _name, string memory _choice) public
+  /*function vote(string memory _name, string memory _choice) public
   {
     require(!surveyProps[_name].stoppedStatus);
     require(!userVotes[msg.sender][_name]);
@@ -69,6 +77,6 @@ contract FunctionalSurveys is StorageSurveys, ERC20, Ownable
     assert(userVotes[msg.sender][_name]);
     _transfer(address(this), msg.sender, surveyProps[_name].valueOfSurvey / surveyProps[_name].possibleVotes);
     if(surveyProps[_name].votedTimes == surveyProps[_name].possibleVotes) surveyProps[_name].stoppedStatus = true;
-  }
+  }*/
 
 }
