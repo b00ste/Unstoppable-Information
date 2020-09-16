@@ -17,21 +17,29 @@ function Body(props) {
         <>
         <Container>
             <FirstRow
+                key='firstrow'
+                
                 title={props.title}
-                addNewTitle={props.addNewTitle}
-                saveNewTitleValue={props.saveNewTitleValue}
+                setTitle={props.setTitle}
+
                 options={props.options}
-                addNewOption={props.addNewOption}
-                saveNewOptionValue={props.saveNewOptionValue}
+                setOptions={props.setOptions}
+                
                 value={props.value}
                 maxParticipants={props.maxParticipants}
-                saveNewValue={props.saveNewValue}
-                saveNewMaxParticipants={props.saveNewMaxParticipants}
-                addNewValueAndMaxParticipants={props.addNewValueAndMaxParticipants}
+                setValue={props.setValue}
+                setMaxParticipants={props.setMaxParticipants}
             />
         </Container>
         <Container>
-            <SurveyButtons setNewSurvey={props.setNewSurvey} />
+            <SurveyButtons
+                surveysContract={props.surveysContract}
+                setNewSurvey={props.setNewSurvey}
+                title={props.title}
+                options={props.options}
+                value={props.value}
+                maxParticipants={props.maxParticipants}
+            />
         </Container>
         </>
     );

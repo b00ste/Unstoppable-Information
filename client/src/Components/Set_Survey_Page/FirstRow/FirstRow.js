@@ -29,25 +29,28 @@ function FirstRow(props) {
         <>
         <Component>
             <SurveyTitle
+                key='surveytitle'
+
                 title={props.title}
-                addNewTitle={props.addNewTitle}
-                saveNewTitleValue={props.saveNewTitleValue}
+                setTitle={props.setTitle}
             />
         </Component>
         <Component>
             <SurveyOptions
+                key='surveyoptions'
+
                 options={props.options}
-                addNewOption={props.addNewOption}
-                saveNewOptionValue={props.saveNewOptionValue}
+                setOptions={props.setOptions}
             />
         </Component>
         <Component>
             <SurveyValue 
+                key='surveyvalue'
+
                 value={props.value}
                 maxParticipants={props.maxParticipants}
-                saveNewValue={props.saveNewValue}
-                saveNewMaxParticipants={props.saveNewMaxParticipants}
-                addNewValueAndMaxParticipants={props.addNewValueAndMaxParticipants}
+                setValue={props.setValue}
+                setMaxParticipants={props.setMaxParticipants}
             />
         </Component>
         </>
