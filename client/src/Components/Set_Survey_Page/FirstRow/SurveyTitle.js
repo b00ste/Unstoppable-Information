@@ -14,7 +14,7 @@ function SurveyTitle(props) {
 
     return(
         <>
-            { props.title ? <h6>Title of your survey is {props.title}</h6> : <></> }
+            { props.title ? <h6>Title of your survey is "{props.title}".</h6> : <h6>Set a title.</h6> }
             <input type="text" className="form-control" placeholder="Title" onChange={saveNewTitleValue} />
             <button type="button" className="btn btn-primary" onClick={addNewTitle}>Add title</button>
         </>

@@ -5,7 +5,8 @@ import SurveyValue from './SurveyValue.js'
 import styled from 'styled-components';
 
 const Component = styled.div `
-    flex: 0 0 400px;
+    width: 400px;
+    word-wrap: break-word;
     margin: 15px;
     border: 1px solid black;
     text-align: center;
@@ -16,6 +17,7 @@ const Component = styled.div `
     }
     h6 {
         margin: 15px;
+        disply: inline;
     }
     button {
         display: inline-block;

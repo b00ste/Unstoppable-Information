@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import 'bootswatch/dist/lux/bootstrap.min.css';
 import {
     Link
 } from 'react-router-dom';

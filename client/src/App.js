@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 
 import Header from './Components/Header.js';
+import Footer from './Components/Footer.js';
 import Body from './Components/Set_Survey_Page/Body.js';
 
 import Web3 from 'web3';
@@ -67,6 +68,7 @@ function App() {
         </Route>
         
       </Switch>
+      <Footer />
     </Router>
   );
 }
