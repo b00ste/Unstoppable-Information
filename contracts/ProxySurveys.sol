@@ -2,19 +2,17 @@
 
 pragma solidity ^0.6.0;
 
-import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "./StorageSurveys.sol";
+import "./TokenSurveys.sol";
 
-contract ProxySurveys is StorageSurveys, ERC20, Ownable
+contract ProxySurveys is Ownable, StorageSurveys, TokenSurveys(1000)
 {
   address currentAddress;
 
-  constructor(address _currentAddress, uint256 initialSupply) public ERC20("SurveyToken", "SVT")
+  constructor(address _currentAddress) public
   {
     currentAddress = _currentAddress;
-    uint internalInitialSupply = initialSupply * (10 ** 18);
-    _mint(msg.sender, internalInitialSupply);
   }
 
   function update(address _newAddress) onlyOwner public

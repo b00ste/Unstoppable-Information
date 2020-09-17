@@ -1,5 +1,5 @@
 import React from 'react'
-import SurveyOptions from './SurveyOptions.js'
+import SurveyQuestions from './SurveyQuestions.js'
 import SurveyTitle from './SurveyTitle.js'
 import SurveyValue from './SurveyValue.js'
 import styled from 'styled-components';
@@ -38,11 +38,11 @@ function FirstRow(props) {
             />
         </Component>
         <Component>
-            <SurveyOptions
+            <SurveyQuestions
                 key='surveyoptions'
 
-                options={props.options}
-                setOptions={props.setOptions}
+                questions={props.questions}
+                setQuestions={props.setQuestions}
             />
         </Component>
         <Component>

@@ -2,24 +2,24 @@
 
 pragma solidity ^0.6.0;
 
-import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "./StorageSurveys.sol";
+import "./TokenSurveys.sol";
 
-contract FunctionalSurveys is StorageSurveys, ERC20, Ownable
+
+contract FunctionalSurveys is Ownable, StorageSurveys, TokenSurveys(1000)
 {
 // Initializing the contract
 
-  constructor(uint256 initialSupply) public ERC20("SurveyToken", "SVT")
+  constructor() public
   {
-    initialize(initialSupply);
+    initialize();
   }
 
-  function initialize(uint256 initialSupply) public
+  function initialize() public
   {
     require(!_initialized);
-    uint internalInitialSupply = initialSupply * (10 ** 18);
-    _mint(msg.sender, internalInitialSupply);
+    _uintStorage['totalSurveys'] = 0;
     _initialized = true;
   }
 
@@ -39,32 +39,47 @@ contract FunctionalSurveys is StorageSurveys, ERC20, Ownable
     return(surveyProps[_name].questions);
   }
 
-  function setSurevey(string memory _name, string memory _questions, uint256 _participantsAllowed, uint256 _valueOfSurvey) public payable
+  function setSurvey(string memory _name, string memory _questions, uint256 _participantsAllowed, uint256 _valueOfSurvey) public payable
   {
+    //saving the value of survey with 18 decimals
     uint256 _actualValueOfSurvey = _valueOfSurvey * (10**18);
+    //require that every user that participates at the survey gets at least 0.0001 coins
     require(_actualValueOfSurvey/_participantsAllowed >= 10**14);
     address msgSender = msg.sender;
+    //saving the new survey name to the array and saving the total number of surveys
     surveys.push(_name);
-    surveyProps[_name].surveyOwner = msg.sender;
+    _uintStorage['totalSurveys']++;
+    //creating a survey with it's properties
+    surveyProps[_name].surveyOwner = msgSender;
     surveyProps[_name].questions = _questions;
     surveyProps[_name].stoppedStatus = false;
     surveyProps[_name].valueOfSurvey = _actualValueOfSurvey - _actualValueOfSurvey/100*10;
     surveyProps[_name].participantsAllowed = _participantsAllowed;
     surveyProps[_name].totalParticipants = 0;
+    //creating user account
+    userInfo[msgSender].surevysTitles[userInfo[msgSender].surveysCreated] = _name;
+    userInfo[msgSender].surveysCreated++;
+    //sending the rewards to the creator of the contract and setting the value of the survey
     _transfer(msgSender, Ownable.owner(), _actualValueOfSurvey/100*10);
     _transfer(msgSender, address(this), surveyProps[_name].valueOfSurvey);
-    emit surveyNumber(surveys.length);
+    //emiting the number of the survey in the array of surveys
+    emit surveyNumber(surveys.length - 1);
   }
 
-  function setAnswers(string memory _name, string memory _answers) public
+  function answerSurvey(string memory _name, string memory _answers) public
   {
-    require(!userVotes[msg.sender][_name]);
-    userVotes[msg.sender][_name] = true;
+    //if the free slots for participation at this survey are filled stop the contract
+    if(surveyProps[_name].totalParticipants == surveyProps[_name].participantsAllowed) surveyProps[_name].stoppedStatus = true;
+    //require that the survey hase participation slots free and didn't stop
     require(!surveyProps[_name].stoppedStatus);
+    //require that the user didn't participate at this survey and setting it's participation
+    require(!userParticipated[msg.sender][_name]);
+    userParticipated[msg.sender][_name] = true;
+    //setting new answers to the survey and updating the number of participants
     surveyProps[_name].answers = _answers;
     surveyProps[_name].totalParticipants++;
+    //sending the rewards for participating at the survey
     _transfer(address(this), msg.sender, surveyProps[_name].valueOfSurvey / surveyProps[_name].participantsAllowed);
-    if(surveyProps[_name].totalParticipants == surveyProps[_name].participantsAllowed) surveyProps[_name].stoppedStatus = true;
   }
 
   /*function vote(string memory _name, string memory _choice) public

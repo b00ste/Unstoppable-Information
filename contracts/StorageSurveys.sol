@@ -4,6 +4,7 @@ pragma solidity ^0.6.0;
 
 contract StorageSurveys
 {
+  //creating a sruct with all properties of a survey and saving all the properties of a survey in a mapping
   struct Survey
   {
     address surveyOwner;
@@ -14,15 +15,21 @@ contract StorageSurveys
     uint256 participantsAllowed;
     uint256 totalParticipants;
   }
+  mapping (string => Survey) internal surveyProps;
+
+  //
+  struct User
+  {
+    uint256 surveysCreated;
+    mapping (uint256 => string) surevysTitles;
+  }
+  mapping (address => User) userInfo;
 
   //an array of strings, titles of surveys
   string[] internal surveys;
 
   //saving the surveys at which a certain user did participate
-  mapping (address => mapping (string => bool)) internal userVotes;
-
-  //saving all the properties of a survey
-  mapping (string => Survey) internal surveyProps;
+  mapping (address => mapping (string => bool)) internal userParticipated;
 
   //setting all possible variables needed in future
   mapping (string => uint256) _uintStorage;

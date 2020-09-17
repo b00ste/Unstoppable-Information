@@ -15,27 +15,27 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"_initialized\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/C/Users/User/Projects/Surveys_V2/contracts/StorageSurveys.sol\":\"StorageSurveys\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/C/Users/User/Projects/Surveys_V2/contracts/StorageSurveys.sol\":{\"keccak256\":\"0x6a0c4d174038d905a57e9dfb2f2592233755c92aa6da150b9da180319319cbac\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://72965a4d934a86857f25ff0f8ad04216b02fac0512f1e5c82ec9c3ff11016976\",\"dweb:/ipfs/QmWHe6sJiFqZ1Hv3bWphE2xWUtnmF8ow4PV68uHBGSCMUG\"]}},\"version\":1}",
-  "bytecode": "0x6080604052348015600f57600080fd5b5060948061001e6000396000f3fe6080604052348015600f57600080fd5b506004361060285760003560e01c80633072cf6014602d575b600080fd5b6033604b565b60405180821515815260200191505060405180910390f35b600860009054906101000a900460ff168156fea264697066735822122016851c40e081bfda9e4590dbc8457bbe72ab4d3612aaa06f5c8eb6c7bbe65d7864736f6c634300060c0033",
-  "deployedBytecode": "0x6080604052348015600f57600080fd5b506004361060285760003560e01c80633072cf6014602d575b600080fd5b6033604b565b60405180821515815260200191505060405180910390f35b600860009054906101000a900460ff168156fea264697066735822122016851c40e081bfda9e4590dbc8457bbe72ab4d3612aaa06f5c8eb6c7bbe65d7864736f6c634300060c0033",
+  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"_initialized\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/C/Users/User/Projects/Surveys_V2/contracts/StorageSurveys.sol\":\"StorageSurveys\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/C/Users/User/Projects/Surveys_V2/contracts/StorageSurveys.sol\":{\"keccak256\":\"0xd90845057161ff230f64442609d3656a1b262bc86b53a3bd5a0e06b1cd06d7e1\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://1f8b52cfd7ce78159bfbf60acb0754aafc8e81591cbb2a1512fd2717a6e441f3\",\"dweb:/ipfs/Qmbwjg4Y1yk3oHmxeo5FKVUvLjydFKU1GBSWs3KCuPhD9B\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b5060948061001e6000396000f3fe6080604052348015600f57600080fd5b506004361060285760003560e01c80633072cf6014602d575b600080fd5b6033604b565b60405180821515815260200191505060405180910390f35b600960009054906101000a900460ff168156fea2646970667358221220f628f893a32e3a19d8a4208dd448e37bf7a75adf62ac98d4aa08ba7029f51eec64736f6c634300060c0033",
+  "deployedBytecode": "0x6080604052348015600f57600080fd5b506004361060285760003560e01c80633072cf6014602d575b600080fd5b6033604b565b60405180821515815260200191505060405180910390f35b600960009054906101000a900460ff168156fea2646970667358221220f628f893a32e3a19d8a4208dd448e37bf7a75adf62ac98d4aa08ba7029f51eec64736f6c634300060c0033",
   "immutableReferences": {},
-  "sourceMap": "62:865:3:-:0;;;;;;;;;;;;;;;;;;;",
-  "deployedSourceMap": "62:865:3:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;899:24;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o",
-  "source": "// SPDX-License-Identifier: MIT\r\n\r\npragma solidity ^0.6.0;\r\n\r\ncontract StorageSurveys\r\n{\r\n  struct Survey\r\n  {\r\n    address surveyOwner;\r\n    string questions;\r\n    string answers;\r\n    bool stoppedStatus;\r\n    uint256 valueOfSurvey;\r\n    uint256 participantsAllowed;\r\n    uint256 totalParticipants;\r\n  }\r\n\r\n  //an array of strings, titles of surveys\r\n  string[] internal surveys;\r\n\r\n  //saving the surveys at which a certain user did participate\r\n  mapping (address => mapping (string => bool)) internal userVotes;\r\n\r\n  //saving all the properties of a survey\r\n  mapping (string => Survey) internal surveyProps;\r\n\r\n  //setting all possible variables needed in future\r\n  mapping (string => uint256) _uintStorage;\r\n  mapping (string => string) _stringStorage;\r\n  mapping (string => bool) _boolStorage;\r\n  mapping (string => address) _addressStorage;\r\n  mapping (string => bytes4) _bytesStorage;\r\n\r\n  bool public _initialized;\r\n}\r\n",
+  "sourceMap": "62:1085:3:-:0;;;;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "62:1085:3:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1119:24;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o",
+  "source": "// SPDX-License-Identifier: MIT\r\n\r\npragma solidity ^0.6.0;\r\n\r\ncontract StorageSurveys\r\n{\r\n  //creating a sruct with all properties of a survey and saving all the properties of a survey in a mapping\r\n  struct Survey\r\n  {\r\n    address surveyOwner;\r\n    string questions;\r\n    string answers;\r\n    bool stoppedStatus;\r\n    uint256 valueOfSurvey;\r\n    uint256 participantsAllowed;\r\n    uint256 totalParticipants;\r\n  }\r\n  mapping (string => Survey) internal surveyProps;\r\n\r\n  //\r\n  struct User\r\n  {\r\n    uint256 surveysCreated;\r\n    mapping (uint256 => string) surevysTitles;\r\n  }\r\n  mapping (address => User) userInfo;\r\n\r\n  //an array of strings, titles of surveys\r\n  string[] internal surveys;\r\n\r\n  //saving the surveys at which a certain user did participate\r\n  mapping (address => mapping (string => bool)) internal userParticipated;\r\n\r\n  //setting all possible variables needed in future\r\n  mapping (string => uint256) _uintStorage;\r\n  mapping (string => string) _stringStorage;\r\n  mapping (string => bool) _boolStorage;\r\n  mapping (string => address) _addressStorage;\r\n  mapping (string => bytes4) _bytesStorage;\r\n\r\n  bool public _initialized;\r\n}\r\n",
   "sourcePath": "C:\\Users\\User\\Projects\\Surveys_V2\\contracts\\StorageSurveys.sol",
   "ast": {
     "absolutePath": "/C/Users/User/Projects/Surveys_V2/contracts/StorageSurveys.sol",
     "exportedSymbols": {
       "StorageSurveys": [
-        455
+        453
       ]
     },
-    "id": 456,
+    "id": 454,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 404,
+        "id": 391,
         "literals": [
           "solidity",
           "^",
@@ -52,26 +52,26 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 455,
+        "id": 453,
         "linearizedBaseContracts": [
-          455
+          453
         ],
         "name": "StorageSurveys",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "canonicalName": "StorageSurveys.Survey",
-            "id": 419,
+            "id": 406,
             "members": [
               {
                 "constant": false,
-                "id": 406,
+                "id": 393,
                 "mutability": "mutable",
                 "name": "surveyOwner",
                 "nodeType": "VariableDeclaration",
                 "overrides": null,
-                "scope": 419,
-                "src": "116:19:3",
+                "scope": 406,
+                "src": "225:19:3",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -79,10 +79,10 @@
                   "typeString": "address"
                 },
                 "typeName": {
-                  "id": 405,
+                  "id": 392,
                   "name": "address",
                   "nodeType": "ElementaryTypeName",
-                  "src": "116:7:3",
+                  "src": "225:7:3",
                   "stateMutability": "nonpayable",
                   "typeDescriptions": {
                     "typeIdentifier": "t_address",
@@ -94,13 +94,13 @@
               },
               {
                 "constant": false,
-                "id": 408,
+                "id": 395,
                 "mutability": "mutable",
                 "name": "questions",
                 "nodeType": "VariableDeclaration",
                 "overrides": null,
-                "scope": 419,
-                "src": "142:16:3",
+                "scope": 406,
+                "src": "251:16:3",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -108,10 +108,10 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 407,
+                  "id": 394,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
-                  "src": "142:6:3",
+                  "src": "251:6:3",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_storage_ptr",
                     "typeString": "string"
@@ -122,13 +122,13 @@
               },
               {
                 "constant": false,
-                "id": 410,
+                "id": 397,
                 "mutability": "mutable",
                 "name": "answers",
                 "nodeType": "VariableDeclaration",
                 "overrides": null,
-                "scope": 419,
-                "src": "165:14:3",
+                "scope": 406,
+                "src": "274:14:3",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -136,10 +136,10 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 409,
+                  "id": 396,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
-                  "src": "165:6:3",
+                  "src": "274:6:3",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_storage_ptr",
                     "typeString": "string"
@@ -150,13 +150,13 @@
               },
               {
                 "constant": false,
-                "id": 412,
+                "id": 399,
                 "mutability": "mutable",
                 "name": "stoppedStatus",
                 "nodeType": "VariableDeclaration",
                 "overrides": null,
-                "scope": 419,
-                "src": "186:18:3",
+                "scope": 406,
+                "src": "295:18:3",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -164,10 +164,10 @@
                   "typeString": "bool"
                 },
                 "typeName": {
-                  "id": 411,
+                  "id": 398,
                   "name": "bool",
                   "nodeType": "ElementaryTypeName",
-                  "src": "186:4:3",
+                  "src": "295:4:3",
                   "typeDescriptions": {
                     "typeIdentifier": "t_bool",
                     "typeString": "bool"
@@ -178,13 +178,13 @@
               },
               {
                 "constant": false,
-                "id": 414,
+                "id": 401,
                 "mutability": "mutable",
                 "name": "valueOfSurvey",
                 "nodeType": "VariableDeclaration",
                 "overrides": null,
-                "scope": 419,
-                "src": "211:21:3",
+                "scope": 406,
+                "src": "320:21:3",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -192,10 +192,154 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 413,
+                  "id": 400,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
-                  "src": "211:7:3",
+                  "src": "320:7:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 403,
+                "mutability": "mutable",
+                "name": "participantsAllowed",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 406,
+                "src": "348:27:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 402,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "348:7:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 405,
+                "mutability": "mutable",
+                "name": "totalParticipants",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 406,
+                "src": "382:25:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 404,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "382:7:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "Survey",
+            "nodeType": "StructDefinition",
+            "scope": 453,
+            "src": "201:212:3",
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 410,
+            "mutability": "mutable",
+            "name": "surveyProps",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 453,
+            "src": "417:47:3",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_string_memory_ptr_$_t_struct$_Survey_$406_storage_$",
+              "typeString": "mapping(string => struct StorageSurveys.Survey)"
+            },
+            "typeName": {
+              "id": 409,
+              "keyType": {
+                "id": 407,
+                "name": "string",
+                "nodeType": "ElementaryTypeName",
+                "src": "426:6:3",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "417:26:3",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_string_memory_ptr_$_t_struct$_Survey_$406_storage_$",
+                "typeString": "mapping(string => struct StorageSurveys.Survey)"
+              },
+              "valueType": {
+                "contractScope": null,
+                "id": 408,
+                "name": "Survey",
+                "nodeType": "UserDefinedTypeName",
+                "referencedDeclaration": 406,
+                "src": "436:6:3",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Survey_$406_storage_ptr",
+                  "typeString": "struct StorageSurveys.Survey"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "canonicalName": "StorageSurveys.User",
+            "id": 417,
+            "members": [
+              {
+                "constant": false,
+                "id": 412,
+                "mutability": "mutable",
+                "name": "surveysCreated",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 417,
+                "src": "499:22:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 411,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "499:7:3",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint256",
                     "typeString": "uint256"
@@ -208,74 +352,114 @@
                 "constant": false,
                 "id": 416,
                 "mutability": "mutable",
-                "name": "participantsAllowed",
+                "name": "surevysTitles",
                 "nodeType": "VariableDeclaration",
                 "overrides": null,
-                "scope": 419,
-                "src": "239:27:3",
+                "scope": 417,
+                "src": "528:41:3",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_uint256",
-                  "typeString": "uint256"
+                  "typeIdentifier": "t_mapping$_t_uint256_$_t_string_storage_$",
+                  "typeString": "mapping(uint256 => string)"
                 },
                 "typeName": {
                   "id": 415,
-                  "name": "uint256",
-                  "nodeType": "ElementaryTypeName",
-                  "src": "239:7:3",
+                  "keyType": {
+                    "id": 413,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "537:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "nodeType": "Mapping",
+                  "src": "528:27:3",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_uint256",
-                    "typeString": "uint256"
-                  }
-                },
-                "value": null,
-                "visibility": "internal"
-              },
-              {
-                "constant": false,
-                "id": 418,
-                "mutability": "mutable",
-                "name": "totalParticipants",
-                "nodeType": "VariableDeclaration",
-                "overrides": null,
-                "scope": 419,
-                "src": "273:25:3",
-                "stateVariable": false,
-                "storageLocation": "default",
-                "typeDescriptions": {
-                  "typeIdentifier": "t_uint256",
-                  "typeString": "uint256"
-                },
-                "typeName": {
-                  "id": 417,
-                  "name": "uint256",
-                  "nodeType": "ElementaryTypeName",
-                  "src": "273:7:3",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_uint256",
-                    "typeString": "uint256"
+                    "typeIdentifier": "t_mapping$_t_uint256_$_t_string_storage_$",
+                    "typeString": "mapping(uint256 => string)"
+                  },
+                  "valueType": {
+                    "id": 414,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "548:6:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
                   }
                 },
                 "value": null,
                 "visibility": "internal"
               }
             ],
-            "name": "Survey",
+            "name": "User",
             "nodeType": "StructDefinition",
-            "scope": 455,
-            "src": "92:212:3",
+            "scope": 453,
+            "src": "477:98:3",
             "visibility": "public"
           },
           {
             "constant": false,
-            "id": 422,
+            "id": 421,
+            "mutability": "mutable",
+            "name": "userInfo",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 453,
+            "src": "579:34:3",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_address_$_t_struct$_User_$417_storage_$",
+              "typeString": "mapping(address => struct StorageSurveys.User)"
+            },
+            "typeName": {
+              "id": 420,
+              "keyType": {
+                "id": 418,
+                "name": "address",
+                "nodeType": "ElementaryTypeName",
+                "src": "588:7:3",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "579:25:3",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_address_$_t_struct$_User_$417_storage_$",
+                "typeString": "mapping(address => struct StorageSurveys.User)"
+              },
+              "valueType": {
+                "contractScope": null,
+                "id": 419,
+                "name": "User",
+                "nodeType": "UserDefinedTypeName",
+                "referencedDeclaration": 417,
+                "src": "599:4:3",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_User_$417_storage_ptr",
+                  "typeString": "struct StorageSurveys.User"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 424,
             "mutability": "mutable",
             "name": "surveys",
             "nodeType": "VariableDeclaration",
             "overrides": null,
-            "scope": 455,
-            "src": "354:25:3",
+            "scope": 453,
+            "src": "664:25:3",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -284,19 +468,19 @@
             },
             "typeName": {
               "baseType": {
-                "id": 420,
+                "id": 422,
                 "name": "string",
                 "nodeType": "ElementaryTypeName",
-                "src": "354:6:3",
+                "src": "664:6:3",
                 "typeDescriptions": {
                   "typeIdentifier": "t_string_storage_ptr",
                   "typeString": "string"
                 }
               },
-              "id": 421,
+              "id": 423,
               "length": null,
               "nodeType": "ArrayTypeName",
-              "src": "354:8:3",
+              "src": "664:8:3",
               "typeDescriptions": {
                 "typeIdentifier": "t_array$_t_string_storage_$dyn_storage_ptr",
                 "typeString": "string[]"
@@ -307,13 +491,13 @@
           },
           {
             "constant": false,
-            "id": 428,
+            "id": 430,
             "mutability": "mutable",
-            "name": "userVotes",
+            "name": "userParticipated",
             "nodeType": "VariableDeclaration",
             "overrides": null,
-            "scope": 455,
-            "src": "450:64:3",
+            "scope": 453,
+            "src": "760:71:3",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -321,46 +505,46 @@
               "typeString": "mapping(address => mapping(string => bool))"
             },
             "typeName": {
-              "id": 427,
+              "id": 429,
               "keyType": {
-                "id": 423,
+                "id": 425,
                 "name": "address",
                 "nodeType": "ElementaryTypeName",
-                "src": "459:7:3",
+                "src": "769:7:3",
                 "typeDescriptions": {
                   "typeIdentifier": "t_address",
                   "typeString": "address"
                 }
               },
               "nodeType": "Mapping",
-              "src": "450:45:3",
+              "src": "760:45:3",
               "typeDescriptions": {
                 "typeIdentifier": "t_mapping$_t_address_$_t_mapping$_t_string_memory_ptr_$_t_bool_$_$",
                 "typeString": "mapping(address => mapping(string => bool))"
               },
               "valueType": {
-                "id": 426,
+                "id": 428,
                 "keyType": {
-                  "id": 424,
+                  "id": 426,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
-                  "src": "479:6:3",
+                  "src": "789:6:3",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_storage_ptr",
                     "typeString": "string"
                   }
                 },
                 "nodeType": "Mapping",
-                "src": "470:24:3",
+                "src": "780:24:3",
                 "typeDescriptions": {
                   "typeIdentifier": "t_mapping$_t_string_memory_ptr_$_t_bool_$",
                   "typeString": "mapping(string => bool)"
                 },
                 "valueType": {
-                  "id": 425,
+                  "id": 427,
                   "name": "bool",
                   "nodeType": "ElementaryTypeName",
-                  "src": "489:4:3",
+                  "src": "799:4:3",
                   "typeDescriptions": {
                     "typeIdentifier": "t_bool",
                     "typeString": "bool"
@@ -373,62 +557,13 @@
           },
           {
             "constant": false,
-            "id": 432,
-            "mutability": "mutable",
-            "name": "surveyProps",
-            "nodeType": "VariableDeclaration",
-            "overrides": null,
-            "scope": 455,
-            "src": "564:47:3",
-            "stateVariable": true,
-            "storageLocation": "default",
-            "typeDescriptions": {
-              "typeIdentifier": "t_mapping$_t_string_memory_ptr_$_t_struct$_Survey_$419_storage_$",
-              "typeString": "mapping(string => struct StorageSurveys.Survey)"
-            },
-            "typeName": {
-              "id": 431,
-              "keyType": {
-                "id": 429,
-                "name": "string",
-                "nodeType": "ElementaryTypeName",
-                "src": "573:6:3",
-                "typeDescriptions": {
-                  "typeIdentifier": "t_string_storage_ptr",
-                  "typeString": "string"
-                }
-              },
-              "nodeType": "Mapping",
-              "src": "564:26:3",
-              "typeDescriptions": {
-                "typeIdentifier": "t_mapping$_t_string_memory_ptr_$_t_struct$_Survey_$419_storage_$",
-                "typeString": "mapping(string => struct StorageSurveys.Survey)"
-              },
-              "valueType": {
-                "contractScope": null,
-                "id": 430,
-                "name": "Survey",
-                "nodeType": "UserDefinedTypeName",
-                "referencedDeclaration": 419,
-                "src": "583:6:3",
-                "typeDescriptions": {
-                  "typeIdentifier": "t_struct$_Survey_$419_storage_ptr",
-                  "typeString": "struct StorageSurveys.Survey"
-                }
-              }
-            },
-            "value": null,
-            "visibility": "internal"
-          },
-          {
-            "constant": false,
-            "id": 436,
+            "id": 434,
             "mutability": "mutable",
             "name": "_uintStorage",
             "nodeType": "VariableDeclaration",
             "overrides": null,
-            "scope": 455,
-            "src": "671:40:3",
+            "scope": 453,
+            "src": "891:40:3",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -436,28 +571,28 @@
               "typeString": "mapping(string => uint256)"
             },
             "typeName": {
-              "id": 435,
+              "id": 433,
               "keyType": {
-                "id": 433,
+                "id": 431,
                 "name": "string",
                 "nodeType": "ElementaryTypeName",
-                "src": "680:6:3",
+                "src": "900:6:3",
                 "typeDescriptions": {
                   "typeIdentifier": "t_string_storage_ptr",
                   "typeString": "string"
                 }
               },
               "nodeType": "Mapping",
-              "src": "671:27:3",
+              "src": "891:27:3",
               "typeDescriptions": {
                 "typeIdentifier": "t_mapping$_t_string_memory_ptr_$_t_uint256_$",
                 "typeString": "mapping(string => uint256)"
               },
               "valueType": {
-                "id": 434,
+                "id": 432,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
-                "src": "690:7:3",
+                "src": "910:7:3",
                 "typeDescriptions": {
                   "typeIdentifier": "t_uint256",
                   "typeString": "uint256"
@@ -469,13 +604,13 @@
           },
           {
             "constant": false,
-            "id": 440,
+            "id": 438,
             "mutability": "mutable",
             "name": "_stringStorage",
             "nodeType": "VariableDeclaration",
             "overrides": null,
-            "scope": 455,
-            "src": "716:41:3",
+            "scope": 453,
+            "src": "936:41:3",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -483,28 +618,28 @@
               "typeString": "mapping(string => string)"
             },
             "typeName": {
-              "id": 439,
+              "id": 437,
               "keyType": {
-                "id": 437,
+                "id": 435,
                 "name": "string",
                 "nodeType": "ElementaryTypeName",
-                "src": "725:6:3",
+                "src": "945:6:3",
                 "typeDescriptions": {
                   "typeIdentifier": "t_string_storage_ptr",
                   "typeString": "string"
                 }
               },
               "nodeType": "Mapping",
-              "src": "716:26:3",
+              "src": "936:26:3",
               "typeDescriptions": {
                 "typeIdentifier": "t_mapping$_t_string_memory_ptr_$_t_string_storage_$",
                 "typeString": "mapping(string => string)"
               },
               "valueType": {
-                "id": 438,
+                "id": 436,
                 "name": "string",
                 "nodeType": "ElementaryTypeName",
-                "src": "735:6:3",
+                "src": "955:6:3",
                 "typeDescriptions": {
                   "typeIdentifier": "t_string_storage_ptr",
                   "typeString": "string"
@@ -516,13 +651,13 @@
           },
           {
             "constant": false,
-            "id": 444,
+            "id": 442,
             "mutability": "mutable",
             "name": "_boolStorage",
             "nodeType": "VariableDeclaration",
             "overrides": null,
-            "scope": 455,
-            "src": "762:37:3",
+            "scope": 453,
+            "src": "982:37:3",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -530,28 +665,28 @@
               "typeString": "mapping(string => bool)"
             },
             "typeName": {
-              "id": 443,
+              "id": 441,
               "keyType": {
-                "id": 441,
+                "id": 439,
                 "name": "string",
                 "nodeType": "ElementaryTypeName",
-                "src": "771:6:3",
+                "src": "991:6:3",
                 "typeDescriptions": {
                   "typeIdentifier": "t_string_storage_ptr",
                   "typeString": "string"
                 }
               },
               "nodeType": "Mapping",
-              "src": "762:24:3",
+              "src": "982:24:3",
               "typeDescriptions": {
                 "typeIdentifier": "t_mapping$_t_string_memory_ptr_$_t_bool_$",
                 "typeString": "mapping(string => bool)"
               },
               "valueType": {
-                "id": 442,
+                "id": 440,
                 "name": "bool",
                 "nodeType": "ElementaryTypeName",
-                "src": "781:4:3",
+                "src": "1001:4:3",
                 "typeDescriptions": {
                   "typeIdentifier": "t_bool",
                   "typeString": "bool"
@@ -563,13 +698,13 @@
           },
           {
             "constant": false,
-            "id": 448,
+            "id": 446,
             "mutability": "mutable",
             "name": "_addressStorage",
             "nodeType": "VariableDeclaration",
             "overrides": null,
-            "scope": 455,
-            "src": "804:43:3",
+            "scope": 453,
+            "src": "1024:43:3",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -577,28 +712,28 @@
               "typeString": "mapping(string => address)"
             },
             "typeName": {
-              "id": 447,
+              "id": 445,
               "keyType": {
-                "id": 445,
+                "id": 443,
                 "name": "string",
                 "nodeType": "ElementaryTypeName",
-                "src": "813:6:3",
+                "src": "1033:6:3",
                 "typeDescriptions": {
                   "typeIdentifier": "t_string_storage_ptr",
                   "typeString": "string"
                 }
               },
               "nodeType": "Mapping",
-              "src": "804:27:3",
+              "src": "1024:27:3",
               "typeDescriptions": {
                 "typeIdentifier": "t_mapping$_t_string_memory_ptr_$_t_address_$",
                 "typeString": "mapping(string => address)"
               },
               "valueType": {
-                "id": 446,
+                "id": 444,
                 "name": "address",
                 "nodeType": "ElementaryTypeName",
-                "src": "823:7:3",
+                "src": "1043:7:3",
                 "stateMutability": "nonpayable",
                 "typeDescriptions": {
                   "typeIdentifier": "t_address",
@@ -611,13 +746,13 @@
           },
           {
             "constant": false,
-            "id": 452,
+            "id": 450,
             "mutability": "mutable",
             "name": "_bytesStorage",
             "nodeType": "VariableDeclaration",
             "overrides": null,
-            "scope": 455,
-            "src": "852:40:3",
+            "scope": 453,
+            "src": "1072:40:3",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -625,28 +760,28 @@
               "typeString": "mapping(string => bytes4)"
             },
             "typeName": {
-              "id": 451,
+              "id": 449,
               "keyType": {
-                "id": 449,
+                "id": 447,
                 "name": "string",
                 "nodeType": "ElementaryTypeName",
-                "src": "861:6:3",
+                "src": "1081:6:3",
                 "typeDescriptions": {
                   "typeIdentifier": "t_string_storage_ptr",
                   "typeString": "string"
                 }
               },
               "nodeType": "Mapping",
-              "src": "852:26:3",
+              "src": "1072:26:3",
               "typeDescriptions": {
                 "typeIdentifier": "t_mapping$_t_string_memory_ptr_$_t_bytes4_$",
                 "typeString": "mapping(string => bytes4)"
               },
               "valueType": {
-                "id": 450,
+                "id": 448,
                 "name": "bytes4",
                 "nodeType": "ElementaryTypeName",
-                "src": "871:6:3",
+                "src": "1091:6:3",
                 "typeDescriptions": {
                   "typeIdentifier": "t_bytes4",
                   "typeString": "bytes4"
@@ -659,13 +794,13 @@
           {
             "constant": false,
             "functionSelector": "3072cf60",
-            "id": 454,
+            "id": 452,
             "mutability": "mutable",
             "name": "_initialized",
             "nodeType": "VariableDeclaration",
             "overrides": null,
-            "scope": 455,
-            "src": "899:24:3",
+            "scope": 453,
+            "src": "1119:24:3",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -673,10 +808,10 @@
               "typeString": "bool"
             },
             "typeName": {
-              "id": 453,
+              "id": 451,
               "name": "bool",
               "nodeType": "ElementaryTypeName",
-              "src": "899:4:3",
+              "src": "1119:4:3",
               "typeDescriptions": {
                 "typeIdentifier": "t_bool",
                 "typeString": "bool"
@@ -686,25 +821,25 @@
             "visibility": "public"
           }
         ],
-        "scope": 456,
-        "src": "62:865:3"
+        "scope": 454,
+        "src": "62:1085:3"
       }
     ],
-    "src": "35:894:3"
+    "src": "35:1114:3"
   },
   "legacyAST": {
     "absolutePath": "/C/Users/User/Projects/Surveys_V2/contracts/StorageSurveys.sol",
     "exportedSymbols": {
       "StorageSurveys": [
-        455
+        453
       ]
     },
-    "id": 456,
+    "id": 454,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 404,
+        "id": 391,
         "literals": [
           "solidity",
           "^",
@@ -721,26 +856,26 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 455,
+        "id": 453,
         "linearizedBaseContracts": [
-          455
+          453
         ],
         "name": "StorageSurveys",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "canonicalName": "StorageSurveys.Survey",
-            "id": 419,
+            "id": 406,
             "members": [
               {
                 "constant": false,
-                "id": 406,
+                "id": 393,
                 "mutability": "mutable",
                 "name": "surveyOwner",
                 "nodeType": "VariableDeclaration",
                 "overrides": null,
-                "scope": 419,
-                "src": "116:19:3",
+                "scope": 406,
+                "src": "225:19:3",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -748,10 +883,10 @@
                   "typeString": "address"
                 },
                 "typeName": {
-                  "id": 405,
+                  "id": 392,
                   "name": "address",
                   "nodeType": "ElementaryTypeName",
-                  "src": "116:7:3",
+                  "src": "225:7:3",
                   "stateMutability": "nonpayable",
                   "typeDescriptions": {
                     "typeIdentifier": "t_address",
@@ -763,13 +898,13 @@
               },
               {
                 "constant": false,
-                "id": 408,
+                "id": 395,
                 "mutability": "mutable",
                 "name": "questions",
                 "nodeType": "VariableDeclaration",
                 "overrides": null,
-                "scope": 419,
-                "src": "142:16:3",
+                "scope": 406,
+                "src": "251:16:3",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -777,10 +912,10 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 407,
+                  "id": 394,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
-                  "src": "142:6:3",
+                  "src": "251:6:3",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_storage_ptr",
                     "typeString": "string"
@@ -791,13 +926,13 @@
               },
               {
                 "constant": false,
-                "id": 410,
+                "id": 397,
                 "mutability": "mutable",
                 "name": "answers",
                 "nodeType": "VariableDeclaration",
                 "overrides": null,
-                "scope": 419,
-                "src": "165:14:3",
+                "scope": 406,
+                "src": "274:14:3",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -805,10 +940,10 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 409,
+                  "id": 396,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
-                  "src": "165:6:3",
+                  "src": "274:6:3",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_storage_ptr",
                     "typeString": "string"
@@ -819,13 +954,13 @@
               },
               {
                 "constant": false,
-                "id": 412,
+                "id": 399,
                 "mutability": "mutable",
                 "name": "stoppedStatus",
                 "nodeType": "VariableDeclaration",
                 "overrides": null,
-                "scope": 419,
-                "src": "186:18:3",
+                "scope": 406,
+                "src": "295:18:3",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -833,10 +968,10 @@
                   "typeString": "bool"
                 },
                 "typeName": {
-                  "id": 411,
+                  "id": 398,
                   "name": "bool",
                   "nodeType": "ElementaryTypeName",
-                  "src": "186:4:3",
+                  "src": "295:4:3",
                   "typeDescriptions": {
                     "typeIdentifier": "t_bool",
                     "typeString": "bool"
@@ -847,13 +982,13 @@
               },
               {
                 "constant": false,
-                "id": 414,
+                "id": 401,
                 "mutability": "mutable",
                 "name": "valueOfSurvey",
                 "nodeType": "VariableDeclaration",
                 "overrides": null,
-                "scope": 419,
-                "src": "211:21:3",
+                "scope": 406,
+                "src": "320:21:3",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -861,10 +996,154 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 413,
+                  "id": 400,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
-                  "src": "211:7:3",
+                  "src": "320:7:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 403,
+                "mutability": "mutable",
+                "name": "participantsAllowed",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 406,
+                "src": "348:27:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 402,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "348:7:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 405,
+                "mutability": "mutable",
+                "name": "totalParticipants",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 406,
+                "src": "382:25:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 404,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "382:7:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "Survey",
+            "nodeType": "StructDefinition",
+            "scope": 453,
+            "src": "201:212:3",
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 410,
+            "mutability": "mutable",
+            "name": "surveyProps",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 453,
+            "src": "417:47:3",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_string_memory_ptr_$_t_struct$_Survey_$406_storage_$",
+              "typeString": "mapping(string => struct StorageSurveys.Survey)"
+            },
+            "typeName": {
+              "id": 409,
+              "keyType": {
+                "id": 407,
+                "name": "string",
+                "nodeType": "ElementaryTypeName",
+                "src": "426:6:3",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "417:26:3",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_string_memory_ptr_$_t_struct$_Survey_$406_storage_$",
+                "typeString": "mapping(string => struct StorageSurveys.Survey)"
+              },
+              "valueType": {
+                "contractScope": null,
+                "id": 408,
+                "name": "Survey",
+                "nodeType": "UserDefinedTypeName",
+                "referencedDeclaration": 406,
+                "src": "436:6:3",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Survey_$406_storage_ptr",
+                  "typeString": "struct StorageSurveys.Survey"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "canonicalName": "StorageSurveys.User",
+            "id": 417,
+            "members": [
+              {
+                "constant": false,
+                "id": 412,
+                "mutability": "mutable",
+                "name": "surveysCreated",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 417,
+                "src": "499:22:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 411,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "499:7:3",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint256",
                     "typeString": "uint256"
@@ -877,74 +1156,114 @@
                 "constant": false,
                 "id": 416,
                 "mutability": "mutable",
-                "name": "participantsAllowed",
+                "name": "surevysTitles",
                 "nodeType": "VariableDeclaration",
                 "overrides": null,
-                "scope": 419,
-                "src": "239:27:3",
+                "scope": 417,
+                "src": "528:41:3",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_uint256",
-                  "typeString": "uint256"
+                  "typeIdentifier": "t_mapping$_t_uint256_$_t_string_storage_$",
+                  "typeString": "mapping(uint256 => string)"
                 },
                 "typeName": {
                   "id": 415,
-                  "name": "uint256",
-                  "nodeType": "ElementaryTypeName",
-                  "src": "239:7:3",
+                  "keyType": {
+                    "id": 413,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "537:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "nodeType": "Mapping",
+                  "src": "528:27:3",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_uint256",
-                    "typeString": "uint256"
-                  }
-                },
-                "value": null,
-                "visibility": "internal"
-              },
-              {
-                "constant": false,
-                "id": 418,
-                "mutability": "mutable",
-                "name": "totalParticipants",
-                "nodeType": "VariableDeclaration",
-                "overrides": null,
-                "scope": 419,
-                "src": "273:25:3",
-                "stateVariable": false,
-                "storageLocation": "default",
-                "typeDescriptions": {
-                  "typeIdentifier": "t_uint256",
-                  "typeString": "uint256"
-                },
-                "typeName": {
-                  "id": 417,
-                  "name": "uint256",
-                  "nodeType": "ElementaryTypeName",
-                  "src": "273:7:3",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_uint256",
-                    "typeString": "uint256"
+                    "typeIdentifier": "t_mapping$_t_uint256_$_t_string_storage_$",
+                    "typeString": "mapping(uint256 => string)"
+                  },
+                  "valueType": {
+                    "id": 414,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "548:6:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
                   }
                 },
                 "value": null,
                 "visibility": "internal"
               }
             ],
-            "name": "Survey",
+            "name": "User",
             "nodeType": "StructDefinition",
-            "scope": 455,
-            "src": "92:212:3",
+            "scope": 453,
+            "src": "477:98:3",
             "visibility": "public"
           },
           {
             "constant": false,
-            "id": 422,
+            "id": 421,
+            "mutability": "mutable",
+            "name": "userInfo",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 453,
+            "src": "579:34:3",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_address_$_t_struct$_User_$417_storage_$",
+              "typeString": "mapping(address => struct StorageSurveys.User)"
+            },
+            "typeName": {
+              "id": 420,
+              "keyType": {
+                "id": 418,
+                "name": "address",
+                "nodeType": "ElementaryTypeName",
+                "src": "588:7:3",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "579:25:3",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_address_$_t_struct$_User_$417_storage_$",
+                "typeString": "mapping(address => struct StorageSurveys.User)"
+              },
+              "valueType": {
+                "contractScope": null,
+                "id": 419,
+                "name": "User",
+                "nodeType": "UserDefinedTypeName",
+                "referencedDeclaration": 417,
+                "src": "599:4:3",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_User_$417_storage_ptr",
+                  "typeString": "struct StorageSurveys.User"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 424,
             "mutability": "mutable",
             "name": "surveys",
             "nodeType": "VariableDeclaration",
             "overrides": null,
-            "scope": 455,
-            "src": "354:25:3",
+            "scope": 453,
+            "src": "664:25:3",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -953,19 +1272,19 @@
             },
             "typeName": {
               "baseType": {
-                "id": 420,
+                "id": 422,
                 "name": "string",
                 "nodeType": "ElementaryTypeName",
-                "src": "354:6:3",
+                "src": "664:6:3",
                 "typeDescriptions": {
                   "typeIdentifier": "t_string_storage_ptr",
                   "typeString": "string"
                 }
               },
-              "id": 421,
+              "id": 423,
               "length": null,
               "nodeType": "ArrayTypeName",
-              "src": "354:8:3",
+              "src": "664:8:3",
               "typeDescriptions": {
                 "typeIdentifier": "t_array$_t_string_storage_$dyn_storage_ptr",
                 "typeString": "string[]"
@@ -976,13 +1295,13 @@
           },
           {
             "constant": false,
-            "id": 428,
+            "id": 430,
             "mutability": "mutable",
-            "name": "userVotes",
+            "name": "userParticipated",
             "nodeType": "VariableDeclaration",
             "overrides": null,
-            "scope": 455,
-            "src": "450:64:3",
+            "scope": 453,
+            "src": "760:71:3",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -990,46 +1309,46 @@
               "typeString": "mapping(address => mapping(string => bool))"
             },
             "typeName": {
-              "id": 427,
+              "id": 429,
               "keyType": {
-                "id": 423,
+                "id": 425,
                 "name": "address",
                 "nodeType": "ElementaryTypeName",
-                "src": "459:7:3",
+                "src": "769:7:3",
                 "typeDescriptions": {
                   "typeIdentifier": "t_address",
                   "typeString": "address"
                 }
               },
               "nodeType": "Mapping",
-              "src": "450:45:3",
+              "src": "760:45:3",
               "typeDescriptions": {
                 "typeIdentifier": "t_mapping$_t_address_$_t_mapping$_t_string_memory_ptr_$_t_bool_$_$",
                 "typeString": "mapping(address => mapping(string => bool))"
               },
               "valueType": {
-                "id": 426,
+                "id": 428,
                 "keyType": {
-                  "id": 424,
+                  "id": 426,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
-                  "src": "479:6:3",
+                  "src": "789:6:3",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_storage_ptr",
                     "typeString": "string"
                   }
                 },
                 "nodeType": "Mapping",
-                "src": "470:24:3",
+                "src": "780:24:3",
                 "typeDescriptions": {
                   "typeIdentifier": "t_mapping$_t_string_memory_ptr_$_t_bool_$",
                   "typeString": "mapping(string => bool)"
                 },
                 "valueType": {
-                  "id": 425,
+                  "id": 427,
                   "name": "bool",
                   "nodeType": "ElementaryTypeName",
-                  "src": "489:4:3",
+                  "src": "799:4:3",
                   "typeDescriptions": {
                     "typeIdentifier": "t_bool",
                     "typeString": "bool"
@@ -1042,62 +1361,13 @@
           },
           {
             "constant": false,
-            "id": 432,
-            "mutability": "mutable",
-            "name": "surveyProps",
-            "nodeType": "VariableDeclaration",
-            "overrides": null,
-            "scope": 455,
-            "src": "564:47:3",
-            "stateVariable": true,
-            "storageLocation": "default",
-            "typeDescriptions": {
-              "typeIdentifier": "t_mapping$_t_string_memory_ptr_$_t_struct$_Survey_$419_storage_$",
-              "typeString": "mapping(string => struct StorageSurveys.Survey)"
-            },
-            "typeName": {
-              "id": 431,
-              "keyType": {
-                "id": 429,
-                "name": "string",
-                "nodeType": "ElementaryTypeName",
-                "src": "573:6:3",
-                "typeDescriptions": {
-                  "typeIdentifier": "t_string_storage_ptr",
-                  "typeString": "string"
-                }
-              },
-              "nodeType": "Mapping",
-              "src": "564:26:3",
-              "typeDescriptions": {
-                "typeIdentifier": "t_mapping$_t_string_memory_ptr_$_t_struct$_Survey_$419_storage_$",
-                "typeString": "mapping(string => struct StorageSurveys.Survey)"
-              },
-              "valueType": {
-                "contractScope": null,
-                "id": 430,
-                "name": "Survey",
-                "nodeType": "UserDefinedTypeName",
-                "referencedDeclaration": 419,
-                "src": "583:6:3",
-                "typeDescriptions": {
-                  "typeIdentifier": "t_struct$_Survey_$419_storage_ptr",
-                  "typeString": "struct StorageSurveys.Survey"
-                }
-              }
-            },
-            "value": null,
-            "visibility": "internal"
-          },
-          {
-            "constant": false,
-            "id": 436,
+            "id": 434,
             "mutability": "mutable",
             "name": "_uintStorage",
             "nodeType": "VariableDeclaration",
             "overrides": null,
-            "scope": 455,
-            "src": "671:40:3",
+            "scope": 453,
+            "src": "891:40:3",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -1105,28 +1375,28 @@
               "typeString": "mapping(string => uint256)"
             },
             "typeName": {
-              "id": 435,
+              "id": 433,
               "keyType": {
-                "id": 433,
+                "id": 431,
                 "name": "string",
                 "nodeType": "ElementaryTypeName",
-                "src": "680:6:3",
+                "src": "900:6:3",
                 "typeDescriptions": {
                   "typeIdentifier": "t_string_storage_ptr",
                   "typeString": "string"
                 }
               },
               "nodeType": "Mapping",
-              "src": "671:27:3",
+              "src": "891:27:3",
               "typeDescriptions": {
                 "typeIdentifier": "t_mapping$_t_string_memory_ptr_$_t_uint256_$",
                 "typeString": "mapping(string => uint256)"
               },
               "valueType": {
-                "id": 434,
+                "id": 432,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
-                "src": "690:7:3",
+                "src": "910:7:3",
                 "typeDescriptions": {
                   "typeIdentifier": "t_uint256",
                   "typeString": "uint256"
@@ -1138,13 +1408,13 @@
           },
           {
             "constant": false,
-            "id": 440,
+            "id": 438,
             "mutability": "mutable",
             "name": "_stringStorage",
             "nodeType": "VariableDeclaration",
             "overrides": null,
-            "scope": 455,
-            "src": "716:41:3",
+            "scope": 453,
+            "src": "936:41:3",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -1152,28 +1422,28 @@
               "typeString": "mapping(string => string)"
             },
             "typeName": {
-              "id": 439,
+              "id": 437,
               "keyType": {
-                "id": 437,
+                "id": 435,
                 "name": "string",
                 "nodeType": "ElementaryTypeName",
-                "src": "725:6:3",
+                "src": "945:6:3",
                 "typeDescriptions": {
                   "typeIdentifier": "t_string_storage_ptr",
                   "typeString": "string"
                 }
               },
               "nodeType": "Mapping",
-              "src": "716:26:3",
+              "src": "936:26:3",
               "typeDescriptions": {
                 "typeIdentifier": "t_mapping$_t_string_memory_ptr_$_t_string_storage_$",
                 "typeString": "mapping(string => string)"
               },
               "valueType": {
-                "id": 438,
+                "id": 436,
                 "name": "string",
                 "nodeType": "ElementaryTypeName",
-                "src": "735:6:3",
+                "src": "955:6:3",
                 "typeDescriptions": {
                   "typeIdentifier": "t_string_storage_ptr",
                   "typeString": "string"
@@ -1185,13 +1455,13 @@
           },
           {
             "constant": false,
-            "id": 444,
+            "id": 442,
             "mutability": "mutable",
             "name": "_boolStorage",
             "nodeType": "VariableDeclaration",
             "overrides": null,
-            "scope": 455,
-            "src": "762:37:3",
+            "scope": 453,
+            "src": "982:37:3",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -1199,28 +1469,28 @@
               "typeString": "mapping(string => bool)"
             },
             "typeName": {
-              "id": 443,
+              "id": 441,
               "keyType": {
-                "id": 441,
+                "id": 439,
                 "name": "string",
                 "nodeType": "ElementaryTypeName",
-                "src": "771:6:3",
+                "src": "991:6:3",
                 "typeDescriptions": {
                   "typeIdentifier": "t_string_storage_ptr",
                   "typeString": "string"
                 }
               },
               "nodeType": "Mapping",
-              "src": "762:24:3",
+              "src": "982:24:3",
               "typeDescriptions": {
                 "typeIdentifier": "t_mapping$_t_string_memory_ptr_$_t_bool_$",
                 "typeString": "mapping(string => bool)"
               },
               "valueType": {
-                "id": 442,
+                "id": 440,
                 "name": "bool",
                 "nodeType": "ElementaryTypeName",
-                "src": "781:4:3",
+                "src": "1001:4:3",
                 "typeDescriptions": {
                   "typeIdentifier": "t_bool",
                   "typeString": "bool"
@@ -1232,13 +1502,13 @@
           },
           {
             "constant": false,
-            "id": 448,
+            "id": 446,
             "mutability": "mutable",
             "name": "_addressStorage",
             "nodeType": "VariableDeclaration",
             "overrides": null,
-            "scope": 455,
-            "src": "804:43:3",
+            "scope": 453,
+            "src": "1024:43:3",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -1246,28 +1516,28 @@
               "typeString": "mapping(string => address)"
             },
             "typeName": {
-              "id": 447,
+              "id": 445,
               "keyType": {
-                "id": 445,
+                "id": 443,
                 "name": "string",
                 "nodeType": "ElementaryTypeName",
-                "src": "813:6:3",
+                "src": "1033:6:3",
                 "typeDescriptions": {
                   "typeIdentifier": "t_string_storage_ptr",
                   "typeString": "string"
                 }
               },
               "nodeType": "Mapping",
-              "src": "804:27:3",
+              "src": "1024:27:3",
               "typeDescriptions": {
                 "typeIdentifier": "t_mapping$_t_string_memory_ptr_$_t_address_$",
                 "typeString": "mapping(string => address)"
               },
               "valueType": {
-                "id": 446,
+                "id": 444,
                 "name": "address",
                 "nodeType": "ElementaryTypeName",
-                "src": "823:7:3",
+                "src": "1043:7:3",
                 "stateMutability": "nonpayable",
                 "typeDescriptions": {
                   "typeIdentifier": "t_address",
@@ -1280,13 +1550,13 @@
           },
           {
             "constant": false,
-            "id": 452,
+            "id": 450,
             "mutability": "mutable",
             "name": "_bytesStorage",
             "nodeType": "VariableDeclaration",
             "overrides": null,
-            "scope": 455,
-            "src": "852:40:3",
+            "scope": 453,
+            "src": "1072:40:3",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -1294,28 +1564,28 @@
               "typeString": "mapping(string => bytes4)"
             },
             "typeName": {
-              "id": 451,
+              "id": 449,
               "keyType": {
-                "id": 449,
+                "id": 447,
                 "name": "string",
                 "nodeType": "ElementaryTypeName",
-                "src": "861:6:3",
+                "src": "1081:6:3",
                 "typeDescriptions": {
                   "typeIdentifier": "t_string_storage_ptr",
                   "typeString": "string"
                 }
               },
               "nodeType": "Mapping",
-              "src": "852:26:3",
+              "src": "1072:26:3",
               "typeDescriptions": {
                 "typeIdentifier": "t_mapping$_t_string_memory_ptr_$_t_bytes4_$",
                 "typeString": "mapping(string => bytes4)"
               },
               "valueType": {
-                "id": 450,
+                "id": 448,
                 "name": "bytes4",
                 "nodeType": "ElementaryTypeName",
-                "src": "871:6:3",
+                "src": "1091:6:3",
                 "typeDescriptions": {
                   "typeIdentifier": "t_bytes4",
                   "typeString": "bytes4"
@@ -1328,13 +1598,13 @@
           {
             "constant": false,
             "functionSelector": "3072cf60",
-            "id": 454,
+            "id": 452,
             "mutability": "mutable",
             "name": "_initialized",
             "nodeType": "VariableDeclaration",
             "overrides": null,
-            "scope": 455,
-            "src": "899:24:3",
+            "scope": 453,
+            "src": "1119:24:3",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -1342,10 +1612,10 @@
               "typeString": "bool"
             },
             "typeName": {
-              "id": 453,
+              "id": 451,
               "name": "bool",
               "nodeType": "ElementaryTypeName",
-              "src": "899:4:3",
+              "src": "1119:4:3",
               "typeDescriptions": {
                 "typeIdentifier": "t_bool",
                 "typeString": "bool"
@@ -1355,11 +1625,11 @@
             "visibility": "public"
           }
         ],
-        "scope": 456,
-        "src": "62:865:3"
+        "scope": 454,
+        "src": "62:1085:3"
       }
     ],
-    "src": "35:894:3"
+    "src": "35:1114:3"
   },
   "compiler": {
     "name": "solc",
@@ -1367,7 +1637,7 @@
   },
   "networks": {},
   "schemaVersion": "3.2.4",
-  "updatedAt": "2020-09-16T10:45:23.262Z",
+  "updatedAt": "2020-09-17T07:42:25.093Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},

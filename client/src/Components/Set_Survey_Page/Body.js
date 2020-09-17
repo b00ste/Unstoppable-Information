@@ -22,8 +22,8 @@ function Body(props) {
                 title={props.title}
                 setTitle={props.setTitle}
 
-                options={props.options}
-                setOptions={props.setOptions}
+                questions={props.questions}
+                setQuestions={props.setQuestions}
                 
                 value={props.value}
                 maxParticipants={props.maxParticipants}
@@ -36,7 +36,7 @@ function Body(props) {
                 surveysContract={props.surveysContract}
                 setNewSurvey={props.setNewSurvey}
                 title={props.title}
-                options={props.options}
+                questions={props.questions}
                 value={props.value}
                 maxParticipants={props.maxParticipants}
             />

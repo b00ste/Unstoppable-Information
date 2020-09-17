@@ -18,10 +18,10 @@ function SurveyButtons(props) {
       event.preventDefault();
       const accounts = await window.ethereum.enable();
       const account = accounts[0];
-      let questions = props.options[0];
-      for(var i = 1; i < props.options.length; i ++)
-        questions += '-' + props.options[i];
-      const result = await props.surveysContract.methods.setSurevey(props.title, questions, props.maxParticipants, props.value).send({ from: account });
+      let questions = props.questions[0];
+      for(var i = 1; i < props.questions.length; i ++)
+        questions += '-' + props.questions[i];
+      const result = await props.surveysContract.methods.setSurvey(props.title, questions, props.maxParticipants, props.value).send({ from: account });
       console.log(result);
     }
     
