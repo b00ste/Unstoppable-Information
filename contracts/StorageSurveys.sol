@@ -39,4 +39,9 @@ contract StorageSurveys
   mapping (string => bytes4) _bytesStorage;
 
   bool public _initialized;
+
+  function getUintStorage(string memory _valueName) public view returns(uint256)
+  {
+    return(_uintStorage[_valueName]);
+  }
 }

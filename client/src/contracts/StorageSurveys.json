@@ -13,24 +13,43 @@
       ],
       "stateMutability": "view",
       "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_valueName",
+          "type": "string"
+        }
+      ],
+      "name": "getUintStorage",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"_initialized\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/C/Users/User/Projects/Surveys_V2/contracts/StorageSurveys.sol\":\"StorageSurveys\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/C/Users/User/Projects/Surveys_V2/contracts/StorageSurveys.sol\":{\"keccak256\":\"0xd90845057161ff230f64442609d3656a1b262bc86b53a3bd5a0e06b1cd06d7e1\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://1f8b52cfd7ce78159bfbf60acb0754aafc8e81591cbb2a1512fd2717a6e441f3\",\"dweb:/ipfs/Qmbwjg4Y1yk3oHmxeo5FKVUvLjydFKU1GBSWs3KCuPhD9B\"]}},\"version\":1}",
-  "bytecode": "0x6080604052348015600f57600080fd5b5060948061001e6000396000f3fe6080604052348015600f57600080fd5b506004361060285760003560e01c80633072cf6014602d575b600080fd5b6033604b565b60405180821515815260200191505060405180910390f35b600960009054906101000a900460ff168156fea2646970667358221220f628f893a32e3a19d8a4208dd448e37bf7a75adf62ac98d4aa08ba7029f51eec64736f6c634300060c0033",
-  "deployedBytecode": "0x6080604052348015600f57600080fd5b506004361060285760003560e01c80633072cf6014602d575b600080fd5b6033604b565b60405180821515815260200191505060405180910390f35b600960009054906101000a900460ff168156fea2646970667358221220f628f893a32e3a19d8a4208dd448e37bf7a75adf62ac98d4aa08ba7029f51eec64736f6c634300060c0033",
+  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"_initialized\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_valueName\",\"type\":\"string\"}],\"name\":\"getUintStorage\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/C/Users/User/Projects/Surveys_V2/contracts/StorageSurveys.sol\":\"StorageSurveys\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/C/Users/User/Projects/Surveys_V2/contracts/StorageSurveys.sol\":{\"keccak256\":\"0x2ff0505c54efef21ba858534963223d487886ae28dc2730118f1d8276c834cea\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://68cc68bf97e91790a4bfbd840c495a014b2143a5181f6e386383620016cb98b0\",\"dweb:/ipfs/QmPQ6beTyT1gN7Vj8yo4mhh421TKqKtHJrt6RRAV1mv7bU\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b506101e6806100206000396000f3fe608060405234801561001057600080fd5b50600436106100365760003560e01c80633072cf601461003b57806365ae67c81461005b575b600080fd5b61004361012a565b60405180821515815260200191505060405180910390f35b6101146004803603602081101561007157600080fd5b810190808035906020019064010000000081111561008e57600080fd5b8201836020820111156100a057600080fd5b803590602001918460018302840111640100000000831117156100c257600080fd5b91908080601f016020809104026020016040519081016040528093929190818152602001838380828437600081840152601f19601f82011690508083019250505050505050919291929050505061013d565b6040518082815260200191505060405180910390f35b600960009054906101000a900460ff1681565b60006004826040518082805190602001908083835b602083106101755780518252602082019150602081019050602083039250610152565b6001836020036101000a038019825116818451168082178552505050505050905001915050908152602001604051809103902054905091905056fea26469706673582212203d6a4439a2caeadd8b1d137025f5c14deb2aab062d710cfc0cc8fd9c6087688364736f6c634300060c0033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100365760003560e01c80633072cf601461003b57806365ae67c81461005b575b600080fd5b61004361012a565b60405180821515815260200191505060405180910390f35b6101146004803603602081101561007157600080fd5b810190808035906020019064010000000081111561008e57600080fd5b8201836020820111156100a057600080fd5b803590602001918460018302840111640100000000831117156100c257600080fd5b91908080601f016020809104026020016040519081016040528093929190818152602001838380828437600081840152601f19601f82011690508083019250505050505050919291929050505061013d565b6040518082815260200191505060405180910390f35b600960009054906101000a900460ff1681565b60006004826040518082805190602001908083835b602083106101755780518252602082019150602081019050602083039250610152565b6001836020036101000a038019825116818451168082178552505050505050905001915050908152602001604051809103902054905091905056fea26469706673582212203d6a4439a2caeadd8b1d137025f5c14deb2aab062d710cfc0cc8fd9c6087688364736f6c634300060c0033",
   "immutableReferences": {},
-  "sourceMap": "62:1085:3:-:0;;;;;;;;;;;;;;;;;;;",
-  "deployedSourceMap": "62:1085:3:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1119:24;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o",
-  "source": "// SPDX-License-Identifier: MIT\r\n\r\npragma solidity ^0.6.0;\r\n\r\ncontract StorageSurveys\r\n{\r\n  //creating a sruct with all properties of a survey and saving all the properties of a survey in a mapping\r\n  struct Survey\r\n  {\r\n    address surveyOwner;\r\n    string questions;\r\n    string answers;\r\n    bool stoppedStatus;\r\n    uint256 valueOfSurvey;\r\n    uint256 participantsAllowed;\r\n    uint256 totalParticipants;\r\n  }\r\n  mapping (string => Survey) internal surveyProps;\r\n\r\n  //\r\n  struct User\r\n  {\r\n    uint256 surveysCreated;\r\n    mapping (uint256 => string) surevysTitles;\r\n  }\r\n  mapping (address => User) userInfo;\r\n\r\n  //an array of strings, titles of surveys\r\n  string[] internal surveys;\r\n\r\n  //saving the surveys at which a certain user did participate\r\n  mapping (address => mapping (string => bool)) internal userParticipated;\r\n\r\n  //setting all possible variables needed in future\r\n  mapping (string => uint256) _uintStorage;\r\n  mapping (string => string) _stringStorage;\r\n  mapping (string => bool) _boolStorage;\r\n  mapping (string => address) _addressStorage;\r\n  mapping (string => bytes4) _bytesStorage;\r\n\r\n  bool public _initialized;\r\n}\r\n",
+  "sourceMap": "62:1218:3:-:0;;;;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "62:1218:3:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1119:24;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;1150:127;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;1119:24;;;;;;;;;;;;;:::o;1150:127::-;1220:7;1246:12;1259:10;1246:24;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1239:32;;1150:127;;;:::o",
+  "source": "// SPDX-License-Identifier: MIT\r\n\r\npragma solidity ^0.6.0;\r\n\r\ncontract StorageSurveys\r\n{\r\n  //creating a sruct with all properties of a survey and saving all the properties of a survey in a mapping\r\n  struct Survey\r\n  {\r\n    address surveyOwner;\r\n    string questions;\r\n    string answers;\r\n    bool stoppedStatus;\r\n    uint256 valueOfSurvey;\r\n    uint256 participantsAllowed;\r\n    uint256 totalParticipants;\r\n  }\r\n  mapping (string => Survey) internal surveyProps;\r\n\r\n  //\r\n  struct User\r\n  {\r\n    uint256 surveysCreated;\r\n    mapping (uint256 => string) surevysTitles;\r\n  }\r\n  mapping (address => User) userInfo;\r\n\r\n  //an array of strings, titles of surveys\r\n  string[] internal surveys;\r\n\r\n  //saving the surveys at which a certain user did participate\r\n  mapping (address => mapping (string => bool)) internal userParticipated;\r\n\r\n  //setting all possible variables needed in future\r\n  mapping (string => uint256) _uintStorage;\r\n  mapping (string => string) _stringStorage;\r\n  mapping (string => bool) _boolStorage;\r\n  mapping (string => address) _addressStorage;\r\n  mapping (string => bytes4) _bytesStorage;\r\n\r\n  bool public _initialized;\r\n\r\n  function getUintStorage(string memory _valueName) public view returns(uint256)\r\n  {\r\n    return(_uintStorage[_valueName]);\r\n  }\r\n}\r\n",
   "sourcePath": "C:\\Users\\User\\Projects\\Surveys_V2\\contracts\\StorageSurveys.sol",
   "ast": {
     "absolutePath": "/C/Users/User/Projects/Surveys_V2/contracts/StorageSurveys.sol",
     "exportedSymbols": {
       "StorageSurveys": [
-        453
+        466
       ]
     },
-    "id": 454,
+    "id": 467,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
@@ -52,9 +71,9 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 453,
+        "id": 466,
         "linearizedBaseContracts": [
-          453
+          466
         ],
         "name": "StorageSurveys",
         "nodeType": "ContractDefinition",
@@ -263,7 +282,7 @@
             ],
             "name": "Survey",
             "nodeType": "StructDefinition",
-            "scope": 453,
+            "scope": 466,
             "src": "201:212:3",
             "visibility": "public"
           },
@@ -274,7 +293,7 @@
             "name": "surveyProps",
             "nodeType": "VariableDeclaration",
             "overrides": null,
-            "scope": 453,
+            "scope": 466,
             "src": "417:47:3",
             "stateVariable": true,
             "storageLocation": "default",
@@ -398,7 +417,7 @@
             ],
             "name": "User",
             "nodeType": "StructDefinition",
-            "scope": 453,
+            "scope": 466,
             "src": "477:98:3",
             "visibility": "public"
           },
@@ -409,7 +428,7 @@
             "name": "userInfo",
             "nodeType": "VariableDeclaration",
             "overrides": null,
-            "scope": 453,
+            "scope": 466,
             "src": "579:34:3",
             "stateVariable": true,
             "storageLocation": "default",
@@ -458,7 +477,7 @@
             "name": "surveys",
             "nodeType": "VariableDeclaration",
             "overrides": null,
-            "scope": 453,
+            "scope": 466,
             "src": "664:25:3",
             "stateVariable": true,
             "storageLocation": "default",
@@ -496,7 +515,7 @@
             "name": "userParticipated",
             "nodeType": "VariableDeclaration",
             "overrides": null,
-            "scope": 453,
+            "scope": 466,
             "src": "760:71:3",
             "stateVariable": true,
             "storageLocation": "default",
@@ -562,7 +581,7 @@
             "name": "_uintStorage",
             "nodeType": "VariableDeclaration",
             "overrides": null,
-            "scope": 453,
+            "scope": 466,
             "src": "891:40:3",
             "stateVariable": true,
             "storageLocation": "default",
@@ -609,7 +628,7 @@
             "name": "_stringStorage",
             "nodeType": "VariableDeclaration",
             "overrides": null,
-            "scope": 453,
+            "scope": 466,
             "src": "936:41:3",
             "stateVariable": true,
             "storageLocation": "default",
@@ -656,7 +675,7 @@
             "name": "_boolStorage",
             "nodeType": "VariableDeclaration",
             "overrides": null,
-            "scope": 453,
+            "scope": 466,
             "src": "982:37:3",
             "stateVariable": true,
             "storageLocation": "default",
@@ -703,7 +722,7 @@
             "name": "_addressStorage",
             "nodeType": "VariableDeclaration",
             "overrides": null,
-            "scope": 453,
+            "scope": 466,
             "src": "1024:43:3",
             "stateVariable": true,
             "storageLocation": "default",
@@ -751,7 +770,7 @@
             "name": "_bytesStorage",
             "nodeType": "VariableDeclaration",
             "overrides": null,
-            "scope": 453,
+            "scope": 466,
             "src": "1072:40:3",
             "stateVariable": true,
             "storageLocation": "default",
@@ -799,7 +818,7 @@
             "name": "_initialized",
             "nodeType": "VariableDeclaration",
             "overrides": null,
-            "scope": 453,
+            "scope": 466,
             "src": "1119:24:3",
             "stateVariable": true,
             "storageLocation": "default",
@@ -819,22 +838,178 @@
             },
             "value": null,
             "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 464,
+              "nodeType": "Block",
+              "src": "1232:45:3",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "components": [
+                      {
+                        "argumentTypes": null,
+                        "baseExpression": {
+                          "argumentTypes": null,
+                          "id": 459,
+                          "name": "_uintStorage",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 434,
+                          "src": "1246:12:3",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_mapping$_t_string_memory_ptr_$_t_uint256_$",
+                            "typeString": "mapping(string memory => uint256)"
+                          }
+                        },
+                        "id": 461,
+                        "indexExpression": {
+                          "argumentTypes": null,
+                          "id": 460,
+                          "name": "_valueName",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 454,
+                          "src": "1259:10:3",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_string_memory_ptr",
+                            "typeString": "string memory"
+                          }
+                        },
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "nodeType": "IndexAccess",
+                        "src": "1246:24:3",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "id": 462,
+                    "isConstant": false,
+                    "isInlineArray": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "TupleExpression",
+                    "src": "1245:26:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "functionReturnParameters": 458,
+                  "id": 463,
+                  "nodeType": "Return",
+                  "src": "1239:32:3"
+                }
+              ]
+            },
+            "documentation": null,
+            "functionSelector": "65ae67c8",
+            "id": 465,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getUintStorage",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 455,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 454,
+                  "mutability": "mutable",
+                  "name": "_valueName",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 465,
+                  "src": "1174:24:3",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 453,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1174:6:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1173:26:3"
+            },
+            "returnParameters": {
+              "id": 458,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 457,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 465,
+                  "src": "1220:7:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 456,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1220:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1219:9:3"
+            },
+            "scope": 466,
+            "src": "1150:127:3",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "public"
           }
         ],
-        "scope": 454,
-        "src": "62:1085:3"
+        "scope": 467,
+        "src": "62:1218:3"
       }
     ],
-    "src": "35:1114:3"
+    "src": "35:1247:3"
   },
   "legacyAST": {
     "absolutePath": "/C/Users/User/Projects/Surveys_V2/contracts/StorageSurveys.sol",
     "exportedSymbols": {
       "StorageSurveys": [
-        453
+        466
       ]
     },
-    "id": 454,
+    "id": 467,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
@@ -856,9 +1031,9 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 453,
+        "id": 466,
         "linearizedBaseContracts": [
-          453
+          466
         ],
         "name": "StorageSurveys",
         "nodeType": "ContractDefinition",
@@ -1067,7 +1242,7 @@
             ],
             "name": "Survey",
             "nodeType": "StructDefinition",
-            "scope": 453,
+            "scope": 466,
             "src": "201:212:3",
             "visibility": "public"
           },
@@ -1078,7 +1253,7 @@
             "name": "surveyProps",
             "nodeType": "VariableDeclaration",
             "overrides": null,
-            "scope": 453,
+            "scope": 466,
             "src": "417:47:3",
             "stateVariable": true,
             "storageLocation": "default",
@@ -1202,7 +1377,7 @@
             ],
             "name": "User",
             "nodeType": "StructDefinition",
-            "scope": 453,
+            "scope": 466,
             "src": "477:98:3",
             "visibility": "public"
           },
@@ -1213,7 +1388,7 @@
             "name": "userInfo",
             "nodeType": "VariableDeclaration",
             "overrides": null,
-            "scope": 453,
+            "scope": 466,
             "src": "579:34:3",
             "stateVariable": true,
             "storageLocation": "default",
@@ -1262,7 +1437,7 @@
             "name": "surveys",
             "nodeType": "VariableDeclaration",
             "overrides": null,
-            "scope": 453,
+            "scope": 466,
             "src": "664:25:3",
             "stateVariable": true,
             "storageLocation": "default",
@@ -1300,7 +1475,7 @@
             "name": "userParticipated",
             "nodeType": "VariableDeclaration",
             "overrides": null,
-            "scope": 453,
+            "scope": 466,
             "src": "760:71:3",
             "stateVariable": true,
             "storageLocation": "default",
@@ -1366,7 +1541,7 @@
             "name": "_uintStorage",
             "nodeType": "VariableDeclaration",
             "overrides": null,
-            "scope": 453,
+            "scope": 466,
             "src": "891:40:3",
             "stateVariable": true,
             "storageLocation": "default",
@@ -1413,7 +1588,7 @@
             "name": "_stringStorage",
             "nodeType": "VariableDeclaration",
             "overrides": null,
-            "scope": 453,
+            "scope": 466,
             "src": "936:41:3",
             "stateVariable": true,
             "storageLocation": "default",
@@ -1460,7 +1635,7 @@
             "name": "_boolStorage",
             "nodeType": "VariableDeclaration",
             "overrides": null,
-            "scope": 453,
+            "scope": 466,
             "src": "982:37:3",
             "stateVariable": true,
             "storageLocation": "default",
@@ -1507,7 +1682,7 @@
             "name": "_addressStorage",
             "nodeType": "VariableDeclaration",
             "overrides": null,
-            "scope": 453,
+            "scope": 466,
             "src": "1024:43:3",
             "stateVariable": true,
             "storageLocation": "default",
@@ -1555,7 +1730,7 @@
             "name": "_bytesStorage",
             "nodeType": "VariableDeclaration",
             "overrides": null,
-            "scope": 453,
+            "scope": 466,
             "src": "1072:40:3",
             "stateVariable": true,
             "storageLocation": "default",
@@ -1603,7 +1778,7 @@
             "name": "_initialized",
             "nodeType": "VariableDeclaration",
             "overrides": null,
-            "scope": 453,
+            "scope": 466,
             "src": "1119:24:3",
             "stateVariable": true,
             "storageLocation": "default",
@@ -1623,13 +1798,169 @@
             },
             "value": null,
             "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 464,
+              "nodeType": "Block",
+              "src": "1232:45:3",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "components": [
+                      {
+                        "argumentTypes": null,
+                        "baseExpression": {
+                          "argumentTypes": null,
+                          "id": 459,
+                          "name": "_uintStorage",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 434,
+                          "src": "1246:12:3",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_mapping$_t_string_memory_ptr_$_t_uint256_$",
+                            "typeString": "mapping(string memory => uint256)"
+                          }
+                        },
+                        "id": 461,
+                        "indexExpression": {
+                          "argumentTypes": null,
+                          "id": 460,
+                          "name": "_valueName",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 454,
+                          "src": "1259:10:3",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_string_memory_ptr",
+                            "typeString": "string memory"
+                          }
+                        },
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "nodeType": "IndexAccess",
+                        "src": "1246:24:3",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "id": 462,
+                    "isConstant": false,
+                    "isInlineArray": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "TupleExpression",
+                    "src": "1245:26:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "functionReturnParameters": 458,
+                  "id": 463,
+                  "nodeType": "Return",
+                  "src": "1239:32:3"
+                }
+              ]
+            },
+            "documentation": null,
+            "functionSelector": "65ae67c8",
+            "id": 465,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getUintStorage",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 455,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 454,
+                  "mutability": "mutable",
+                  "name": "_valueName",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 465,
+                  "src": "1174:24:3",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 453,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1174:6:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1173:26:3"
+            },
+            "returnParameters": {
+              "id": 458,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 457,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 465,
+                  "src": "1220:7:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 456,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1220:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1219:9:3"
+            },
+            "scope": 466,
+            "src": "1150:127:3",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "public"
           }
         ],
-        "scope": 454,
-        "src": "62:1085:3"
+        "scope": 467,
+        "src": "62:1218:3"
       }
     ],
-    "src": "35:1114:3"
+    "src": "35:1247:3"
   },
   "compiler": {
     "name": "solc",
@@ -1637,7 +1968,7 @@
   },
   "networks": {},
   "schemaVersion": "3.2.4",
-  "updatedAt": "2020-09-17T07:42:25.093Z",
+  "updatedAt": "2020-09-18T12:22:16.418Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},

@@ -4,14 +4,14 @@ import {
     Link
 } from 'react-router-dom';
 
-const ContainerHeader = styled.div`
-    
+const Bar = styled.div`
+    width: 100%;
 `
 
 
 function Header() {
     return(
-        <ContainerHeader>
+        <>
             <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
                 <Link className="navbar-brand" to="/">Survey App</Link>
                 <ul className="navbar-nav mr-auto">
@@ -29,7 +29,13 @@ function Header() {
                     </li>
                 </ul>
             </nav>
-        </ContainerHeader>
+            <div className="progress">
+                <Bar className="progress-bar progress-bar-striped progress-bar-animated"></Bar>
+            </div>
+            <div className="progress">
+                <Bar className="progress-bar"></Bar>
+            </div>
+        </>
     );
 }
 

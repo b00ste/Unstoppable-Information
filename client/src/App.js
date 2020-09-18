@@ -8,8 +8,8 @@ import {
 
 import Header from './Components/Header.js';
 import Footer from './Components/Footer.js';
-import Set_Survey_Body from './Components/Set_Survey_Page/Body.js';
-import Get_Survey_Body from './Components/Get_Surveys_Page/Body.js';
+import SET_SURVEY_BODY from './Components/Set_Survey_Page/Body.js';
+import GET_SURVEYS_BODY from './Components/Get_Surveys_Page/Body.js';
 
 import Web3 from 'web3';
 import func from './contracts/FunctionalSurveys.json';
@@ -39,7 +39,7 @@ function App() {
         </Route>
 
         <Route path="/startSurveys">
-          <Set_Survey_Body
+          <SET_SURVEY_BODY
             key='body'
 
             title={title}
@@ -58,8 +58,7 @@ function App() {
         </Route>
 
         <Route path="/participateSurveys">
-          <h1>this is participate survey page</h1>
-          <Get_Survey_Body 
+          <GET_SURVEYS_BODY 
             surveysContract={surveysContract}
           />
         </Route>
