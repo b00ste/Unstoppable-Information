@@ -58,7 +58,7 @@ function App() {
         </Route>
 
         <Route path="/participateSurveys">
-          <GET_SURVEYS_BODY 
+          <GET_SURVEYS_BODY
             surveysContract={surveysContract}
           />
         </Route>
@@ -69,7 +69,7 @@ function App() {
             This is a paragraph about us
           </p>
         </Route>
-        
+
       </Switch>
       <Footer />
     </Router>

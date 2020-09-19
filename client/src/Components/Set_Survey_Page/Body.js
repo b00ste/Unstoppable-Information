@@ -11,7 +11,6 @@ const Container = styled.div `
 `;
 
 function Body(props) {
-
     return(
         <>
         <Container>
@@ -23,7 +22,7 @@ function Body(props) {
 
                 questions={props.questions}
                 setQuestions={props.setQuestions}
-                
+
                 value={props.value}
                 maxParticipants={props.maxParticipants}
                 setValue={props.setValue}
@@ -33,11 +32,17 @@ function Body(props) {
         <Container>
             <SurveyButtons
                 surveysContract={props.surveysContract}
-                setNewSurvey={props.setNewSurvey}
+                
                 title={props.title}
+                setTitle={props.setTitle}
+                
                 questions={props.questions}
+                setQuestions={props.setQuestions}
+                
                 value={props.value}
                 maxParticipants={props.maxParticipants}
+                setValue={props.setValue}
+                setMaxParticipants={props.setMaxParticipants}
             />
         </Container>
         </>
