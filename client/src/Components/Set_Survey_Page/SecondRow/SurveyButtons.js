@@ -21,14 +21,13 @@ function SurveyButtons(props) {
         let questions = props.questions[0];
         for (var i = 1; i < props.questions.length; i++)
             questions += '-' + props.questions[i];
-        const result = await props.surveysContract.methods.setSurvey(props.title, questions, props.maxParticipants, props.value).send({ from: account })
+        await props.surveysContract.methods.setSurvey(props.title, questions, props.maxParticipants, props.value).send({ from: account })
         .then( () => {
             props.setTitle(undefined);
             props.setQuestions([]);
             props.setValue(undefined);
             props.setMaxParticipants(undefined);
         });
-        console.log(result);
     }
 
     return (

@@ -38,6 +38,8 @@ function Body(props) {
                 setSelectedSurvey={setSelectedSurvey}
 
                 surveyQuestions={surveyQuestions}
+
+                surveysContract={props.surveysContract}
             />
         </Container>
     );

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const Survey = styled.div`
@@ -20,13 +20,12 @@ const Survey = styled.div`
     }
     div {
         width: 30em;
-        margin: 10px;
-        border: 1px solid black;
         text-align: center;
         input {
             width: 25em;
             display: inline-block;
-            margin-top: 5px;
+            margin-top: 2px;
+            margin-bottom: 15px;
         }
         button {
             width: 29em;
@@ -45,6 +44,25 @@ const SurveyMask = styled.div`
 `;
 
 function SelectedSurvey(props) {
+    const [answers, setAnswers] = useState({})
+
+    const updateAnswers = (event) => {
+        event.preventDefault();
+        setAnswers({ ...answers, [event.target.name]: event.target.value });
+    }
+
+    const sendAnswer = async (event) => {
+        event.preventDefault();
+        let answer = props.surveyQuestions[props.selectedSurvey][0];
+        const accounts = await window.ethereum.enable();
+        const account = accounts[0];
+        console.log(answers);
+        console.log(props.surveyQuestions[props.selectedSurvey].length);
+        for (var i = 1; i < props.surveyQuestions[props.selectedSurvey].length; i++) 
+            answer += '-' + props.surveyQuestions[props.selectedSurvey][i];
+        await props.surveysContract.methods.answerSurvey(props.selectedSurvey, answer).send({ from: account })
+        .then(res => console.log(res))
+    }
 
     let survey;
     let surveyMask;
@@ -74,12 +92,12 @@ function SelectedSurvey(props) {
                             <>
                                 <div>
                                     <h6>{val}</h6>
-                                    <input type="text" className="form-control" placeholder={val} />
+                                    <input type="text" className="form-control" name={val} placeholder="Your Answer" onChange={updateAnswers} />
                                 </div>
                             </>
                         )
                 }
-                <div><button type="button" className="btn btn-primary">Submit</button></div>
+                <div><button type="button" className="btn btn-primary" onClick={sendAnswer}>Submit</button></div>
             </Survey>
         surveyMask = <SurveyMask></SurveyMask>
     }

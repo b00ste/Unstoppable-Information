@@ -16,7 +16,7 @@ import func from './contracts/FunctionalSurveys.json';
 //import proxy from './contracts/ProxySurveys.json';
 
 const web3 = new Web3(Web3.givenProvider);
-const contractAddress = '0x8C131A6cE6bE2b3aBEF8c7D2adDB2e2c9A0e2d4f';
+const contractAddress = '0xB3ab67C3717054d0774b7F7f00494C3fF143A2BA';
 const surveysContract = new web3.eth.Contract(func.abi, contractAddress);
 
 function App() {
