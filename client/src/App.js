@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import 'bootswatch/dist/lux/bootstrap.min.css';
 import {
   BrowserRouter as Router,
@@ -10,6 +10,7 @@ import Header from './Components/Header.js';
 import Footer from './Components/Footer.js';
 import SET_SURVEY_BODY from './Components/Set_Survey_Page/Body.js';
 import GET_SURVEYS_BODY from './Components/Get_Surveys_Page/Body.js';
+import ACCOUNT_BODY from './Components/Account_Page/Body.js';
 
 import Web3 from 'web3';
 import func from './contracts/FunctionalSurveys.json';
@@ -20,10 +21,27 @@ const contractAddress = '0xB3ab67C3717054d0774b7F7f00494C3fF143A2BA';
 const surveysContract = new web3.eth.Contract(func.abi, contractAddress);
 
 function App() {
+  const [account, setAccount] = useState(undefined);
+
   const [title, setTitle] = useState(undefined);
   const [questions, setQuestions] = useState([]);
   const [value, setValue] = useState(undefined);
   const [maxParticipants, setMaxParticipants] = useState(undefined);
+
+  const [surveyTitles, setSurveyTitles] = useState([]);
+  const [surveyQuestions, setSurveyQuestions] = useState({});
+  const [showSurvey, setShowSurvey] = useState(false);
+  const [selectedSurvey, setSelectedSurvey] = useState(undefined);
+
+  const getAccount = async () => {
+		const accounts = await window.ethereum.enable();
+    setAccount(accounts[0]);
+	}
+	useEffect(() => {
+		if(account === undefined){
+      getAccount();
+		}
+	});
 
   return (
     <Router>
@@ -31,17 +49,11 @@ function App() {
       <Switch>
 
         <Route exact path="/">
-          <h1>this is first page</h1>
-        </Route>
-
-        <Route path="/home">
           <h1>this is home page</h1>
         </Route>
 
         <Route path="/startSurveys">
           <SET_SURVEY_BODY
-            key='body'
-
             title={title}
             setTitle={setTitle}
 
@@ -49,17 +61,32 @@ function App() {
             setQuestions={setQuestions}
 
             value={value}
-            maxParticipants={maxParticipants}
             setValue={setValue}
+
+            maxParticipants={maxParticipants}
             setMaxParticipants={setMaxParticipants}
 
             surveysContract={surveysContract}
+            account={account}
           />
         </Route>
 
         <Route path="/participateSurveys">
           <GET_SURVEYS_BODY
+            surveyTitles={surveyTitles}
+            setSurveyTitles={setSurveyTitles}
+
+            surveyQuestions={surveyQuestions}
+            setSurveyQuestions={setSurveyQuestions}
+
+            showSurvey={showSurvey}
+            setShowSurvey={setShowSurvey}
+
+            selectedSurvey={selectedSurvey}
+            setSelectedSurvey={setSelectedSurvey}
+
             surveysContract={surveysContract}
+            account={account}
           />
         </Route>
 
@@ -68,6 +95,15 @@ function App() {
           <p>
             This is a paragraph about us
           </p>
+        </Route>
+
+        <Route path="/account">
+          <h1>this is account page</h1>
+          <ACCOUNT_BODY
+
+            surveysContract={surveysContract}
+            account={account}
+          />
         </Route>
 
       </Switch>

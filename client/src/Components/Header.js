@@ -8,6 +8,11 @@ const Bar = styled.div`
     width: 100%;
 `
 
+const RightLi = styled.li `
+    position: absolute;
+    right: 0;
+`;
+
 
 function Header() {
     return(
@@ -16,17 +21,17 @@ function Header() {
                 <Link className="navbar-brand" to="/">Survey App</Link>
                 <ul className="navbar-nav mr-auto">
                     <li className="nav-item active">
-                        <Link className="nav-link" to="/home"> Home <span className="sr-only">(current)</span></Link>
+                        <Link className="nav-link" to="/startSurveys"> Start a Survey </Link>
                     </li>
                     <li className="nav-item active">
-                        <Link className="nav-link" to="/startSurveys"> Start a Survey <span className="sr-only">(current)</span></Link>
+                        <Link className="nav-link" to="/participateSurveys"> Participate at Surveys </Link>
                     </li>
                     <li className="nav-item active">
-                        <Link className="nav-link" to="/participateSurveys"> Participate at Surveys <span className="sr-only">(current)</span></Link>
+                        <Link className="nav-link" to="/aboutUs"> About Us </Link>
                     </li>
-                    <li className="nav-item active">
-                        <Link className="nav-link" to="/aboutUs"> About Us <span className="sr-only">(current)</span></Link>
-                    </li>
+                    <RightLi className="nav-item active">
+                        <Link className="nav-link " to="/account"> Account </Link>
+                    </RightLi>
                 </ul>
             </nav>
             <div className="progress">

@@ -23,7 +23,7 @@ contract StorageSurveys
     uint256 surveysCreated;
     mapping (uint256 => string) surevysTitles;
   }
-  mapping (address => User) userInfo;
+  mapping (address => User) internal userInfo;
 
   //an array of strings, titles of surveys
   string[] internal surveys;
@@ -32,16 +32,24 @@ contract StorageSurveys
   mapping (address => mapping (string => bool)) internal userParticipated;
 
   //setting all possible variables needed in future
-  mapping (string => uint256) _uintStorage;
-  mapping (string => string) _stringStorage;
-  mapping (string => bool) _boolStorage;
-  mapping (string => address) _addressStorage;
-  mapping (string => bytes4) _bytesStorage;
+  mapping (string => uint256) internal _uintStorage;
+  mapping (string => string) internal _stringStorage;
+  mapping (string => bool) internal _boolStorage;
+  mapping (string => address) internal _addressStorage;
+  mapping (string => bytes4) internal _bytesStorage;
 
   bool public _initialized;
 
   function getUintStorage(string memory _valueName) public view returns(uint256)
   {
     return(_uintStorage[_valueName]);
+  }
+  function getUserCreatedSurveys() public view returns(uint256)
+  {
+    return(userInfo[msg.sender].surveysCreated);
+  }
+  function getUserSurveyOfNumber(uint256 _index) public view returns(string memory)
+  {
+    return(userInfo[msg.sender].surevysTitles[_index]);
   }
 }
