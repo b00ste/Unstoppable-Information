@@ -14,12 +14,10 @@ function SurveyValue(props) {
   const saveNewValue = (event) => {
     event.preventDefault();
     newValue = event.target.value;
-    event.target.value = '';
   }
   const saveNewMaxParticipants = (event) => {
     event.preventDefault();
     newMaxParticipants = event.target.value;
-    event.target.value = '';
   }
   const addNewValueAndMaxParticipants = (event) => {
     event.preventDefault();
@@ -32,8 +30,8 @@ function SurveyValue(props) {
       <div className="card border-light mb-3">
         <div className="card-body">
           {props.value && props.maxParticipants ? <p className="card-text">Your survey has {props.value} ETH for {props.maxParticipants} participants.</p> : <h4 className="card-title">Set a value and paricipants.</h4>}
-          <Input type="text" className="form-control" placeholder="Value" onChange={saveNewValue} />
-          <Input type="text" className="form-control" placeholder="Participants" onChange={saveNewMaxParticipants} />
+          <Input type="number" className="form-control" placeholder="Value" onChange={saveNewValue} />
+          <Input type="number" className="form-control" placeholder="Participants" onChange={saveNewMaxParticipants} />
           <button type="button" className="btn btn-primary" onClick={addNewValueAndMaxParticipants}>Save value and participants</button>
         </div>
       </div>

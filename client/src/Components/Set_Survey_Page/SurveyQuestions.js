@@ -14,7 +14,6 @@ function SurveyQuestions(props) {
   const saveNewQuestionValue = (event) => {
     event.preventDefault();
     newQuestionValue = event.target.value;
-    event.target.value = '';
   }
   const addNewQuestion = (event) => {
     event.preventDefault();

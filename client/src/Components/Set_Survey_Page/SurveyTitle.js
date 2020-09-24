@@ -13,7 +13,6 @@ function SurveyTitle(props) {
   const saveNewTitleValue = (event) => {
     event.preventDefault();
     newTitleValue = event.target.value;
-    event.target.value = '';
   }
   const addNewTitle = (event) => {
     event.preventDefault();
