@@ -25,20 +25,18 @@ const Container = styled.div`
 
 function Body(props) {
 	const setNewSurvey = async () => {
+		props.setLoading(true);
 		let questions = props.questions[0];
 		for (var i = 1; i < props.questions.length; i++)
 			questions += ',' + props.questions[i];
-		await props.surveysContract.methods.setSurvey(props.title, questions, props.maxParticipants, props.value).send({ from: props.account })
+		await props.surveysContract.methods.setSurvey(props.title, questions, props.maxParticipants, props.value).send({ from: props.userAddress })
 			.then(() => {
 				props.setTitle(undefined);
 				props.setQuestions([]);
 				props.setValue(undefined);
 				props.setMaxParticipants(undefined);
+				props.setLoading(false);
 			});
-	}
-
-	if (props.title && props.questions && props.maxParticipants && props.value) {
-		setNewSurvey();
 	}
 
 	return (
@@ -57,6 +55,7 @@ function Body(props) {
 				setValue={props.setValue}
 				setMaxParticipants={props.setMaxParticipants}
 			/>
+			<button type="button" className="btn btn-primary" onClick={setNewSurvey}>Let's go</button>
 		</Container>
 	);
 }

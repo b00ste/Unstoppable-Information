@@ -9,7 +9,7 @@ contract StorageSurveys
   {
     address surveyOwner;
     string questions;
-    string answers;
+    string[] answers;
     bool stoppedStatus;
     uint256 valueOfSurvey;
     uint256 participantsAllowed;
@@ -40,10 +40,32 @@ contract StorageSurveys
 
   bool public _initialized;
 
+  function getSurveyName(uint256 _ofNumber) public view returns(string memory)
+  {
+    return(surveys[_ofNumber]);
+  }
+  function getSurveyQuestions(string memory _name) public view returns(string memory)
+  {
+    return(surveyProps[_name].questions);
+  }
+  function getParticipantsAllowed(string memory _name) public view returns(uint256)
+  {
+    return(surveyProps[_name].participantsAllowed);
+  }
+  function getSurveyTotalParticipants(string memory _name) public view returns(uint256)
+  {
+    return(surveyProps[_name].totalParticipants);
+  }
+  function getSurveyAnswers(string memory _name, uint256 _ofNumber) public view returns(string memory)
+  {
+    return(surveyProps[_name].answers[_ofNumber]);
+  }
+
   function getUintStorage(string memory _valueName) public view returns(uint256)
   {
     return(_uintStorage[_valueName]);
   }
+
   function getUserCreatedSurveys() public view returns(uint256)
   {
     return(userInfo[msg.sender].surveysCreated);

@@ -1,39 +1,64 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import Web3 from 'web3';
-
-const web3 = new Web3(Web3.givenProvider);
+import styled from 'styled-components';
+import SelectedSurvey from '../SelectedSurvey';
+import Balance from './Get_Balance';
+import UserSurveys from './Get_Account_Surveys';
+import SurveyQuestions from './Get_Survey_Questions';
+import SurveyAnswers from './Get_Survey_Answers';
 
 function Body(props) {
-	const [nrOfSurveys, setNrOfSurveys] = useState(undefined);
-	const [surveys, setSurveys] = useState(undefined);
-	const [balance, setBalance] = useState(undefined);
-	
-	const getUSerInfo = async () => {
-		const newNumberOfSurveys = await props.surveysContract.methods.getUserCreatedSurveys().call({from: props.account});
-		setNrOfSurveys(newNumberOfSurveys);
-		const newSurveys = [];
-		for(let i = 0; i < newNumberOfSurveys; i++) {
-			newSurveys.push(await props.surveysContract.methods.getUserSurveyOfNumber(i).call({from: props.account}));
-		}
-		setSurveys(newSurveys);
-		let newBalance;
-		if(web3.utils.isAddress(props.account))
-			newBalance = await props.surveysContract.methods.balanceOf(props.account).call();
-		setBalance(newBalance/10**18);
-	}
+	return (
+		<>
+			<Balance
+				balance={props.balance}
+				setBalance={props.setBalance}
 
-	useEffect(() => {
-		if(nrOfSurveys === undefined)
-			getUSerInfo();
-	})
+				surveysContract={props.surveysContract}
+				userAddress={props.userAddress}
+			/>
+			<UserSurveys
+				nrOfUserSurveys={props.nrOfUserSurveys}
+				setNrOfUserSurveys={props.setNrOfUserSurveys}
+				userSurveys={props.userSurveys}
+				setUserSurveys={props.setUserSurveys}
 
-	return(
-	<>
-		<p>{nrOfSurveys}</p>
-		{ surveys !== undefined ? surveys.map( val => <p key={uuidv4()}>{val}</p> ) : <></> }
-		<p>{balance !== undefined ? balance : <></>}</p>
-	</>
+				surveysContract={props.surveysContract}
+				userAddress={props.userAddress}
+			/>
+			<p>{props.nrOfUserSurveys}</p>
+			{ props.userSurveys !== undefined ? props.userSurveys.map(val => <p key={uuidv4()} onClick={() => { props.setShowSurvey(true); props.setSelectedSurvey(val); }}>{val}</p>) : <></>}
+			<p>{props.balance !== undefined ? props.balance : <></>}</p>
+			<SelectedSurvey
+				showSurvey={props.showSurvey}
+				setShowSurvey={props.setShowSurvey}
+				selectedSurvey={props.selectedSurvey}
+				setSelectedSurvey={props.setSelectedSurvey}
+				body={
+					<>
+						<p>some text</p>
+						<SurveyQuestions
+							userSurveyQuestions={props.userSurveyQuestions}
+							setUserSurveyQuestions={props.setUserSurveyQuestions}
+							selectedSurvey={props.selectedSurvey}
+							showSurvey={props.showSurvey}
+
+							surveysContract={props.surveysContract}
+							userAddress={props.userAddress}
+						/>
+						<SurveyAnswers
+							userSurveyAnswers={props.userSurveyAnswers}
+							setUserSurveyAnswers={props.setUserSurveyAnswers}
+							selectedSurvey={props.selectedSurvey}
+							showSurvey={props.showSurvey}
+
+							surveysContract={props.surveysContract}
+							userAddress={props.userAddress}
+						/>
+					</>
+				}
+			/>
+		</>
 	);
 }
 

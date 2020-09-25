@@ -29,16 +29,6 @@ contract FunctionalSurveys is Ownable, StorageSurveys, TokenSurveys(1000)
 
 // General app functions
 
-  function getSurveyName(uint256 _ofNumber) public view returns(string memory)
-  {
-    return(surveys[_ofNumber]);
-  }
-
-  function getChoices(string memory _name) public view returns(string memory)
-  {
-    return(surveyProps[_name].questions);
-  }
-
   function setSurvey(string memory _name, string memory _questions, uint256 _participantsAllowed, uint256 _valueOfSurvey) public payable
   {
     //saving the value of survey with 18 decimals
@@ -76,7 +66,7 @@ contract FunctionalSurveys is Ownable, StorageSurveys, TokenSurveys(1000)
     require(!userParticipated[msg.sender][_name]);
     userParticipated[msg.sender][_name] = true;
     //setting new answers to the survey and updating the number of participants
-    surveyProps[_name].answers = _answers;
+    surveyProps[_name].answers.push(_answers);
     surveyProps[_name].totalParticipants++;
     //sending the rewards for participating at the survey
     _transfer(address(this), msg.sender, surveyProps[_name].valueOfSurvey / surveyProps[_name].participantsAllowed);

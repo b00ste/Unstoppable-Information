@@ -17,11 +17,13 @@ import func from './contracts/FunctionalSurveys.json';
 //import proxy from './contracts/ProxySurveys.json';
 
 const web3 = new Web3(Web3.givenProvider);
-const contractAddress = '0x141a196928354DF72898719775A0bB5945c8F8d0';
+const contractAddress = '0x03b90E47542bD96d19E974BeA9e81fA0e5708DDf';
 const surveysContract = new web3.eth.Contract(func.abi, contractAddress);
 
 function App() {
-  const [account, setAccount] = useState(undefined);
+  const [userAddress, setUserAddress] = useState(undefined);
+
+  const [loading, setLoading] = useState(false);
 
   const [title, setTitle] = useState(undefined);
   const [questions, setQuestions] = useState([]);
@@ -33,19 +35,25 @@ function App() {
   const [showSurvey, setShowSurvey] = useState(false);
   const [selectedSurvey, setSelectedSurvey] = useState(undefined);
 
-  const getAccount = async () => {
-		const accounts = await window.ethereum.enable();
-    setAccount(accounts[0]);
-	}
-	useEffect(() => {
-		if(account === undefined){
-      getAccount();
-		}
-	});
+  const [balance, setBalance] = useState(undefined);
+  const [nrOfUserSurveys, setNrOfUserSurveys] = useState(undefined);
+  const [userSurveys, setUserSurveys] = useState(undefined);
+  const [userSurveyQuestions, setUserSurveyQuestions] = useState(undefined);
+  const [userSurveyAnswers, setUserSurveyAnswers] = useState(undefined);
+
+  const getUserAddress = async () => {
+    const accounts = await window.ethereum.enable();
+    setUserAddress(accounts[0]);
+  }
+  useEffect(() => {
+    if (userAddress === undefined) {
+      getUserAddress();
+    }
+  });
 
   return (
     <Router>
-      <Header account={account} />
+      <Header userAddress={userAddress} loading={loading} />
       <Switch>
 
         <Route exact path="/">
@@ -66,8 +74,11 @@ function App() {
             maxParticipants={maxParticipants}
             setMaxParticipants={setMaxParticipants}
 
+            loading={loading}
+            setLoading={setLoading}
+
             surveysContract={surveysContract}
-            account={account}
+            userAddress={userAddress}
           />
         </Route>
 
@@ -85,8 +96,11 @@ function App() {
             selectedSurvey={selectedSurvey}
             setSelectedSurvey={setSelectedSurvey}
 
+            loading={loading}
+            setLoading={setLoading}
+
             surveysContract={surveysContract}
-            account={account}
+            userAddress={userAddress}
           />
         </Route>
 
@@ -100,9 +114,28 @@ function App() {
         <Route path="/account">
           <h1>this is account page</h1>
           <ACCOUNT_BODY
+            balance={balance}
+            setBalance={setBalance}
+            nrOfUserSurveys={nrOfUserSurveys}
+            setNrOfUserSurveys={setNrOfUserSurveys}
+            userSurveys={userSurveys}
+            setUserSurveys={setUserSurveys}
+            userSurveyQuestions={userSurveyQuestions}
+            setUserSurveyQuestions={setUserSurveyQuestions}
+            userSurveyAnswers={userSurveyAnswers}
+            setUserSurveyAnswers={setUserSurveyAnswers}
+
+            showSurvey={showSurvey}
+            setShowSurvey={setShowSurvey}
+
+            selectedSurvey={selectedSurvey}
+            setSelectedSurvey={setSelectedSurvey}
+
+            loading={loading}
+            setLoading={setLoading}
 
             surveysContract={surveysContract}
-            account={account}
+            userAddress={userAddress}
           />
         </Route>
 

@@ -25,6 +25,13 @@ const RightLi = styled.li`
 
 
 function Header(props) {
+	let loading = <></>
+	if (props.loading) {
+		loading =
+			<div className="progress">
+				<Bar className="progress-bar progress-bar-striped progress-bar-animated"></Bar>
+			</div>
+	}
 	return (
 		<>
 			<nav className="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -40,13 +47,11 @@ function Header(props) {
 						<Link className="nav-link" to="/aboutUs"> About Us </Link>
 					</li>
 					<RightLi className="nav-item active">
-						<Link className="nav-link" to="/account">{props.account}</Link>
+						<Link className="nav-link" to="/account">{props.userAddress}</Link>
 					</RightLi>
 				</ul>
 			</nav>
-			<div className="progress">
-				<Bar className="progress-bar progress-bar-striped progress-bar-animated"></Bar>
-			</div>
+			{loading}
 			<div className="progress">
 				<Bar className="progress-bar"></Bar>
 			</div>
