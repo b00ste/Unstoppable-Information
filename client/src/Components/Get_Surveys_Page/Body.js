@@ -6,10 +6,10 @@ import Surveys from './Get_Surveys';
 import SelectedSurveyData from './Show_Selected_Survey';
 
 const Container = styled.div`
-display: flex;
-flex-wrap: wrap;
-justify-content: center;
-align-items: flex-end;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: flex-end;
 `;
 
 function Body(props) {

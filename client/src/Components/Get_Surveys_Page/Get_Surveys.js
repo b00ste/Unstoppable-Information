@@ -3,18 +3,18 @@ import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
 
 const Survey = styled.div`
-max-width: 20rem;
-word-wrap: break-word;
-margin: 5rem 2.5rem 2.5rem 2.5rem;
-text-align: center;
-span {
-margin: 15px;
-display: inline-block;
-}
-button {
-display: inline-block;
-margin 5px;
-width: 15rem;
+	max-width: 20rem;
+	word-wrap: break-word;
+	margin: 5rem 2.5rem 2.5rem 2.5rem;
+	text-align: center;
+	span {
+		margin: 15px;
+		display: inline-block;
+	}
+	button {
+		display: inline-block;
+		margin 5px;
+		width: 15rem;
 }
 `;
 

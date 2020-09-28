@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import SurveyQuestions from './SurveyQuestions.js'
 import SurveyTitle from './SurveyTitle.js'
 import SurveyValue from './SurveyValue.js'
+import SurveyParticipants from './SurveyParticipants.js'
 
 const Container = styled.div`
 	display: flex;
@@ -10,15 +11,23 @@ const Container = styled.div`
 	justify-content: center;
 	align-items: flex-end;
 	div {
-		max-width: 400px;
-		word-wrap: break-word;
+		width: 25em;
+		max-height: 23em;
 		margin-top: 2.5rem;
-		margin-bottom: 2.5rem;
 		text-align: center;
+		div {
+			overflow-y: auto;
+		}
+	}
 	button {
 		display: inline-block;
 		margin 5px;
-		width: 300px;
+		width: 23em;
+	}
+	input {
+		display: inline-block;
+  	margin 5px;
+  	width: 20em;
 	}
 }
 `;
@@ -40,23 +49,29 @@ function Body(props) {
 	}
 
 	return (
+		<>
 		<Container>
 			<SurveyTitle
 				title={props.title}
 				setTitle={props.setTitle}
 			/>
+			<SurveyValue
+				value={props.value}
+				setValue={props.setValue}
+			/>
+			<SurveyParticipants
+				maxParticipants={props.maxParticipants}
+				setMaxParticipants={props.setMaxParticipants}
+			/>
+		</Container>
+		<Container>
 			<SurveyQuestions
 				questions={props.questions}
 				setQuestions={props.setQuestions}
+				setNewSurvey={setNewSurvey}
 			/>
-			<SurveyValue
-				value={props.value}
-				maxParticipants={props.maxParticipants}
-				setValue={props.setValue}
-				setMaxParticipants={props.setMaxParticipants}
-			/>
-			<button type="button" className="btn btn-primary" onClick={setNewSurvey}>Let's go</button>
 		</Container>
+		</>
 	);
 }
 

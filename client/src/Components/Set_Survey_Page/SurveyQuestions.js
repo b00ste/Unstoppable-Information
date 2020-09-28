@@ -1,12 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
-
-const Input =styled.input`
-  display: inline-block;
-  margin 5px;
-  width: 300px;
-`;
 
 function SurveyQuestions(props) {
 
@@ -17,7 +10,9 @@ function SurveyQuestions(props) {
   }
   const addNewQuestion = (event) => {
     event.preventDefault();
-    let newQuestions = [...props.questions];
+    let newQuestions = [];
+    if(props.questions !== undefined)
+      newQuestions = [...props.questions];
     newQuestions.push(newQuestionValue);
     props.setQuestions(newQuestions);
   }
@@ -26,10 +21,16 @@ function SurveyQuestions(props) {
     <>
       <div className="card border-light mb-3">
         <div className="card-body">
-          {props.questions.length ? <></> : <h4 className="card-title">Choose questions.</h4>}
-          {props.questions.map((val) => <p key={uuidv4()} className="card-text">"{val}"</p>)}
-          <Input type="text" className="form-control" placeholder="Questions" onChange={saveNewQuestionValue} />
+          {
+            props.questions === undefined
+              ? <h4 className="card-title">Choose questions.</h4>
+              : props.questions.map((val) => <p key={uuidv4()} className="card-text">"{val}"</p>)
+          }
+          <input type="text" className="form-control" placeholder="Questions" onChange={saveNewQuestionValue} />
           <button type="button" className="btn btn-primary" onClick={addNewQuestion}>Save new question</button>
+          <button type="button" className="btn btn-primary" onClick={props.setNewSurvey}>
+						Let's go
+					</button>
         </div>
       </div>
     </>

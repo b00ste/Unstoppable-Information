@@ -26,7 +26,7 @@ function App() {
   const [loading, setLoading] = useState(false);
 
   const [title, setTitle] = useState(undefined);
-  const [questions, setQuestions] = useState([]);
+  const [questions, setQuestions] = useState(undefined);
   const [value, setValue] = useState(undefined);
   const [maxParticipants, setMaxParticipants] = useState(undefined);
 
