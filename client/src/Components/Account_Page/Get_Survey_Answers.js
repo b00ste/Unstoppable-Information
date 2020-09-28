@@ -4,18 +4,18 @@ import { v4 as uuidv4 } from 'uuid';
 function GetSurveyAnswers(props) {
 
 	const getSurveyAnswers = async () => {
-		let newUserSurveyAnswers;
+		let newSurveyAnswers;
 		let surveyTotalParticipants = await props.surveysContract.methods.getSurveyTotalParticipants(props.selectedSurvey).call({ from: props.userAddress });
-		newUserSurveyAnswers = [];
+		newSurveyAnswers = [];
 		for (let i = 0; i < surveyTotalParticipants; i++) {
 			let surveyAnswer = await props.surveysContract.methods.getSurveyAnswers(props.selectedSurvey, i).call({ from: props.userAddress });
-			newUserSurveyAnswers.push(surveyAnswer);
+			newSurveyAnswers.push(surveyAnswer);
 		}
-		props.setUserSurveyAnswers(newUserSurveyAnswers);
+		props.setSurveyAnswers(newSurveyAnswers);
 	}
 
 	useEffect(() => {
-		if (props.userSurveyAnswers === undefined && props.showSurvey) {
+		if (props.surveyAnswers === undefined && props.showSurvey) {
 			getSurveyAnswers();
 		}
 	});
@@ -23,8 +23,8 @@ function GetSurveyAnswers(props) {
 	return (
 		<>
 			{
-				props.userSurveyAnswers !== undefined
-					? props.userSurveyAnswers.map(val => <p key={uuidv4()}>{val}</p>)
+				props.surveyAnswers !== undefined
+					? props.surveyAnswers.map(val => <p key={uuidv4()}>{val}</p>)
 					: <></>
 			}
 		</>

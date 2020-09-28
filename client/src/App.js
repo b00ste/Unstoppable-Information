@@ -30,16 +30,16 @@ function App() {
   const [value, setValue] = useState(undefined);
   const [maxParticipants, setMaxParticipants] = useState(undefined);
 
-  const [surveyTitles, setSurveyTitles] = useState([]);
-  const [surveyQuestions, setSurveyQuestions] = useState({});
+  const [surveyTitles, setSurveyTitles] = useState(undefined);
+  const [surveyQuestions, setSurveyQuestions] = useState(undefined);
+  const [surveyAnswers, setSurveyAnswers] = useState(undefined);
+
   const [showSurvey, setShowSurvey] = useState(false);
   const [selectedSurvey, setSelectedSurvey] = useState(undefined);
 
   const [balance, setBalance] = useState(undefined);
   const [nrOfUserSurveys, setNrOfUserSurveys] = useState(undefined);
   const [userSurveys, setUserSurveys] = useState(undefined);
-  const [userSurveyQuestions, setUserSurveyQuestions] = useState(undefined);
-  const [userSurveyAnswers, setUserSurveyAnswers] = useState(undefined);
 
   const getUserAddress = async () => {
     const accounts = await window.ethereum.enable();
@@ -90,6 +90,9 @@ function App() {
             surveyQuestions={surveyQuestions}
             setSurveyQuestions={setSurveyQuestions}
 
+            surveyAnswers={surveyAnswers}
+            setSurveyAnswers={setSurveyAnswers}
+
             showSurvey={showSurvey}
             setShowSurvey={setShowSurvey}
 
@@ -112,18 +115,21 @@ function App() {
         </Route>
 
         <Route path="/account">
-          <h1>this is account page</h1>
           <ACCOUNT_BODY
             balance={balance}
             setBalance={setBalance}
+
             nrOfUserSurveys={nrOfUserSurveys}
             setNrOfUserSurveys={setNrOfUserSurveys}
+
             userSurveys={userSurveys}
             setUserSurveys={setUserSurveys}
-            userSurveyQuestions={userSurveyQuestions}
-            setUserSurveyQuestions={setUserSurveyQuestions}
-            userSurveyAnswers={userSurveyAnswers}
-            setUserSurveyAnswers={setUserSurveyAnswers}
+
+            surveyQuestions={surveyQuestions}
+            setSurveyQuestions={setSurveyQuestions}
+            
+            surveyAnswers={surveyAnswers}
+            setSurveyAnswers={setSurveyAnswers}
 
             showSurvey={showSurvey}
             setShowSurvey={setShowSurvey}

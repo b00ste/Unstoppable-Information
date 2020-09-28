@@ -59,10 +59,7 @@ function SelectedSurvey(props) {
 					className="bi bi-x"
 					fill="currentColor"
 					xmlns="http://www.w3.org/2000/svg"
-					onClick={() => {
-						props.setShowSurvey(false);
-						props.setSelectedSurvey(undefined);
-					}}
+					onClick={props.exit}
 				>
 					<path
 						fillRule="evenodd"

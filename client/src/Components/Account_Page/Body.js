@@ -1,6 +1,4 @@
 import React from 'react';
-import { v4 as uuidv4 } from 'uuid';
-import styled from 'styled-components';
 import SelectedSurvey from '../SelectedSurvey';
 import Balance from './Get_Balance';
 import UserSurveys from './Get_Account_Surveys';
@@ -22,24 +20,20 @@ function Body(props) {
 				setNrOfUserSurveys={props.setNrOfUserSurveys}
 				userSurveys={props.userSurveys}
 				setUserSurveys={props.setUserSurveys}
+				setShowSurvey={props.setShowSurvey}
+				setSelectedSurvey={props.setSelectedSurvey}
 
 				surveysContract={props.surveysContract}
 				userAddress={props.userAddress}
 			/>
-			<p>{props.nrOfUserSurveys}</p>
-			{ props.userSurveys !== undefined ? props.userSurveys.map(val => <p key={uuidv4()} onClick={() => { props.setShowSurvey(true); props.setSelectedSurvey(val); }}>{val}</p>) : <></>}
-			<p>{props.balance !== undefined ? props.balance : <></>}</p>
 			<SelectedSurvey
 				showSurvey={props.showSurvey}
-				setShowSurvey={props.setShowSurvey}
 				selectedSurvey={props.selectedSurvey}
-				setSelectedSurvey={props.setSelectedSurvey}
 				body={
 					<>
-						<p>some text</p>
 						<SurveyQuestions
-							userSurveyQuestions={props.userSurveyQuestions}
-							setUserSurveyQuestions={props.setUserSurveyQuestions}
+							surveyQuestions={props.surveyQuestions}
+							setSurveyQuestions={props.setSurveyQuestions}
 							selectedSurvey={props.selectedSurvey}
 							showSurvey={props.showSurvey}
 
@@ -47,8 +41,8 @@ function Body(props) {
 							userAddress={props.userAddress}
 						/>
 						<SurveyAnswers
-							userSurveyAnswers={props.userSurveyAnswers}
-							setUserSurveyAnswers={props.setUserSurveyAnswers}
+							surveyAnswers={props.surveyAnswers}
+							setSurveyAnswers={props.setSurveyAnswers}
 							selectedSurvey={props.selectedSurvey}
 							showSurvey={props.showSurvey}
 
@@ -56,6 +50,15 @@ function Body(props) {
 							userAddress={props.userAddress}
 						/>
 					</>
+				}
+				exit=
+				{
+					() => {
+						props.setShowSurvey(false);
+						props.setSelectedSurvey(undefined);
+						props.setSurveyQuestions(undefined);
+						props.setSurveyAnswers(undefined);
+					}
 				}
 			/>
 		</>

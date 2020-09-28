@@ -1,7 +1,18 @@
 import React, { useEffect } from 'react';
 import Web3 from 'web3';
+import styled from 'styled-components';
 
 const web3 = new Web3(Web3.givenProvider);
+
+const Div = styled.div`
+	position: relative;
+	h5 {
+		position: absolute;
+		top: 0;
+		right: 0;
+		padding: 0.5em;
+	}
+`;
 
 function GetBalance(props) {
 	const getBalance = async () => {
@@ -17,7 +28,9 @@ function GetBalance(props) {
 	});
 
 	return(
-		<></>
+		<Div>
+			{props.balance !== undefined ? <h5>Balance: {props.balance} SVT</h5> : <></>}
+		</Div>
 	);
 }
 
