@@ -43,6 +43,7 @@ function Body(props) {
 			<SelectedSurvey
 				showSurvey={props.showSurvey}
 				selectedSurvey={props.selectedSurvey}
+				loading={props.loading}
 				body=
 				{
 					<SelectedSurveyData
@@ -56,6 +57,7 @@ function Body(props) {
 						setSelectedSurvey={props.setSelectedSurvey}
 						surveysContract={props.surveysContract}
 						userAddress={props.userAddress}
+						setLoading={props.setLoading}
 					/>
 				}
 				exit=
@@ -64,6 +66,7 @@ function Body(props) {
 						props.setShowSurvey(false);
 						props.setSelectedSurvey(undefined);
 						props.setSurveyQuestions(undefined);
+						props.setSurveyAnswers(undefined);
 					}
 				}
 			/>

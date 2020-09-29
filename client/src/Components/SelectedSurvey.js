@@ -10,7 +10,7 @@ const Survey = styled.div`
 	background-color: white;
 	box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 	max-height: 40rem;
-	overflow: auto;
+	max-width: 50rem;
 
 	display: flex;
 	flex-direction: column;
@@ -26,12 +26,21 @@ const Survey = styled.div`
 		cursor: pointer;
 	}
 	div {
-		width: 30em;
 		text-align: center;
 	}
 	.card-header {
+		width: 100%;
 		padding-left: 5em;
 		padding-right: 5em;
+	}
+	.card-body {
+		overflow: auto;
+	}
+	.progress {
+		width: 100%;
+	}
+	.progress-bar {
+		width: 100%;
 	}
 }
 `;
@@ -46,6 +55,14 @@ const SurveyMask = styled.div`
 `;
 
 function SelectedSurvey(props) {
+
+	let loading = <></>
+	if (props.loading && props.selectedSurvey !== undefined) {
+		loading =
+			<div className="progress">
+				<div className="progress-bar progress-bar-striped progress-bar-animated"></div>
+			</div>
+	}
 
 	let survey;
 	let surveyMask;
@@ -67,6 +84,7 @@ function SelectedSurvey(props) {
 					/>
 				</svg>
 				<div className="card-header"><h1>{props.selectedSurvey}</h1></div>
+				{loading}
 				<div className="card-body">{props.body}</div>
 			</Survey>
 		surveyMask = <SurveyMask></SurveyMask>
