@@ -53,7 +53,16 @@ function App() {
 
   return (
     <Router>
-      <Header userAddress={userAddress} loading={loading} />
+      <Header
+        balance={balance}
+        setBalance={setBalance}
+
+        loading={loading}
+        setLoading={setLoading}
+
+        surveysContract={surveysContract}
+        userAddress={userAddress}
+      />
       <Switch>
 
         <Route exact path="/">
