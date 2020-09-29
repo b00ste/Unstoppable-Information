@@ -4,10 +4,10 @@ import SurveyQuestions from './Get_Survey_Questions'
 
 const Button = styled.button`
 	width: 29em;
-	display: inline-block;
+	display: block;
 `;
 
-function ShowSelcetedSurvey(props) {
+function Data(props) {
 
 	const updateAnswers = (event) => {
 		event.preventDefault();
@@ -16,6 +16,7 @@ function ShowSelcetedSurvey(props) {
 
 	const sendAnswer = async (event) => {
 		event.preventDefault();
+		props.setLoading(true);
 		let questions = props.surveyQuestions.split(',');
 		let answer = props.surveyAnswers[questions[0]]
 		for (var i = 1; i < questions.length; i++)
@@ -26,6 +27,7 @@ function ShowSelcetedSurvey(props) {
 				props.setShowSurvey(false);
 				props.setSelectedSurvey(undefined);
 				props.setSurveyQuestions(undefined);
+				props.setLoading(false);
 			});
 	}
 
@@ -44,10 +46,11 @@ function ShowSelcetedSurvey(props) {
 				surveysContract={props.surveysContract}
 				userAddress={props.userAddress}
 				updateAnswers={updateAnswers}
+				setLoading={props.setLoading}
 			/>
 			<Button type="button" className="btn btn-primary" onClick={sendAnswer}>Submit</Button>
 		</>
 	);
 }
 
-export default ShowSelcetedSurvey;
+export default Data;

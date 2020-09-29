@@ -1,20 +1,12 @@
 import React from 'react';
 import SelectedSurvey from '../SelectedSurvey';
-import Balance from './Get_Balance';
 import UserSurveys from './Get_Account_Surveys';
-import SurveyQuestions from './Get_Survey_Questions';
-import SurveyAnswers from './Get_Survey_Answers';
+import Data from './Selected_Survey_Data';
+import ExportDataButton from './Export_Data_Button';
 
 function Body(props) {
 	return (
 		<>
-			<Balance
-				balance={props.balance}
-				setBalance={props.setBalance}
-
-				surveysContract={props.surveysContract}
-				userAddress={props.userAddress}
-			/>
 			<UserSurveys
 				nrOfUserSurveys={props.nrOfUserSurveys}
 				setNrOfUserSurveys={props.setNrOfUserSurveys}
@@ -29,9 +21,12 @@ function Body(props) {
 			<SelectedSurvey
 				showSurvey={props.showSurvey}
 				selectedSurvey={props.selectedSurvey}
+				loading={props.loading}
 				body={
 					<>
-						<SurveyQuestions
+						<Data
+							surveyAnswers={props.surveyAnswers}
+							setSurveyAnswers={props.setSurveyAnswers}
 							surveyQuestions={props.surveyQuestions}
 							setSurveyQuestions={props.setSurveyQuestions}
 							selectedSurvey={props.selectedSurvey}
@@ -39,15 +34,11 @@ function Body(props) {
 
 							surveysContract={props.surveysContract}
 							userAddress={props.userAddress}
+							setLoading={props.setLoading}
 						/>
-						<SurveyAnswers
+						<ExportDataButton
 							surveyAnswers={props.surveyAnswers}
-							setSurveyAnswers={props.setSurveyAnswers}
-							selectedSurvey={props.selectedSurvey}
-							showSurvey={props.showSurvey}
-
-							surveysContract={props.surveysContract}
-							userAddress={props.userAddress}
+							surveyQuestions={props.surveyQuestions}
 						/>
 					</>
 				}

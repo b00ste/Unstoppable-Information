@@ -12,13 +12,14 @@ const Input = styled.input`
 function GetSurveyQuestions(props) {
 
 	const getSurveyQuestions = async () => {
+		props.setLoading(true);
 		let newSurveyQuestions = await props.surveysContract.methods.getSurveyQuestions(props.selectedSurvey).call({ from: props.userAddress });
 		props.setSurveyQuestions(newSurveyQuestions);
 	}
 
 	useEffect(() => {
 		if (props.surveyQuestions === undefined && props.showSurvey && props.selectedSurvey !== undefined) {
-			getSurveyQuestions();
+			getSurveyQuestions().then(() => props.setLoading(false));
 		}
 	});
 

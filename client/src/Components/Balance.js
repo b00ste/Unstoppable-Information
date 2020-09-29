@@ -4,18 +4,16 @@ import styled from 'styled-components';
 
 const web3 = new Web3(Web3.givenProvider);
 
-const Div = styled.div`
-	position: relative;
-	h5 {
-		position: absolute;
-		top: 0;
-		right: 0;
-		padding: 0.5em;
-	}
+const H6 = styled.h6`
+	position: absolute;
+	right: 0;
+	color: #fff;
+	margin: 1em;
 `;
 
 function GetBalance(props) {
 	const getBalance = async () => {
+		props.setLoading(true);
 		let newBalance;
 		if (web3.utils.isAddress(props.userAddress))
 			newBalance = (await props.surveysContract.methods.balanceOf(props.userAddress).call() / 10 ** 18);
@@ -24,13 +22,13 @@ function GetBalance(props) {
 
 	useEffect(() => {
 		if (props.balance === undefined)
-			getBalance();
+			getBalance().then( () => props.setLoading(false) );
 	});
 
 	return(
-		<Div>
-			{props.balance !== undefined ? <h5>Balance: {props.balance} SVT</h5> : <></>}
-		</Div>
+		<>
+			{props.balance !== undefined ? <H6>Balance: {props.balance} SVT</H6> : <></>}
+		</>
 	);
 }
 
