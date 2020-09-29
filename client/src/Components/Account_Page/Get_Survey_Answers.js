@@ -4,7 +4,6 @@ import { v4 as uuidv4 } from 'uuid';
 function GetSurveyAnswers(props) {
 
 	const getSurveyAnswers = async () => {
-		props.setLoading(true)
 		let newSurveyAnswers;
 		let surveyTotalParticipants = await props.surveysContract.methods.getSurveyTotalParticipants(props.selectedSurvey).call({ from: props.userAddress });
 		newSurveyAnswers = [];
@@ -17,7 +16,7 @@ function GetSurveyAnswers(props) {
 
 	useEffect(() => {
 		if (props.surveyAnswers === undefined && props.showSurvey) {
-			getSurveyAnswers().then(() => props.setLoading(false));
+			getSurveyAnswers();
 		}
 	});
 
@@ -25,15 +24,7 @@ function GetSurveyAnswers(props) {
 		<>
 			{
 				props.surveyAnswers !== undefined
-					? props.surveyAnswers.map(val1 =>
-						<tr className="table-primary" key={uuidv4()}>
-							{
-								val1.split(',').map(val2 =>
-									<th scope="col" key={uuidv4()}>{val2}</th>
-								)
-							}
-						</tr>
-					)
+					? props.surveyAnswers.map(val => <p key={uuidv4()}>{val}</p>)
 					: <></>
 			}
 		</>

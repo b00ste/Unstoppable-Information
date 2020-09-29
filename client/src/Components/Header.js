@@ -3,12 +3,10 @@ import styled from 'styled-components';
 import {
 	Link
 } from 'react-router-dom';
-import Balance from './Balance';
 
 const Bar = styled.div`
-	min-width: 540px;
-	width: 100%;
-`;
+width: 100%;
+`
 
 const RightLi = styled.li`
 	position: absolute;
@@ -28,7 +26,7 @@ const RightLi = styled.li`
 
 function Header(props) {
 	let loading = <></>
-	if (props.loading && props.selectedSurvey === undefined) {
+	if (props.loading) {
 		loading =
 			<div className="progress">
 				<Bar className="progress-bar progress-bar-striped progress-bar-animated"></Bar>
@@ -55,16 +53,7 @@ function Header(props) {
 			</nav>
 			{loading}
 			<div className="progress">
-				<Bar className="progress-bar">
-					<Balance
-						balance={props.balance}
-						setBalance={props.setBalance}
-
-						surveysContract={props.surveysContract}
-						userAddress={props.userAddress}
-						setLoading={props.setLoading}
-					/>
-				</Bar>
+				<Bar className="progress-bar"></Bar>
 			</div>
 		</>
 	);
