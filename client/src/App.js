@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import './Components/Icons';
-import 'bootswatch/dist/lux/bootstrap.min.css';
 import styled from 'styled-components';
 import {
   BrowserRouter as Router,
@@ -31,6 +29,7 @@ function App() {
   const [userAddress, setUserAddress] = useState(undefined);
 
   const [loading, setLoading] = useState(false);
+	const [searchVal, setSearchVal] = useState('');
 
   const [title, setTitle] = useState(undefined);
   const [questions, setQuestions] = useState(undefined);
@@ -46,7 +45,6 @@ function App() {
 
   const [balance, setBalance] = useState(undefined);
   const [nrOfUserSurveys, setNrOfUserSurveys] = useState(undefined);
-  const [userSurveys, setUserSurveys] = useState(undefined);
 
   const getUserAddress = async () => {
     const accounts = await window.ethereum.enable();
@@ -66,6 +64,9 @@ function App() {
 
         loading={loading}
         setLoading={setLoading}
+
+        surveyTitles={surveyTitles}
+        setSearchVal={setSearchVal}
 
         surveysContract={surveysContract}
         userAddress={userAddress}
@@ -118,6 +119,8 @@ function App() {
               loading={loading}
               setLoading={setLoading}
 
+              searchVal={searchVal}
+
               surveysContract={surveysContract}
               userAddress={userAddress}
             />
@@ -127,7 +130,7 @@ function App() {
             <ABOUT_US_BODY />
           </Route>
 
-          <Route path="/account">
+          <Route path="/accountSurveys">
             <ACCOUNT_BODY
               balance={balance}
               setBalance={setBalance}
@@ -135,8 +138,8 @@ function App() {
               nrOfUserSurveys={nrOfUserSurveys}
               setNrOfUserSurveys={setNrOfUserSurveys}
 
-              userSurveys={userSurveys}
-              setUserSurveys={setUserSurveys}
+              surveyTitles={surveyTitles}
+              setSurveyTitles={setSurveyTitles}
 
               surveyQuestions={surveyQuestions}
               setSurveyQuestions={setSurveyQuestions}
@@ -152,6 +155,8 @@ function App() {
 
               loading={loading}
               setLoading={setLoading}
+
+              searchVal={searchVal}
 
               surveysContract={surveysContract}
               userAddress={userAddress}

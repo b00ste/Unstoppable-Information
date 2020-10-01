@@ -1,8 +1,9 @@
 import React from 'react';
-import SelectedSurvey from '../Components/SelectedSurvey';
-import UserSurveys from './Get_Account_Surveys';
-import Data from './Selected_Survey_Data';
-import ExportDataButton from './Export_Data_Button';
+import SelectedSurvey from '../Components/SelectedSurvey.js';
+import UserSurveys from './Get_Account_Surveys.js';
+import Data from './Selected_Survey_Data.js';
+import ExportDataButton from './Export_Data_Button.js';
+
 
 function Body(props) {
 	return (
@@ -10,10 +11,12 @@ function Body(props) {
 			<UserSurveys
 				nrOfUserSurveys={props.nrOfUserSurveys}
 				setNrOfUserSurveys={props.setNrOfUserSurveys}
-				userSurveys={props.userSurveys}
-				setUserSurveys={props.setUserSurveys}
+				surveyTitles={props.surveyTitles}
+				setSurveyTitles={props.setSurveyTitles}
 				setShowSurvey={props.setShowSurvey}
 				setSelectedSurvey={props.setSelectedSurvey}
+
+				searchVal={props.searchVal}
 
 				surveysContract={props.surveysContract}
 				userAddress={props.userAddress}

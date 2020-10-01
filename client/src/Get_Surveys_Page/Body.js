@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components';
-import SelectedSurvey from '../Components/SelectedSurvey';
-import SelectedSurveyData from './Selected_Survey_Data';
-import SurveyTitles from './Get_Survey_Titles';
+import SelectedSurvey from '../Components/SelectedSurvey.js';
+import SelectedSurveyData from './Selected_Survey_Data.js';
+import SurveyTitles from './Get_Survey_Titles.js';
 
 const Container = styled.div`
 	display: flex;
@@ -30,47 +30,50 @@ function Body(props) {
 	});
 
 	return (
-		<Container>
-			<SurveyTitles
-				surveyTitles={props.surveyTitles}
-				setSurveyTitles={props.setSurveyTitles}
-				setShowSurvey={props.setShowSurvey}
-				setSelectedSurvey={props.setSelectedSurvey}
-				surveysContract={props.surveysContract}
-				userAddress={props.userAddress}
-				setLoading={props.setLoading}
-			/>
-			<SelectedSurvey
-				showSurvey={props.showSurvey}
-				selectedSurvey={props.selectedSurvey}
-				loading={props.loading}
-				body=
-				{
-					<SelectedSurveyData
-						surveyQuestions={props.surveyQuestions}
-						setSurveyQuestions={props.setSurveyQuestions}
-						surveyAnswers={props.surveyAnswers}
-						setSurveyAnswers={props.setSurveyAnswers}
-						showSurvey={props.showSurvey}
-						setShowSurvey={props.setShowSurvey}
-						selectedSurvey={props.selectedSurvey}
-						setSelectedSurvey={props.setSelectedSurvey}
-						surveysContract={props.surveysContract}
-						userAddress={props.userAddress}
-						setLoading={props.setLoading}
-					/>
-				}
-				exit=
-				{
-					() => {
-						props.setShowSurvey(false);
-						props.setSelectedSurvey(undefined);
-						props.setSurveyQuestions(undefined);
-						props.setSurveyAnswers(undefined);
+		<>
+			<Container>
+				<SurveyTitles
+					surveyTitles={props.surveyTitles}
+					setSurveyTitles={props.setSurveyTitles}
+					setShowSurvey={props.setShowSurvey}
+					setSelectedSurvey={props.setSelectedSurvey}
+					surveysContract={props.surveysContract}
+					userAddress={props.userAddress}
+					setLoading={props.setLoading}
+					searchVal={props.searchVal}
+				/>
+				<SelectedSurvey
+					showSurvey={props.showSurvey}
+					selectedSurvey={props.selectedSurvey}
+					loading={props.loading}
+					body=
+					{
+						<SelectedSurveyData
+							surveyQuestions={props.surveyQuestions}
+							setSurveyQuestions={props.setSurveyQuestions}
+							surveyAnswers={props.surveyAnswers}
+							setSurveyAnswers={props.setSurveyAnswers}
+							showSurvey={props.showSurvey}
+							setShowSurvey={props.setShowSurvey}
+							selectedSurvey={props.selectedSurvey}
+							setSelectedSurvey={props.setSelectedSurvey}
+							surveysContract={props.surveysContract}
+							userAddress={props.userAddress}
+							setLoading={props.setLoading}
+						/>
 					}
-				}
-			/>
-		</Container>
+					exit=
+					{
+						() => {
+							props.setShowSurvey(false);
+							props.setSelectedSurvey(undefined);
+							props.setSurveyQuestions(undefined);
+							props.setSurveyAnswers(undefined);
+						}
+					}
+				/>
+			</Container>
+		</>
 	);
 }
 

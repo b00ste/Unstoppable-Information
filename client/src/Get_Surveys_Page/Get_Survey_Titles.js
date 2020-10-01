@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const Survey = styled.div`
 	max-width: 20rem;
 	word-wrap: break-word;
-	margin: 5rem 2.5rem 2.5rem 2.5rem;
+	margin: 2em;
 	text-align: center;
 	button {
 		display: inline-block;
@@ -36,23 +36,25 @@ function GetSurveyTitles(props) {
 		<>
 			{
 				props.surveyTitles !== undefined
-					? props.surveyTitles.map((val) =>
-						<Survey key={uuidv4()} className="card text-white bg-primary mb-3">
-							<div className="card-body">
-								<h4 className="card-title">{val}</h4>
-								<button
-									type="button"
-									className="btn btn-secondary"
-									onClick={() => {
-										props.setShowSurvey(true);
-										props.setSelectedSurvey(val);
-									}}
-								>
-									Participate
+					? props.surveyTitles
+						.filter(val => val.includes(props.searchVal))
+						.map((val) =>
+							<Survey key={uuidv4()} className="card text-white bg-primary mb-3">
+								<div className="card-body">
+									<h4 className="card-title">{val}</h4>
+									<button
+										type="button"
+										className="btn btn-secondary"
+										onClick={() => {
+											props.setShowSurvey(true);
+											props.setSelectedSurvey(val);
+										}}
+									>
+										Participate
 								</button>
-							</div>
-						</Survey>
-					)
+								</div>
+							</Survey>
+						)
 					: <></>
 			}
 		</>

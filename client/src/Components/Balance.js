@@ -1,15 +1,7 @@
 import React, { useEffect } from 'react';
 import Web3 from 'web3';
-import styled from 'styled-components';
 
 const web3 = new Web3(Web3.givenProvider);
-
-const H6 = styled.h6`
-	position: absolute;
-	right: 0;
-	color: #fff;
-	margin: 1em;
-`;
 
 function GetBalance(props) {
 	const getBalance = async () => {
@@ -27,7 +19,7 @@ function GetBalance(props) {
 
 	return(
 		<>
-			{props.balance !== undefined ? <H6>Balance: {props.balance} SVT</H6> : <></>}
+			{props.balance !== undefined ? <p className="balance">Balance: {props.balance} SVT</p> : <></>}
 		</>
 	);
 }

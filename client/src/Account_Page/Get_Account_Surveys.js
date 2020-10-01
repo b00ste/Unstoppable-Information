@@ -9,13 +9,13 @@ const Container = styled.div`
 	align-items: flex-end;
 	word-wrap: break-word;
 	h2 {
-		padding: 2em 0 0.5em 0;
+		padding: 1em 0 0em 0;
 	}
 	div {
 		width: 20rem;
 		word-wrap: break-word;
 		text-align: center;
-		margin: 2.5rem;
+		margin: 2rem;
 		h4 {
 			margin: 1em 1em 0.5em 1em;
 		}
@@ -30,16 +30,17 @@ function GetUserSurveys(props) {
 	const getUserSurveys = async () => {
 		const newNumberOfUserSurveys = await props.surveysContract.methods.getUserCreatedSurveys().call({ from: props.userAddress });
 		props.setNrOfUserSurveys(newNumberOfUserSurveys);
-		const newUserSurveys = [];
+		const newSurveyTitles = [];
 		for (let i = newNumberOfUserSurveys - 1; i >= 0; i--) {
-			newUserSurveys.push(await props.surveysContract.methods.getUserSurveyOfNumber(i).call({ from: props.userAddress }));
+			newSurveyTitles.push(await props.surveysContract.methods.getUserSurveyOfNumber(i).call({ from: props.userAddress }));
 		}
-		props.setUserSurveys(newUserSurveys);
+		props.setSurveyTitles(newSurveyTitles);
 	}
 
 	useEffect(() => {
-		if (props.nrOfUserSurveys === undefined)
+		if (props.nrOfUserSurveys === undefined) {
 			getUserSurveys();
+		}
 	});
 
 	return (
@@ -49,8 +50,9 @@ function GetUserSurveys(props) {
 			</Container>
 			<Container>
 				{
-					props.userSurveys !== undefined
-						? props.userSurveys
+					props.surveyTitles !== undefined
+						? props.surveyTitles
+							.filter(val => val.includes(props.searchVal))
 							.map(val =>
 								<div key={uuidv4()} className="card text-white bg-primary mb-3">
 									<h4 className="card-title">{val}</h4>
