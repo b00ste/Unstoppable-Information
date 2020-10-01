@@ -38,6 +38,7 @@ function Body(props) {
 		let questions = props.questions[0];
 		for (var i = 1; i < props.questions.length; i++)
 			questions += ',' + props.questions[i];
+		console.log(questions);
 		await props.surveysContract.methods.setSurvey(props.title, questions, props.maxParticipants, props.value).send({ from: props.userAddress })
 			.then(() => {
 				props.setTitle(undefined);

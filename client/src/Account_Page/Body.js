@@ -39,6 +39,7 @@ function Body(props) {
 						<ExportDataButton
 							surveyAnswers={props.surveyAnswers}
 							surveyQuestions={props.surveyQuestions}
+							selectedSurvey={props.selectedSurvey}
 						/>
 					</>
 				}

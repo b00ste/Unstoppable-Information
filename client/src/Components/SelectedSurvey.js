@@ -24,7 +24,7 @@ const Survey = styled.div`
 		position: absolute;
 		top: 0;
 		right: 0;
-		margin: 0.6rem;
+		margin: 0.6rem 1rem;
 		color: #fff;
 	}
 	svg:hover {

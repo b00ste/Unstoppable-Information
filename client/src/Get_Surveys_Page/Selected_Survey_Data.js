@@ -18,10 +18,17 @@ function Data(props) {
 		event.preventDefault();
 		props.setLoading(true);
 		let questions = props.surveyQuestions.split(',');
-		let answer = props.surveyAnswers[questions[0]]
-		for (var i = 1; i < questions.length; i++)
-			answer += ',' + props.surveyAnswers[questions[i]];
-		await props.surveysContract.methods.answerSurvey(props.selectedSurvey, answer).send({ from: props.userAddress })
+		let answer = [];
+		/*const escaped1 = props.surveyAnswers[questions[0]].replace(/"/g, '\\"')
+		let answer = `"${escaped1}"`;*/
+		for (var i = 0; i < questions.length; i++) {
+			/*const escaped = props.surveyAnswers[questions[i]].replace(/"/g, '\\"')
+			answer += ',' + `"${escaped}"`;*/
+			const escaped = ('' + props.surveyAnswers[questions[i]]).replace(/"/g, '\\"');
+			answer.push(`"${escaped}"`);
+		}
+		console.log(answer.join());
+		await props.surveysContract.methods.answerSurvey(props.selectedSurvey, answer.join()).send({ from: props.userAddress })
 			.then(() => {
 				props.setSurveyAnswers({})
 				props.setShowSurvey(false);
@@ -32,7 +39,7 @@ function Data(props) {
 	}
 
 	useEffect(() => {
-		if(props.surveyAnswers === undefined)
+		if (props.surveyAnswers === undefined)
 			props.setSurveyAnswers({});
 	})
 

@@ -10,7 +10,7 @@ function GetSurveyAnswers(props) {
 		newSurveyAnswers = [];
 		for (let i = 0; i < surveyTotalParticipants; i++) {
 			let surveyAnswer = await props.surveysContract.methods.getSurveyAnswers(props.selectedSurvey, i).call({ from: props.userAddress });
-			newSurveyAnswers.push(surveyAnswer);
+			newSurveyAnswers.push(surveyAnswer.replace(/\\"/g, ''));
 		}
 		props.setSurveyAnswers(newSurveyAnswers);
 	}
@@ -29,7 +29,7 @@ function GetSurveyAnswers(props) {
 						<tr className="table-light" key={uuidv4()}>
 							{
 								val1.split(',').map(val2 =>
-									<th scope="col" key={uuidv4()}>{val2}</th>
+									<th scope="col" key={uuidv4()}>{val2.replace(/"/g, '')}</th>
 								)
 							}
 						</tr>
