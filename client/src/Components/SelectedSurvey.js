@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Survey = styled.div`
 	position: fixed;
@@ -16,22 +17,32 @@ const Survey = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+
+	border: 0px;
+
 	svg {
 		position: absolute;
 		top: 0;
 		right: 0;
+		margin: 0.6rem;
+		color: #fff;
 	}
 	svg:hover {
-		fill: #1a1a1a;
+		color: rgb(170, 170, 170) !important;
 		cursor: pointer;
 	}
 	div {
 		text-align: center;
 	}
 	.card-header {
+		background-color: #1a1a1a;
 		width: 100%;
 		padding-left: 5em;
 		padding-right: 5em;
+		h1 {
+			margin-bottom: 0px;
+			color: #fff;
+		}
 	}
 	.card-body {
 		overflow: auto;
@@ -69,20 +80,11 @@ function SelectedSurvey(props) {
 	if (props.showSurvey) {
 		survey =
 			<Survey className="card border-light mb-3">
-				<svg
-					width="4em"
-					height="4em"
-					viewBox="0 0 16 16"
-					className="bi bi-x"
-					fill="currentColor"
-					xmlns="http://www.w3.org/2000/svg"
+				<FontAwesomeIcon
+					icon="times"
+					size="3x"
 					onClick={props.exit}
-				>
-					<path
-						fillRule="evenodd"
-						d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
-					/>
-				</svg>
+				/>
 				<div className="card-header"><h1>{props.selectedSurvey}</h1></div>
 				{loading}
 				<div className="card-body">{props.body}</div>

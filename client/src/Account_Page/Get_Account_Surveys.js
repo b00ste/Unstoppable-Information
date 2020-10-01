@@ -7,13 +7,15 @@ const Container = styled.div`
 	flex-wrap: wrap;
 	justify-content: center;
 	align-items: flex-end;
-	padding: 1.5em;
 	word-wrap: break-word;
+	h2 {
+		padding: 2em 0 0.5em 0;
+	}
 	div {
 		width: 20rem;
 		word-wrap: break-word;
 		text-align: center;
-		margin: 5rem 2.5rem 2.5rem 2.5rem;
+		margin: 2.5rem;
 		h4 {
 			margin: 1em 1em 0.5em 1em;
 		}

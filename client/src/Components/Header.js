@@ -5,6 +5,12 @@ import {
 } from 'react-router-dom';
 import Balance from './Balance';
 
+const HeaderStyle = styled.header`
+	a:hover {
+		color: rgb(170, 170, 170) !important;
+	}
+`;
+
 const Bar = styled.div`
 	min-width: 540px;
 	width: 100%;
@@ -35,7 +41,7 @@ function Header(props) {
 			</div>
 	}
 	return (
-		<>
+		<HeaderStyle>
 			<nav className="navbar navbar-expand-lg navbar-dark bg-primary">
 				<Link className="navbar-brand" to="/">Survey App</Link>
 				<ul className="navbar-nav mr-auto">
@@ -66,7 +72,7 @@ function Header(props) {
 					/>
 				</Bar>
 			</div>
-		</>
+		</HeaderStyle>
 	);
 }
 

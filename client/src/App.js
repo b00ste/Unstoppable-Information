@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import './Components/Icons';
 import 'bootswatch/dist/lux/bootstrap.min.css';
+import styled from 'styled-components';
 import {
   BrowserRouter as Router,
   Switch,
@@ -8,13 +10,18 @@ import {
 
 import Header from './Components/Header.js';
 import Footer from './Components/Footer.js';
-import SET_SURVEY_BODY from './Components/Set_Survey_Page/Body.js';
-import GET_SURVEYS_BODY from './Components/Get_Surveys_Page/Body.js';
-import ACCOUNT_BODY from './Components/Account_Page/Body.js';
+import SET_SURVEY_BODY from './Set_Survey_Page/Body.js';
+import GET_SURVEYS_BODY from './Get_Surveys_Page/Body.js';
+import ACCOUNT_BODY from './Account_Page/Body.js';
+import ABOUT_US_BODY from './About_Us_Page/Body.js';
 
 import Web3 from 'web3';
 import func from './contracts/FunctionalSurveys.json';
 //import proxy from './contracts/ProxySurveys.json';
+
+const Body = styled.div`
+  margin-bottom: 5em;
+`;
 
 const web3 = new Web3(Web3.givenProvider);
 const contractAddress = '0x03b90E47542bD96d19E974BeA9e81fA0e5708DDf';
@@ -64,96 +71,93 @@ function App() {
         userAddress={userAddress}
       />
       <Switch>
+        <Body>
+          <Route exact path="/">
+            <h1>this is home page</h1>
+          </Route>
 
-        <Route exact path="/">
-          <h1>this is home page</h1>
-        </Route>
+          <Route path="/startSurveys">
+            <SET_SURVEY_BODY
+              title={title}
+              setTitle={setTitle}
 
-        <Route path="/startSurveys">
-          <SET_SURVEY_BODY
-            title={title}
-            setTitle={setTitle}
+              questions={questions}
+              setQuestions={setQuestions}
 
-            questions={questions}
-            setQuestions={setQuestions}
+              value={value}
+              setValue={setValue}
 
-            value={value}
-            setValue={setValue}
+              maxParticipants={maxParticipants}
+              setMaxParticipants={setMaxParticipants}
 
-            maxParticipants={maxParticipants}
-            setMaxParticipants={setMaxParticipants}
+              loading={loading}
+              setLoading={setLoading}
 
-            loading={loading}
-            setLoading={setLoading}
+              surveysContract={surveysContract}
+              userAddress={userAddress}
+            />
+          </Route>
 
-            surveysContract={surveysContract}
-            userAddress={userAddress}
-          />
-        </Route>
+          <Route path="/participateSurveys">
+            <GET_SURVEYS_BODY
+              surveyTitles={surveyTitles}
+              setSurveyTitles={setSurveyTitles}
 
-        <Route path="/participateSurveys">
-          <GET_SURVEYS_BODY
-            surveyTitles={surveyTitles}
-            setSurveyTitles={setSurveyTitles}
+              surveyQuestions={surveyQuestions}
+              setSurveyQuestions={setSurveyQuestions}
 
-            surveyQuestions={surveyQuestions}
-            setSurveyQuestions={setSurveyQuestions}
+              surveyAnswers={surveyAnswers}
+              setSurveyAnswers={setSurveyAnswers}
 
-            surveyAnswers={surveyAnswers}
-            setSurveyAnswers={setSurveyAnswers}
+              showSurvey={showSurvey}
+              setShowSurvey={setShowSurvey}
 
-            showSurvey={showSurvey}
-            setShowSurvey={setShowSurvey}
+              selectedSurvey={selectedSurvey}
+              setSelectedSurvey={setSelectedSurvey}
 
-            selectedSurvey={selectedSurvey}
-            setSelectedSurvey={setSelectedSurvey}
+              loading={loading}
+              setLoading={setLoading}
 
-            loading={loading}
-            setLoading={setLoading}
+              surveysContract={surveysContract}
+              userAddress={userAddress}
+            />
+          </Route>
 
-            surveysContract={surveysContract}
-            userAddress={userAddress}
-          />
-        </Route>
+          <Route path="/aboutUs">
+            <ABOUT_US_BODY />
+          </Route>
 
-        <Route path="/aboutUs">
-          <h1>this is about page</h1>
-          <p>
-            This is a paragraph about us
-          </p>
-        </Route>
+          <Route path="/account">
+            <ACCOUNT_BODY
+              balance={balance}
+              setBalance={setBalance}
 
-        <Route path="/account">
-          <ACCOUNT_BODY
-            balance={balance}
-            setBalance={setBalance}
+              nrOfUserSurveys={nrOfUserSurveys}
+              setNrOfUserSurveys={setNrOfUserSurveys}
 
-            nrOfUserSurveys={nrOfUserSurveys}
-            setNrOfUserSurveys={setNrOfUserSurveys}
+              userSurveys={userSurveys}
+              setUserSurveys={setUserSurveys}
 
-            userSurveys={userSurveys}
-            setUserSurveys={setUserSurveys}
+              surveyQuestions={surveyQuestions}
+              setSurveyQuestions={setSurveyQuestions}
 
-            surveyQuestions={surveyQuestions}
-            setSurveyQuestions={setSurveyQuestions}
-            
-            surveyAnswers={surveyAnswers}
-            setSurveyAnswers={setSurveyAnswers}
+              surveyAnswers={surveyAnswers}
+              setSurveyAnswers={setSurveyAnswers}
 
-            showSurvey={showSurvey}
-            setShowSurvey={setShowSurvey}
+              showSurvey={showSurvey}
+              setShowSurvey={setShowSurvey}
 
-            selectedSurvey={selectedSurvey}
-            setSelectedSurvey={setSelectedSurvey}
+              selectedSurvey={selectedSurvey}
+              setSelectedSurvey={setSelectedSurvey}
 
-            loading={loading}
-            setLoading={setLoading}
+              loading={loading}
+              setLoading={setLoading}
 
-            surveysContract={surveysContract}
-            userAddress={userAddress}
-          />
-        </Route>
-
+              surveysContract={surveysContract}
+              userAddress={userAddress}
+            />
+          </Route>
+        </Body>
       </Switch>
       <Footer />
     </Router>

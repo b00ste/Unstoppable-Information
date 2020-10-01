@@ -26,7 +26,7 @@ function GetSurveyAnswers(props) {
 			{
 				props.surveyAnswers !== undefined
 					? props.surveyAnswers.map(val1 =>
-						<tr className="table-primary" key={uuidv4()}>
+						<tr className="table-light" key={uuidv4()}>
 							{
 								val1.split(',').map(val2 =>
 									<th scope="col" key={uuidv4()}>{val2}</th>

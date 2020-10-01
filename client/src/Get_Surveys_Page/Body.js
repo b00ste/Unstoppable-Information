@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components';
-import SelectedSurvey from '../SelectedSurvey';
+import SelectedSurvey from '../Components/SelectedSurvey';
 import SelectedSurveyData from './Selected_Survey_Data';
 import SurveyTitles from './Get_Survey_Titles';
 

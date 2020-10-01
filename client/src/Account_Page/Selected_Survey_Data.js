@@ -1,10 +1,18 @@
 import React from 'react'
 import SurveyQuestions from './Get_Survey_Questions';
 import SurveyAnswers from './Get_Survey_Answers';
+import styled from 'styled-components';
+
+const Table = styled.table`
+	th {
+		border: 0px !important;
+		border-bottom: 1px solid #1a1a1a !important;
+	}
+`;
 
 function Data(props) {
 	return (
-		<table className="table table-hover">
+		<Table className="table table-hover">
 			<thead>
 				<tr>
 					<SurveyQuestions
@@ -31,7 +39,7 @@ function Data(props) {
 					setLoading={props.setLoading}
 				/>
 			</tbody>
-		</table>
+		</Table>
 	);
 }
 

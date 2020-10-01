@@ -1,5 +1,5 @@
 import React from 'react';
-import SelectedSurvey from '../SelectedSurvey';
+import SelectedSurvey from '../Components/SelectedSurvey';
 import UserSurveys from './Get_Account_Surveys';
 import Data from './Selected_Survey_Data';
 import ExportDataButton from './Export_Data_Button';

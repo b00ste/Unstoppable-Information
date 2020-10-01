@@ -7,7 +7,6 @@ function SurveyTitle(props) {
     let newTitleValue;
     newTitleValue = event.target.value;
     props.setTitle(newTitleValue);
-    console.log(props.title);
   }
 
   return (

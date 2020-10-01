@@ -8,9 +8,11 @@ function ExportData(props) {
 			let newData = {};
 			props.surveyQuestions.split(',').map((val, i) => {
 				newData[val] = aVal.split(',')[i];
+				return 0;
 			});
 			data.push(newData);
-		})
+			return 0;
+		});
 		console.log(data);
 		return data;
 	}
