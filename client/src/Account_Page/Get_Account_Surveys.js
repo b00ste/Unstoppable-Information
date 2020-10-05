@@ -32,7 +32,7 @@ function GetUserSurveys(props) {
 		props.setNrOfUserSurveys(newNumberOfUserSurveys);
 		const newSurveyTitles = [];
 		for (let i = newNumberOfUserSurveys - 1; i >= 0; i--) {
-			newSurveyTitles.push(await props.surveysContract.methods.getUserSurveyOfNumber(i).call({ from: props.userAddress }));
+			newSurveyTitles.push(await props.surveysContract.methods.getUserNumberOfSurveys(i).call({ from: props.userAddress }));
 		}
 		props.setSurveyTitles(newSurveyTitles);
 	}

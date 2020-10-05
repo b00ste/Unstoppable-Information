@@ -28,7 +28,7 @@ function Data(props) {
 			answer.push(`"${escaped}"`);
 		}
 		console.log(answer.join());
-		await props.surveysContract.methods.answerSurvey(props.selectedSurvey, answer.join()).send({ from: props.userAddress })
+		await props.surveysContract.methods.surveyParticipation(props.selectedSurvey, answer.join()).send({ from: props.userAddress })
 			.then(() => {
 				props.setSurveyAnswers({})
 				props.setShowSurvey(false);

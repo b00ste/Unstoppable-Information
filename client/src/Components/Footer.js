@@ -13,7 +13,7 @@ const FooterStyle = styled.footer`
 	justify-content: center;
 	align-items: flex-end;
 	svg {
-		margin: 1rem 0.7rem;
+		margin: 0.6rem 0.7rem;
 		color: #fff;
 	}
 	svg:hover {

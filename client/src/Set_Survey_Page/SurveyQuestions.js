@@ -28,9 +28,6 @@ function SurveyQuestions(props) {
           }
           <input type="text" className="form-control" placeholder="Questions" onChange={saveNewQuestionValue} />
           <button type="button" className="btn btn-primary" onClick={addNewQuestion}>Save new question</button>
-          <button type="button" className="btn btn-primary" onClick={props.setNewSurvey}>
-						Let's go
-					</button>
         </div>
       </div>
     </>

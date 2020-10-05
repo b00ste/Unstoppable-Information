@@ -14,7 +14,7 @@ function GetSurveyQuestions(props) {
 	const getSurveyQuestions = async () => {
 		props.setLoading(true);
 		let newSurveyQuestions = await props.surveysContract.methods.getSurveyQuestions(props.selectedSurvey).call({ from: props.userAddress });
-		props.setSurveyQuestions(newSurveyQuestions);
+		props.setSurveyQuestions(newSurveyQuestions.replace(/\\"/g, '').replace(/"/g, ''));
 	}
 
 	useEffect(() => {

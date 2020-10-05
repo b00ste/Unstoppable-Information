@@ -8,7 +8,7 @@ function GetBalance(props) {
 		props.setLoading(true);
 		let newBalance;
 		if (web3.utils.isAddress(props.userAddress))
-			newBalance = (await props.surveysContract.methods.balanceOf(props.userAddress).call() / 10 ** 18);
+			newBalance = (await props.tokenContract.methods.balanceOf(props.userAddress).call() / 10 ** 18);
 		props.setBalance(newBalance);
 	}
 

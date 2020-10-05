@@ -66,12 +66,12 @@ function Header(props) {
 									balance={props.balance}
 									setBalance={props.setBalance}
 
-									surveysContract={props.surveysContract}
+									tokenContract={props.tokenContract}
 									userAddress={props.userAddress}
 									setLoading={props.setLoading}
 								/>
 								<Link className="dropdown-item" to="/accountSurveys">Your Surveys</Link>
-								<Link className="dropdown-item" to="/accountElections">Your Elections</Link>
+								<Link className="dropdown-item" to="/accountElections">Your Polls</Link>
 							</div>
 						</Dropdown>
 					</Div>

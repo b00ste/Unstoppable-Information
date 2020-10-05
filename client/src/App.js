@@ -14,16 +14,20 @@ import ACCOUNT_BODY from './Account_Page/Body.js';
 import ABOUT_US_BODY from './About_Us_Page/Body.js';
 
 import Web3 from 'web3';
-import func from './contracts/FunctionalSurveys.json';
-//import proxy from './contracts/ProxySurveys.json';
+import surveyFunc from './contracts/FunctionalSurveys.json';
+import token from './contracts/TokenSurveys.json';
 
 const Body = styled.div`
   margin-bottom: 5em;
 `;
 
 const web3 = new Web3(Web3.givenProvider);
-const contractAddress = '0x03b90E47542bD96d19E974BeA9e81fA0e5708DDf';
-const surveysContract = new web3.eth.Contract(func.abi, contractAddress);
+
+const tokenAddress = '0xA6DEe4BCdaFA3E5e66F2A8Fe1e4BEd9082B8bB40';
+const tokenContract = new web3.eth.Contract(token.abi, tokenAddress);
+
+const surveysAddress = '0x507Be3C79DAf1C7df43827F22A2114CeA60B0E6b';
+const surveysContract = new web3.eth.Contract(surveyFunc.abi, surveysAddress);
 
 function App() {
   const [userAddress, setUserAddress] = useState(undefined);
@@ -45,6 +49,9 @@ function App() {
 
   const [balance, setBalance] = useState(undefined);
   const [nrOfUserSurveys, setNrOfUserSurveys] = useState(undefined);
+
+  const [surveyContractApproved, setSurveyContractApproved] = useState(true);
+  const [pollContractApproved, setPollContractApproved] = useState(true);
 
   const getUserAddress = async () => {
     const accounts = await window.ethereum.enable();
@@ -68,7 +75,7 @@ function App() {
         surveyTitles={surveyTitles}
         setSearchVal={setSearchVal}
 
-        surveysContract={surveysContract}
+        tokenContract={tokenContract}
         userAddress={userAddress}
       />
       <Switch>
@@ -94,7 +101,9 @@ function App() {
               loading={loading}
               setLoading={setLoading}
 
+              surveysAddress={surveysAddress}
               surveysContract={surveysContract}
+              tokenContract={tokenContract}
               userAddress={userAddress}
             />
           </Route>
