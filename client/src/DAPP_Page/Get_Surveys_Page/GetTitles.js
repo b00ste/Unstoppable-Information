@@ -14,7 +14,7 @@ const Survey = styled.div`
 }
 `;
 
-function GetTitles({ storage, setStorage }) {
+function GetTitles({ storage, setStorage, surveysContract }) {
 	
 	const getSurveys = async () => {
     setStorage({
@@ -22,9 +22,9 @@ function GetTitles({ storage, setStorage }) {
       loading: true 
     });
 		let newTitles = [];
-		let totalSurveys = await storage.surveysContract.methods.getUintStorage('totalSurveys').call();
+		let totalSurveys = await surveysContract.methods.getUintStorage('totalSurveys').call();
 		for (var i = totalSurveys - 1; i >= 0; i--) {
-			let name = await storage.surveysContract.methods.getSurveyName(i).call();
+			let name = await surveysContract.methods.getSurveyName(i).call();
 			newTitles.push(name);
 		}
     setStorage({

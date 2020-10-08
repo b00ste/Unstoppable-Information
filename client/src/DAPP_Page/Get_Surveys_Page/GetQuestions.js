@@ -9,14 +9,14 @@ const Input = styled.input`
 	margin-bottom: 15px;
 `;
 
-function GetQuestions({ storage, setStorage, updateAnswers }) {
+function GetQuestions({ storage, setStorage, updateAnswers, surveysContract }) {
 
 	const getSurveyQuestions = async () => {
 		setStorage({
 			...storage,
 			loading: true 
 		});
-		let newQuestions = await storage.surveysContract.methods.getSurveyQuestions(storage.selectedSurvey).call({ from: storage.userAddress });
+		let newQuestions = await surveysContract.methods.getSurveyQuestions(storage.selectedSurvey).call({ from: storage.userAddress });
 		setStorage({
 			...storage,
 			loading: false,

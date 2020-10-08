@@ -51,7 +51,7 @@ function Header({ storage, setStorage, tokenContract }) {
 				<div className="collapse navbar-collapse" id="navbarColor01">
 					<Div className="navbar-nav mr-auto">
 						<div className="nav-item">
-							<Link className="nav-link" to="/startSurveys"> Start a Survey </Link>
+							<Link className="nav-link" to="/App"> App </Link>
 						</div>
 						<div className="nav-item">
 							<Link className="nav-link" to="/participateSurveys"> Participate at Surveys </Link>
@@ -65,6 +65,7 @@ function Header({ storage, setStorage, tokenContract }) {
 								<Balance
 									storage={storage}
 									setStorage={setStorage}
+									tokenContract={tokenContract}
 								/>
 								<Link className="dropdown-item" to="/accountSurveys">Your Surveys</Link>
 								<Link className="dropdown-item" to="/accountPolls">Your Polls</Link>

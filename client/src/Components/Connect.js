@@ -1,13 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import Web3 from 'web3';
-import surveyFunc from '../contracts/FunctionalSurveys.json';
-import token from '../contracts/TokenSurveys.json';
-const web3 = new Web3(Web3.givenProvider);
-const tAddress = '0xA6DEe4BCdaFA3E5e66F2A8Fe1e4BEd9082B8bB40';
-const tContract = new web3.eth.Contract(token.abi, tAddress);
-const sAddress = '0x507Be3C79DAf1C7df43827F22A2114CeA60B0E6b';
-const sContract = new web3.eth.Contract(surveyFunc.abi, sContract);
 
 const Survey = styled.div`
 	position: fixed;
@@ -51,10 +43,6 @@ function Connect({ storage, setStorage }) {
 				setStorage({
 					...storage,
 					userAddress: accounts[0],
-					token: tContract,
-					tokenAddress: tAddress,
-					surveys: sContract,
-					surveysAddress: sAddress,
 					connected: true
 				});
 			});
@@ -66,8 +54,8 @@ function Connect({ storage, setStorage }) {
 		connect =
 			<Survey>
 				<p>In order for you to use this app, you need to connect to your ethereum wallet through metamask.</p>
-				<p>By using our app you agree that anyinformation you submit through surveys or polls is public information and anyone can use it for or against you.</p>
-				<p>We are not responsible for the misusing of the informations you provide our app.</p>
+				<p>By using our app you agree that any information you submit is public information and anyone can use it for or against you.</p>
+				<p>We are not responsible for the misuse of the informations you provide our app.</p>
 				<button type="button" className="btn btn-info" onClick={_connect}>Connect</button>
 			</Survey>
 		connectMask = <SurveyMask></SurveyMask>

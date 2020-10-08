@@ -36,25 +36,25 @@ const Container = styled.div`
 function Body({
 	storage,
 	setStorage,
-	surveysContract,
-	tokenContract,
-	surveysAddress
+	pollAddress
+	pollContract,
+	tokenContract
 }) {
 	const approve = async () => {
-		await tokenContract.methods.authorizeOperator(surveysAddress).send({ from: storage.userAddress });
+		await tokenContract.methods.authorizeOperator(pollAddress).send({ from: storage.userAddress });
 	}
-	const setNewSurvey = async () => {
+	const setNewPoll = async () => {
 		setStorage({ ...storage, loading: true });
 		let questions = [];
 		for (var i = 0; i < questions.length; i++) {
 			const escaped = ('' + questions[i]).replace(/"/g, '\\"');
 			questions.push(`"${escaped}"`);
 		}
-		surveysContract.methods.setSurvey(storage.surveyTitle, questions.join(), storage.maxParticipants, storage.value).send({ from: storage.userAddress })
+		pollContract.methods.setPoll(storage.pollTitle, questions.join(), storage.maxParticipants, storage.value).send({ from: storage.userAddress })
 			.then(() => {
 				setStorage({
 					...storage,
-					surveyTitle: undefined,
+					pollTitle: undefined,
 					questions: undefined,
 					value: undefined,
 					maxParticipants: undefined,
@@ -67,7 +67,7 @@ function Body({
 			.catch(err => {
 				setStorage({
 					...storage,
-					surveyTitle: undefined,
+					pollTitle: undefined,
 					questions: undefined,
 					value: undefined,
 					maxParticipants: undefined,
@@ -86,36 +86,36 @@ function Body({
 				<Title
 					storage={storage}
 					setStorage={setStorage}
-					is="survey"
+					is="poll"
 				/>
 				<Value
 					storage={storage}
 					setStorage={setStorage}
-					is="survey"
+					is="poll"
 				/>
 				<Participants
 					storage={storage}
 					setStorage={setStorage}
-					is="survey"
+					is="poll"
 				/>
 			</Container>
 			<Container>
 				<Questions
 					storage={storage}
 					setStorage={setStorage}
-					is="survey"
+					is="poll"
 				/>
 			</Container>
 			<Container>
 				<Buttons
 					storage={storage}
 					setStorage={setStorage}
-					surveysAddress={surveysAddress}
 					tokenContract={tokenContract}
-					is="survey"
+					pollAddress={pollAddress}
+					is="poll"
 
 					approve={approve}
-					sendToBC={setNewSurvey}
+					sendToBC={setNewPoll}
 				/>
 			</Container>
 		</>

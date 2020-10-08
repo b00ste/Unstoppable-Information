@@ -11,13 +11,14 @@ const Container = styled.div`
 	align-items: flex-end;
 `;
 
-function Body({ storage, setStorage }) {
+function Body({ storage, setStorage, surveysContract }) {
 	return (
 		<>
 			<Container>
 				<Titles
 					storage={storage}
 					setStorage={setStorage}
+					surveysContract={surveysContract}
 				/>
 				<SelectedSurvey
 					showSurvey={storage.showSurvey}
@@ -28,6 +29,7 @@ function Body({ storage, setStorage }) {
 						<SelectedSurveyData
 							storage={storage}
 							setStorage={setStorage}
+							surveysContract={surveysContract}
 						/>
 					}
 					exit=

@@ -1,6 +1,6 @@
 import React from 'react'
 
-function SurveyParticipants({ storage, setStorage }) {
+function Participants({ storage, setStorage, is }) {
 
   const saveNewMaxParticipants = (event) => {
     event.preventDefault();
@@ -13,8 +13,12 @@ function SurveyParticipants({ storage, setStorage }) {
         <div className="card-body">
           {
             storage.maxParticipants
-              ? <p className="card-text">Your survey allows {storage.maxParticipants} people to participate.</p>
-              : <h4 className="card-title">Set survey total paricipants.</h4>
+              ? <p className="card-text">
+                  Your {is === "survey" ? "survey" : is === "poll" ? "poll" : ""} allows {storage.maxParticipants} people to participate.
+                </p>
+              : <h4 className="card-title">
+                  Set {is === "survey" ? "survey" : is === "poll" ? "poll" : ""} total paricipants.
+                </h4>
           }
           <input type="number" className="form-control" placeholder="Participants" onChange={saveNewMaxParticipants} />
         </div>
@@ -23,4 +27,4 @@ function SurveyParticipants({ storage, setStorage }) {
   );
 }
 
-export default SurveyParticipants;
+export default Participants;

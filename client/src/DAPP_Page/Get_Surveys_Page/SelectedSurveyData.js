@@ -29,7 +29,7 @@ function Data({ storage, setStorage, surveysContract }) {
 			answer.push(`"${escaped}"`);
 		}
 		console.log(answer.join());
-		await storage.surveysContract.methods.surveyParticipation(storage.selectedSurvey, answer.join()).send({ from: storage.userAddress })
+		await surveysContract.methods.surveyParticipation(storage.selectedSurvey, answer.join()).send({ from: storage.userAddress })
 			.then(() =>
 				setStorage({
 					...storage,
@@ -48,6 +48,7 @@ function Data({ storage, setStorage, surveysContract }) {
 				storage={storage}
 				setStorage={setStorage}
 				updateAnswers={updateAnswers}
+				surveysContract={surveysContract}
 			/>
 			<Button type="button" className="btn btn-primary" onClick={sendAnswer}>Submit</Button>
 		</>
