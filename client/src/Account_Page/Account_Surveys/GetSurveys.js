@@ -40,16 +40,16 @@ function GetUserSurveys({ storage, setStorage, surveysContract }) {
 		setStorage({
 			...storage,
 			nrOfUserSurveys: newNrOfUserSurveys,
-			titles: newTitles,
+			userSurveyTitles: newTitles,
 			loading: false
 		});
 	}
 
 	useEffect(() => {
-		if (storage.nrOfUserSurveys === undefined && storage.titles === undefined) {
+		if (storage.nrOfUserSurveys === undefined && storage.userSurveyTitles === undefined) {
 			getUserSurveys();
 		}
-	}, []);
+	}, [storage.userAddress]);
 
 	return (
 		<>
@@ -58,8 +58,8 @@ function GetUserSurveys({ storage, setStorage, surveysContract }) {
 			</Container>
 			<Container>
 				{
-					storage.titles !== undefined
-						? storage.titles
+					storage.userSurveyTitles !== undefined
+						? storage.userSurveyTitles
 							.filter(val => val.includes(storage.searchVal))
 							.map(val =>
 								<div key={uuidv4()} className="card text-white bg-primary mb-3">

@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import SurveyQuestions from './SurveyQuestions.js';
-import SurveyTitle from './SurveyTitle.js';
-import SurveyValue from './SurveyValue.js';
-import SurveyParticipants from './SurveyParticipants.js';
-import SetButtons from './SetButtons.js';
+import Questions from './SetQuestions.js';
+import Title from './SetTitle.js';
+import Value from './SetValue.js';
+import Participants from './SetParticipants.js';
+import Buttons from './SetButtons.js';
 
 const Container = styled.div`
 	display: flex;
@@ -33,9 +33,9 @@ const Container = styled.div`
 }
 `;
 
-function Body({ surveysContract, tokenContract, surveysAddress, storage, setStorage }) {
+function Body({ storage, setStorage }) {
 	const approve = async () => {
-		await tokenContract.methods.authorizeOperator(surveysAddress).send({ from: storage.userAddress });
+		await storage.tokenContract.methods.authorizeOperator(storage.surveysAddress).send({ from: storage.userAddress });
 	}
 	const setNewSurvey = async () => {
 		setStorage({ ...storage, loading: true });
@@ -44,7 +44,7 @@ function Body({ surveysContract, tokenContract, surveysAddress, storage, setStor
 			const escaped = ('' + questions[i]).replace(/"/g, '\\"');
 			questions.push(`"${escaped}"`);
 		}
-		await surveysContract.methods.setSurvey(storage.titles, questions.join(), storage.maxParticipants, storage.value).send({ from: storage.userAddress })
+		await storage.surveysContract.methods.setSurvey(storage.SurveyTitle, questions.join(), storage.maxParticipants, storage.value).send({ from: storage.userAddress })
 			.then(() => {
 				setStorage({
 					...storage,
@@ -61,31 +61,29 @@ function Body({ surveysContract, tokenContract, surveysAddress, storage, setStor
 	return (
 		<>
 			<Container>
-				<SurveyTitle
+				<Title
 					storage={storage}
 					setStorage={setStorage}
 				/>
-				<SurveyValue
+				<Value
 					storage={storage}
 					setStorage={setStorage}
 				/>
-				<SurveyParticipants
-					storage={storage}
-					setStorage={setStorage}
-				/>
-			</Container>
-			<Container>
-				<SurveyQuestions
+				<Participants
 					storage={storage}
 					setStorage={setStorage}
 				/>
 			</Container>
 			<Container>
-				<SetButtons
+				<Questions
 					storage={storage}
 					setStorage={setStorage}
-					surveysAddress={surveysAddress}
-					tokenContract={tokenContract}
+				/>
+			</Container>
+			<Container>
+				<Buttons
+					storage={storage}
+					setStorage={setStorage}
 
 					approve={approve}
 					setNewSurvey={setNewSurvey}

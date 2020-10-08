@@ -1,6 +1,6 @@
 import React from 'react'
-import SurveyQuestions from './Get_Survey_Questions';
-import SurveyAnswers from './Get_Survey_Answers';
+import Questions from './GetQuestions';
+import Answers from './GetAnswers';
 import styled from 'styled-components';
 
 const Table = styled.table`
@@ -12,10 +12,10 @@ const Table = styled.table`
 
 function Data({ storage, setStorage, surveysContract }) {
 	return (
-		<Table className="table table-hover">
+		<Table className="table">
 			<thead>
 				<tr>
-					<SurveyQuestions
+					<Questions
 						storage={storage}
 						setStorage={setStorage}
 						surveysContract={surveysContract}
@@ -23,7 +23,7 @@ function Data({ storage, setStorage, surveysContract }) {
 				</tr>
 			</thead>
 			<tbody>
-				<SurveyAnswers
+				<Answers
 					storage={storage}
 					setStorage={setStorage}
 					surveysContract={surveysContract}

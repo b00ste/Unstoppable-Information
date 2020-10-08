@@ -8,25 +8,28 @@ function GetSurveyQuestions({ storage, setStorage, surveysContract }) {
 			...storage,
 			loading: true
 		});
-		let newQuestions = await surveysContract.methods.getSurveyQuestions(storage.selectedSurvey).call();
-		setStorage({
-			...storage,
-			questions: newQuestions.replace(/\\"/g, '').replace(/"/g, ''),
-			loading: false
-		});
+		//let newQuestions = await surveysContract.methods.getSurveyQuestions(storage.selectedSurvey).call();
+		surveysContract.methods.getSurveyQuestions(storage.selectedSurvey).call()
+			.then((newQuestions) => {
+				setStorage({
+					...storage,
+					questions: newQuestions.replace(/\\"/g, '').replace(/"/g, ''),
+					loading: false
+				});
+			});
 	}
 
 	useEffect(() => {
 		if (storage.questions === undefined && storage.showSurvey) {
 			getSurveyQuestions();
 		}
-	}, [getSurveyQuestions, storage.questions, storage.showSurvey]);
+	}, [storage.showSurvey]);
 
 	return (
 		<>
 			{
 				storage.questions !== undefined
-					? storage.questions.split(',').map( val => 
+					? storage.questions.split(',').map(val =>
 						<th scope="col" key={uuidv4()}>{val}</th>
 					)
 					: <></>

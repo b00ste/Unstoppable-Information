@@ -65,10 +65,9 @@ function Header({ storage, setStorage, tokenContract }) {
 								<Balance
 									storage={storage}
 									setStorage={setStorage}
-									tokenContract={tokenContract}
 								/>
 								<Link className="dropdown-item" to="/accountSurveys">Your Surveys</Link>
-								<Link className="dropdown-item" to="/accountElections">Your Polls</Link>
+								<Link className="dropdown-item" to="/accountPolls">Your Polls</Link>
 							</div>
 						</Dropdown>
 					</Div>

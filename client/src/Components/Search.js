@@ -9,9 +9,6 @@ const Div = styled.div`
 		width: 15em;
 		margin: 0.5em;
 	}
-	#hidden {
-		display: none;
-	}
 `;
 
 function Search({ storage, setStorage }) {
@@ -21,17 +18,17 @@ function Search({ storage, setStorage }) {
 		setStorage({ ...storage, searchVal: event.target.value });
 	}
 
-	let displayValue = 'hidden';
-	if(storage.titles !== undefined) {
-		displayValue = '';
+	let displayInput;
+	if(storage.titles === undefined) {
+		displayInput = <></>;
 	}
 	else {
-		displayValue = 'hidden';
+		displayInput = <input className="form-control mr-sm-2" type="text" placeholder="Search" onChange={changeSearchVal} />;
 	}
 
 	return (
 		<Div>
-			<input className="form-control mr-sm-2" id={displayValue} type="text" placeholder="Search" onChange={changeSearchVal} />
+			{displayInput}
 		</Div>
 	);
 }

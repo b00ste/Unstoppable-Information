@@ -14,7 +14,7 @@ const Survey = styled.div`
 }
 `;
 
-function GetSurveyTitles({ storage, setStorage, surveysContract }) {
+function GetTitles({ storage, setStorage }) {
 	
 	const getSurveys = async () => {
     setStorage({
@@ -22,28 +22,28 @@ function GetSurveyTitles({ storage, setStorage, surveysContract }) {
       loading: true 
     });
 		let newTitles = [];
-		let totalSurveys = await surveysContract.methods.getUintStorage('totalSurveys').call();
+		let totalSurveys = await storage.surveysContract.methods.getUintStorage('totalSurveys').call();
 		for (var i = totalSurveys - 1; i >= 0; i--) {
-			let name = await surveysContract.methods.getSurveyName(i).call();
+			let name = await storage.surveysContract.methods.getSurveyName(i).call();
 			newTitles.push(name);
 		}
     setStorage({
 			...storage,
-			titles: newTitles,
+			allSurevyTitles: newTitles,
       loading: false 
     });
 	}
 
 	useEffect(() => {
-		if (storage.titles === undefined)
+		if (storage.allSurevyTitles === undefined)
 			getSurveys();
-	}, []);
+	}, [storage.userAddress]);
 
 	return (
 		<>
 			{
-				storage.titles !== undefined
-					? storage.titles
+				storage.allSurevyTitles !== undefined
+					? storage.allSurevyTitles
 						.filter(val => val.includes(storage.searchVal))
 						.map((val) =>
 							<Survey key={uuidv4()} className="card text-white bg-primary mb-3">
@@ -71,4 +71,4 @@ function GetSurveyTitles({ storage, setStorage, surveysContract }) {
 	);
 }
 
-export default GetSurveyTitles;
+export default GetTitles;

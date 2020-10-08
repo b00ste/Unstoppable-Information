@@ -3,11 +3,11 @@ import Web3 from 'web3';
 
 const web3 = new Web3(Web3.givenProvider);
 
-function GetBalance({ storage, setStorage, tokenContract }) {
+function GetBalance({ storage, setStorage }) {
 	const getBalance = async () => {
 		setStorage({ ...storage, loading: true });
 		if (web3.utils.isAddress(storage.userAddress)) {
-			await tokenContract.methods.balanceOf(storage.userAddress).call().then((newBalance) => {
+			storage.tokenContract.methods.balanceOf(storage.userAddress).call().then((newBalance) => {
 				setStorage({ ...storage, balance: newBalance / 10 ** 18, loading: false });
 			})
 		}
@@ -17,7 +17,7 @@ function GetBalance({ storage, setStorage, tokenContract }) {
 		if (storage.balance === undefined) {
 			getBalance();
 		}
-	}, [getBalance, storage.balance]);
+	}, [storage.userAddress]);
 
 	return (
 		<>

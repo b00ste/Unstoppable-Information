@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import styled from 'styled-components';
-import SelectedSurvey from '../Components/SelectedSurvey.js';
-import SelectedSurveyData from './Selected_Survey_Data.js';
-import SurveyTitles from './Get_Survey_Titles.js';
+import SelectedSurvey from '../../Components/SelectedSurvey.js';
+import SelectedSurveyData from './SelectedSurveyData.js';
+import Titles from './GetTitles.js';
 
 const Container = styled.div`
 	display: flex;
@@ -11,19 +11,13 @@ const Container = styled.div`
 	align-items: flex-end;
 `;
 
-function Body({ storage, setStorage, surveysContract, resetState }) {
-	useEffect(() => {
-		return () => {
-			resetState();
-		}
-	}, [resetState])
+function Body({ storage, setStorage }) {
 	return (
 		<>
 			<Container>
-				<SurveyTitles
+				<Titles
 					storage={storage}
 					setStorage={setStorage}
-					surveysContract={surveysContract}
 				/>
 				<SelectedSurvey
 					showSurvey={storage.showSurvey}
@@ -34,7 +28,6 @@ function Body({ storage, setStorage, surveysContract, resetState }) {
 						<SelectedSurveyData
 							storage={storage}
 							setStorage={setStorage}
-							surveysContract={surveysContract}
 						/>
 					}
 					exit=

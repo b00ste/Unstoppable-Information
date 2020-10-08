@@ -9,38 +9,26 @@ const Input = styled.input`
 	margin-bottom: 15px;
 `;
 
-function GetSurveyQuestions({ storage, setStorage, updateAnswers, surveysContract }) {
+function GetQuestions({ storage, setStorage, updateAnswers }) {
 
-	/*const getSurveyQuestions = async () => {
+	const getSurveyQuestions = async () => {
 		setStorage({
 			...storage,
 			loading: true 
 		});
-		let newQuestions = await surveysContract.methods.getSurveyQuestions(storage.selectedSurvey).call({ from: storage.userAddress });
+		let newQuestions = await storage.surveysContract.methods.getSurveyQuestions(storage.selectedSurvey).call({ from: storage.userAddress });
 		setStorage({
 			...storage,
 			loading: false,
 			questions: newQuestions.replace(/\\"/g, '').replace(/"/g, '')
 		});
-	}*/
+	}
 
 	useEffect(() => {
 		if (storage.questions === undefined && storage.showSurvey && storage.selectedSurvey !== undefined) {
-			//getSurveyQuestions();
-			setStorage({
-				...storage,
-				loading: true
-			});
-			surveysContract.methods.getSurveyQuestions(storage.selectedSurvey).call({ from: storage.userAddress })
-			.then((newQuestions) => {
-				setStorage({
-					...storage,
-					loading: false,
-					questions: newQuestions.replace(/\\"/g, '').replace(/"/g, '')
-				});
-			});
+			getSurveyQuestions();
 		}
-	}, [setStorage, storage, surveysContract.methods]);
+	}, []);
 
 	return (
 		<>
@@ -60,4 +48,4 @@ function GetSurveyQuestions({ storage, setStorage, updateAnswers, surveysContrac
 	);
 }
 
-export default GetSurveyQuestions;
+export default GetQuestions;

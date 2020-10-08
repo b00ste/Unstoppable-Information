@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import SurveyQuestions from './Get_Survey_Questions'
+import Questions from './GetQuestions'
 
 const Button = styled.button`
 	width: 29em;
@@ -29,7 +29,7 @@ function Data({ storage, setStorage, surveysContract }) {
 			answer.push(`"${escaped}"`);
 		}
 		console.log(answer.join());
-		await surveysContract.methods.surveyParticipation(storage.selectedSurvey, answer.join()).send({ from: storage.userAddress })
+		await storage.surveysContract.methods.surveyParticipation(storage.selectedSurvey, answer.join()).send({ from: storage.userAddress })
 			.then(() =>
 				setStorage({
 					...storage,
@@ -44,11 +44,10 @@ function Data({ storage, setStorage, surveysContract }) {
 
 	return (
 		<>
-			<SurveyQuestions
+			<Questions
 				storage={storage}
 				setStorage={setStorage}
 				updateAnswers={updateAnswers}
-				surveysContract={surveysContract}
 			/>
 			<Button type="button" className="btn btn-primary" onClick={sendAnswer}>Submit</Button>
 		</>

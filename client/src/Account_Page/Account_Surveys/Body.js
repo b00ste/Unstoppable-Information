@@ -1,19 +1,15 @@
-import React, { useEffect } from 'react';
-import SelectedSurvey from '../Components/SelectedSurvey.js';
-import UserSurveys from './Get_Account_Surveys.js';
-import Data from './Selected_Survey_Data.js';
-import ExportDataButton from './Export_Data_Button.js';
+import React from 'react';
+import SelectedSurvey from '../../Components/SelectedSurvey.js';
+import Surveys from './GetSurveys.js';
+import Data from './SelectedSurveyData.js';
+import Buttons from '../ExportDataButton.js';
 
 
-function Body({ storage, setStorage, surveysContract, resetState }) {
-	useEffect(() => {
-		return () => {
-			resetState();
-		}
-	}, [resetState])
+function Body({ storage, setStorage, surveysContract }) {
+	
 	return (
 		<>
-			<UserSurveys
+			<Surveys
 				storage={storage}
 				setStorage={setStorage}
 				surveysContract={surveysContract}
@@ -29,7 +25,7 @@ function Body({ storage, setStorage, surveysContract, resetState }) {
 							setStorage={setStorage}
 							surveysContract={surveysContract}
 						/>
-						<ExportDataButton
+						<Buttons
 							answers={storage.answers}
 							questions={storage.questions}
 							selectedSurvey={storage.selectedSurvey}

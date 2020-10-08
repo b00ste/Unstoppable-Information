@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 
-function SetButtons({ storage, setStorage, tokenContract, surveysAddress, approve, setNewSurvey }) {
+function SetButtons({ storage, setStorage, approve, setNewSurvey }) {
 
 	const isOperator = async () => {
-		let newSurveyContractApproved = await tokenContract.methods.isOperatorFor(surveysAddress, storage.userAddress).call();
+		let newSurveyContractApproved = await storage.tokenContract.methods.isOperatorFor(storage.surveysAddress, storage.userAddress).call();
 		setStorage({
 			...storage,
 			surveyContractApproved: newSurveyContractApproved
