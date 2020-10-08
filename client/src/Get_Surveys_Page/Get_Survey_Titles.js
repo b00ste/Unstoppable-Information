@@ -14,30 +14,37 @@ const Survey = styled.div`
 }
 `;
 
-function GetSurveyTitles(props) {
-
+function GetSurveyTitles({ storage, setStorage, surveysContract }) {
+	
 	const getSurveys = async () => {
-		props.setLoading(true);
-		let newSurveyTitles = [];
-		let totalSurveys = await props.surveysContract.methods.getUintStorage('totalSurveys').call();
+    setStorage({
+      ...storage,
+      loading: true 
+    });
+		let newTitles = [];
+		let totalSurveys = await surveysContract.methods.getUintStorage('totalSurveys').call();
 		for (var i = totalSurveys - 1; i >= 0; i--) {
-			let name = await props.surveysContract.methods.getSurveyName(i).call();
-			newSurveyTitles.push(name);
+			let name = await surveysContract.methods.getSurveyName(i).call();
+			newTitles.push(name);
 		}
-		props.setSurveyTitles(newSurveyTitles);
+    setStorage({
+			...storage,
+			titles: newTitles,
+      loading: false 
+    });
 	}
 
 	useEffect(() => {
-		if (props.surveyTitles === undefined)
-			getSurveys().then(() => props.setLoading(false));
-	});
+		if (storage.titles === undefined)
+			getSurveys();
+	}, []);
 
 	return (
 		<>
 			{
-				props.surveyTitles !== undefined
-					? props.surveyTitles
-						.filter(val => val.includes(props.searchVal))
+				storage.titles !== undefined
+					? storage.titles
+						.filter(val => val.includes(storage.searchVal))
 						.map((val) =>
 							<Survey key={uuidv4()} className="card text-white bg-primary mb-3">
 								<div className="card-body">
@@ -46,8 +53,11 @@ function GetSurveyTitles(props) {
 										type="button"
 										className="btn btn-secondary"
 										onClick={() => {
-											props.setShowSurvey(true);
-											props.setSelectedSurvey(val);
+											setStorage({
+												...storage,
+												showSurvey: true,
+												selectedSurvey: val
+											});
 										}}
 									>
 										Participate

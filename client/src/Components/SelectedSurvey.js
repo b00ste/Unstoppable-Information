@@ -65,11 +65,11 @@ const SurveyMask = styled.div`
 	right: 0;
 `;
 
-function SelectedSurvey(props) {
+function SelectedSurvey({ showSurvey, selectedSurvey, loading, body, exit }) {
 
-	let loading = <></>
-	if (props.loading && props.selectedSurvey !== undefined) {
-		loading =
+	let loadingBar = <></>
+	if (loading && selectedSurvey !== undefined) {
+		loadingBar =
 			<div className="progress">
 				<div className="progress-bar progress-bar-striped progress-bar-animated"></div>
 			</div>
@@ -77,17 +77,17 @@ function SelectedSurvey(props) {
 
 	let survey;
 	let surveyMask;
-	if (props.showSurvey) {
+	if (showSurvey) {
 		survey =
 			<Survey className="card border-light mb-3">
 				<FontAwesomeIcon
 					icon="times"
 					size="3x"
-					onClick={props.exit}
+					onClick={exit}
 				/>
-				<div className="card-header"><h1>{props.selectedSurvey}</h1></div>
-				{loading}
-				<div className="card-body">{props.body}</div>
+				<div className="card-header"><h1>{selectedSurvey}</h1></div>
+				{loadingBar}
+				<div className="card-body">{body}</div>
 			</Survey>
 		surveyMask = <SurveyMask></SurveyMask>
 	}

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import SurveyQuestions from './Get_Survey_Questions'
 
@@ -7,53 +7,48 @@ const Button = styled.button`
 	display: block;
 `;
 
-function Data(props) {
+function Data({ storage, setStorage, surveysContract }) {
 
+	let newAnswers = {};
 	const updateAnswers = (event) => {
 		event.preventDefault();
-		props.surveyAnswers[event.target.name] = event.target.value;
+		newAnswers[event.target.name] = event.target.value;
 	}
 
 	const sendAnswer = async (event) => {
 		event.preventDefault();
-		props.setLoading(true);
-		let questions = props.surveyQuestions.split(',');
+		setStorage({
+			...storage,
+			loading: true,
+		});
+		let questions = storage.questions.split(',');
 		let answer = [];
-		/*const escaped1 = props.surveyAnswers[questions[0]].replace(/"/g, '\\"')
-		let answer = `"${escaped1}"`;*/
 		for (var i = 0; i < questions.length; i++) {
-			/*const escaped = props.surveyAnswers[questions[i]].replace(/"/g, '\\"')
-			answer += ',' + `"${escaped}"`;*/
-			const escaped = ('' + props.surveyAnswers[questions[i]]).replace(/"/g, '\\"');
+			const escaped = ('' + newAnswers[questions[i]]).replace(/"/g, '\\"');
+			console.log(escaped);
 			answer.push(`"${escaped}"`);
 		}
 		console.log(answer.join());
-		await props.surveysContract.methods.surveyParticipation(props.selectedSurvey, answer.join()).send({ from: props.userAddress })
-			.then(() => {
-				props.setSurveyAnswers({})
-				props.setShowSurvey(false);
-				props.setSelectedSurvey(undefined);
-				props.setSurveyQuestions(undefined);
-				props.setLoading(false);
-			});
+		await surveysContract.methods.surveyParticipation(storage.selectedSurvey, answer.join()).send({ from: storage.userAddress })
+			.then(() =>
+				setStorage({
+					...storage,
+					answers: undefined,
+					showSurvey: false,
+					selectedSurvey: undefined,
+					questions: undefined,
+					loading: false
+				})
+			);
 	}
-
-	useEffect(() => {
-		if (props.surveyAnswers === undefined)
-			props.setSurveyAnswers({});
-	})
 
 	return (
 		<>
 			<SurveyQuestions
-				showSurvey={props.showSurvey}
-				selectedSurvey={props.selectedSurvey}
-				surveyQuestions={props.surveyQuestions}
-				setSurveyQuestions={props.setSurveyQuestions}
-				surveysContract={props.surveysContract}
-				userAddress={props.userAddress}
+				storage={storage}
+				setStorage={setStorage}
 				updateAnswers={updateAnswers}
-				setLoading={props.setLoading}
+				surveysContract={surveysContract}
 			/>
 			<Button type="button" className="btn btn-primary" onClick={sendAnswer}>Submit</Button>
 		</>

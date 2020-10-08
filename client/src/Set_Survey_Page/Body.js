@@ -33,55 +33,59 @@ const Container = styled.div`
 }
 `;
 
-function Body(props) {
+function Body({ surveysContract, tokenContract, surveysAddress, storage, setStorage }) {
 	const approve = async () => {
-		await props.tokenContract.methods.authorizeOperator(props.surveysAddress).send({ from: props.userAddress });
+		await tokenContract.methods.authorizeOperator(surveysAddress).send({ from: storage.userAddress });
 	}
 	const setNewSurvey = async () => {
-		props.setLoading(true);
+		setStorage({ ...storage, loading: true });
 		let questions = [];
-		for (var i = 0; i < props.questions.length; i++) {
-			const escaped = ('' + props.questions[i]).replace(/"/g, '\\"');
+		for (var i = 0; i < questions.length; i++) {
+			const escaped = ('' + questions[i]).replace(/"/g, '\\"');
 			questions.push(`"${escaped}"`);
 		}
-		console.log(questions);
-		await props.surveysContract.methods.setSurvey(props.title, questions.join(), props.maxParticipants, props.value).send({ from: props.userAddress })
+		await surveysContract.methods.setSurvey(storage.titles, questions.join(), storage.maxParticipants, storage.value).send({ from: storage.userAddress })
 			.then(() => {
-				props.setTitle(undefined);
-				props.setQuestions([]);
-				props.setValue(undefined);
-				props.setMaxParticipants(undefined);
-				props.setLoading(false);
-			});
+				setStorage({
+					...storage,
+					titles: undefined,
+					questions: undefined,
+					value: undefined,
+					maxParticipants: undefined,
+					loading: false
+				});
+			})
+			.catch(err => alert(err));
 	}
 
 	return (
 		<>
 			<Container>
 				<SurveyTitle
-					title={props.title}
-					setTitle={props.setTitle}
+					storage={storage}
+					setStorage={setStorage}
 				/>
 				<SurveyValue
-					value={props.value}
-					setValue={props.setValue}
+					storage={storage}
+					setStorage={setStorage}
 				/>
 				<SurveyParticipants
-					maxParticipants={props.maxParticipants}
-					setMaxParticipants={props.setMaxParticipants}
+					storage={storage}
+					setStorage={setStorage}
 				/>
 			</Container>
 			<Container>
 				<SurveyQuestions
-					questions={props.questions}
-					setQuestions={props.setQuestions}
+					storage={storage}
+					setStorage={setStorage}
 				/>
 			</Container>
 			<Container>
 				<SetButtons
-					surveysAddress={props.surveysAddress}
-					tokenContract={props.tokenContract}
-					userAddress={props.userAddress}
+					storage={storage}
+					setStorage={setStorage}
+					surveysAddress={surveysAddress}
+					tokenContract={tokenContract}
 
 					approve={approve}
 					setNewSurvey={setNewSurvey}

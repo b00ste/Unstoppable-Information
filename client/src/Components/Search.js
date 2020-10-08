@@ -14,17 +14,15 @@ const Div = styled.div`
 	}
 `;
 
-function Search(props) {
+function Search({ storage, setStorage }) {
 
-	let newSearchVal;
 	const changeSearchVal = (event) => {
 		event.preventDefault();
-		newSearchVal = event.target.value;
-		props.setSearchVal(newSearchVal);
+		setStorage({ ...storage, searchVal: event.target.value });
 	}
 
 	let displayValue = 'hidden';
-	if(props.surveyTitles !== undefined) {
+	if(storage.titles !== undefined) {
 		displayValue = '';
 	}
 	else {

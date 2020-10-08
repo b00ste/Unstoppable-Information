@@ -1,58 +1,51 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import SelectedSurvey from '../Components/SelectedSurvey.js';
 import UserSurveys from './Get_Account_Surveys.js';
 import Data from './Selected_Survey_Data.js';
 import ExportDataButton from './Export_Data_Button.js';
 
 
-function Body(props) {
+function Body({ storage, setStorage, surveysContract, resetState }) {
+	useEffect(() => {
+		return () => {
+			resetState();
+		}
+	}, [resetState])
 	return (
 		<>
 			<UserSurveys
-				nrOfUserSurveys={props.nrOfUserSurveys}
-				setNrOfUserSurveys={props.setNrOfUserSurveys}
-				surveyTitles={props.surveyTitles}
-				setSurveyTitles={props.setSurveyTitles}
-				setShowSurvey={props.setShowSurvey}
-				setSelectedSurvey={props.setSelectedSurvey}
-
-				searchVal={props.searchVal}
-
-				surveysContract={props.surveysContract}
-				userAddress={props.userAddress}
+				storage={storage}
+				setStorage={setStorage}
+				surveysContract={surveysContract}
 			/>
 			<SelectedSurvey
-				showSurvey={props.showSurvey}
-				selectedSurvey={props.selectedSurvey}
-				loading={props.loading}
+				showSurvey={storage.showSurvey}
+				selectedSurvey={storage.selectedSurvey}
+				loading={storage.loading}
 				body={
 					<>
 						<Data
-							surveyAnswers={props.surveyAnswers}
-							setSurveyAnswers={props.setSurveyAnswers}
-							surveyQuestions={props.surveyQuestions}
-							setSurveyQuestions={props.setSurveyQuestions}
-							selectedSurvey={props.selectedSurvey}
-							showSurvey={props.showSurvey}
-
-							surveysContract={props.surveysContract}
-							userAddress={props.userAddress}
-							setLoading={props.setLoading}
+							storage={storage}
+							setStorage={setStorage}
+							surveysContract={surveysContract}
 						/>
 						<ExportDataButton
-							surveyAnswers={props.surveyAnswers}
-							surveyQuestions={props.surveyQuestions}
-							selectedSurvey={props.selectedSurvey}
+							answers={storage.answers}
+							questions={storage.questions}
+							selectedSurvey={storage.selectedSurvey}
 						/>
 					</>
 				}
 				exit=
 				{
 					() => {
-						props.setShowSurvey(false);
-						props.setSelectedSurvey(undefined);
-						props.setSurveyQuestions(undefined);
-						props.setSurveyAnswers(undefined);
+						setStorage({
+							...storage,
+							showSurvey: false,
+							selectedSurvey: undefined,
+							questions: undefined,
+							answers: undefined
+						});
 					}
 				}
 			/>

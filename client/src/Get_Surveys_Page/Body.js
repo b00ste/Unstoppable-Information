@@ -11,64 +11,42 @@ const Container = styled.div`
 	align-items: flex-end;
 `;
 
-function Body(props) {
-
-	const getSurveys = async () => {
-		props.setLoading(true);
-		let newSurveyTitles = [];
-		let totalSurveys = await props.surveysContract.methods.getUintStorage('totalSurveys').call();
-		for (var i = totalSurveys - 1; i >= 0; i--) {
-			let name = await props.surveysContract.methods.getSurveyName(i).call();
-			newSurveyTitles.push(name);
-		}
-		props.setSurveyTitles(newSurveyTitles);
-	}
-
+function Body({ storage, setStorage, surveysContract, resetState }) {
 	useEffect(() => {
-		if (props.surveyTitles === undefined)
-			getSurveys().then(() => props.setLoading(false));
-	});
-
+		return () => {
+			resetState();
+		}
+	}, [resetState])
 	return (
 		<>
 			<Container>
 				<SurveyTitles
-					surveyTitles={props.surveyTitles}
-					setSurveyTitles={props.setSurveyTitles}
-					setShowSurvey={props.setShowSurvey}
-					setSelectedSurvey={props.setSelectedSurvey}
-					surveysContract={props.surveysContract}
-					userAddress={props.userAddress}
-					setLoading={props.setLoading}
-					searchVal={props.searchVal}
+					storage={storage}
+					setStorage={setStorage}
+					surveysContract={surveysContract}
 				/>
 				<SelectedSurvey
-					showSurvey={props.showSurvey}
-					selectedSurvey={props.selectedSurvey}
-					loading={props.loading}
+					showSurvey={storage.showSurvey}
+					selectedSurvey={storage.selectedSurvey}
+					loading={storage.loading}
 					body=
 					{
 						<SelectedSurveyData
-							surveyQuestions={props.surveyQuestions}
-							setSurveyQuestions={props.setSurveyQuestions}
-							surveyAnswers={props.surveyAnswers}
-							setSurveyAnswers={props.setSurveyAnswers}
-							showSurvey={props.showSurvey}
-							setShowSurvey={props.setShowSurvey}
-							selectedSurvey={props.selectedSurvey}
-							setSelectedSurvey={props.setSelectedSurvey}
-							surveysContract={props.surveysContract}
-							userAddress={props.userAddress}
-							setLoading={props.setLoading}
+							storage={storage}
+							setStorage={setStorage}
+							surveysContract={surveysContract}
 						/>
 					}
 					exit=
 					{
 						() => {
-							props.setShowSurvey(false);
-							props.setSelectedSurvey(undefined);
-							props.setSurveyQuestions(undefined);
-							props.setSurveyAnswers(undefined);
+							setStorage({
+								...storage,
+								showSurvey: false,
+								selectedSurvey: undefined,
+								questions: undefined,
+								answers: undefined
+							});
 						}
 					}
 				/>

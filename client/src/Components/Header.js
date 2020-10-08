@@ -32,9 +32,9 @@ const Div = styled.div`
 	}
 `;
 
-function Header(props) {
+function Header({ storage, setStorage, tokenContract }) {
 	let loading = <></>
-	if (props.loading && props.selectedSurvey === undefined) {
+	if (storage.loading && storage.selectedSurvey === undefined) {
 		loading =
 			<div className="progress">
 				<Bar className="progress-bar progress-bar-striped progress-bar-animated"></Bar>
@@ -60,15 +60,12 @@ function Header(props) {
 							<Link className="nav-link" to="/aboutUs"> About Us </Link>
 						</div>
 						<Dropdown className="nav-item dropdown">
-							<span className="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{props.userAddress}</span>
+							<span className="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{storage.userAddress}</span>
 							<div className="dropdown-menu">
 								<Balance
-									balance={props.balance}
-									setBalance={props.setBalance}
-
-									tokenContract={props.tokenContract}
-									userAddress={props.userAddress}
-									setLoading={props.setLoading}
+									storage={storage}
+									setStorage={setStorage}
+									tokenContract={tokenContract}
 								/>
 								<Link className="dropdown-item" to="/accountSurveys">Your Surveys</Link>
 								<Link className="dropdown-item" to="/accountElections">Your Polls</Link>
@@ -76,8 +73,8 @@ function Header(props) {
 						</Dropdown>
 					</Div>
 					<Search
-						surveyTitles={props.surveyTitles}
-						setSearchVal={props.setSearchVal}
+						storage={storage}
+						setStorage={setStorage}
 					/>
 				</div>
 			</nav>

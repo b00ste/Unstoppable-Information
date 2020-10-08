@@ -1,7 +1,7 @@
 import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-function SurveyQuestions(props) {
+function SurveyQuestions({ storage, setStorage }) {
 
   let newQuestionValue;
   const saveNewQuestionValue = (event) => {
@@ -11,10 +11,10 @@ function SurveyQuestions(props) {
   const addNewQuestion = (event) => {
     event.preventDefault();
     let newQuestions = [];
-    if(props.questions !== undefined)
-      newQuestions = [...props.questions];
+    if(storage.questions !== undefined)
+      newQuestions = [...storage.questions];
     newQuestions.push(newQuestionValue);
-    props.setQuestions(newQuestions);
+    setStorage({ ...storage, questions: newQuestions })
   }
 
   return (
@@ -22,9 +22,9 @@ function SurveyQuestions(props) {
       <div className="card border-light mb-3">
         <div className="card-body">
           {
-            props.questions === undefined
+            storage.questions === undefined
               ? <h4 className="card-title">Choose questions.</h4>
-              : props.questions.map((val) => <p key={uuidv4()} className="card-text">"{val}"</p>)
+              : storage.questions.map((val) => <p key={uuidv4()} className="card-text">"{val}"</p>)
           }
           <input type="text" className="form-control" placeholder="Questions" onChange={saveNewQuestionValue} />
           <button type="button" className="btn btn-primary" onClick={addNewQuestion}>Save new question</button>

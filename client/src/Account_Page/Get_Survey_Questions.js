@@ -1,26 +1,32 @@
 import React, { useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-function GetSurveyQuestions(props) {
+function GetSurveyQuestions({ storage, setStorage, surveysContract }) {
 
 	const getSurveyQuestions = async () => {
-		props.setLoading(true)
-		let newSurveyQuestions;
-		newSurveyQuestions = await props.surveysContract.methods.getSurveyQuestions(props.selectedSurvey).call({ from: props.userAddress });
-		props.setSurveyQuestions(newSurveyQuestions.replace(/\\"/g, '').replace(/"/g, ''));
+		setStorage({
+			...storage,
+			loading: true
+		});
+		let newQuestions = await surveysContract.methods.getSurveyQuestions(storage.selectedSurvey).call();
+		setStorage({
+			...storage,
+			questions: newQuestions.replace(/\\"/g, '').replace(/"/g, ''),
+			loading: false
+		});
 	}
 
 	useEffect(() => {
-		if (props.surveyQuestions === undefined && props.showSurvey) {
-			getSurveyQuestions().then( () => props.setLoading(false) );
+		if (storage.questions === undefined && storage.showSurvey) {
+			getSurveyQuestions();
 		}
-	});
+	}, [getSurveyQuestions, storage.questions, storage.showSurvey]);
 
 	return (
 		<>
 			{
-				props.surveyQuestions !== undefined
-					? props.surveyQuestions.split(',').map( val => 
+				storage.questions !== undefined
+					? storage.questions.split(',').map( val => 
 						<th scope="col" key={uuidv4()}>{val}</th>
 					)
 					: <></>

@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import useAsyncReference from './Components/useAsyncReference.js'
 import styled from 'styled-components';
 import {
   BrowserRouter as Router,
@@ -18,7 +19,7 @@ import surveyFunc from './contracts/FunctionalSurveys.json';
 import token from './contracts/TokenSurveys.json';
 
 const Body = styled.div`
-  margin-bottom: 5em;
+  margin-bottom: 10em;
 `;
 
 const web3 = new Web3(Web3.givenProvider);
@@ -30,147 +31,113 @@ const surveysAddress = '0x507Be3C79DAf1C7df43827F22A2114CeA60B0E6b';
 const surveysContract = new web3.eth.Contract(surveyFunc.abi, surveysAddress);
 
 function App() {
-  const [userAddress, setUserAddress] = useState(undefined);
 
-  const [loading, setLoading] = useState(false);
-	const [searchVal, setSearchVal] = useState('');
+  const [storage, setStorage] = useAsyncReference({
+    userAddress: undefined,
+    loading: undefined,
+    searchVal: '',
+    titles: undefined,
+    questions: undefined,
+    answers: undefined,
+    value: undefined,
+    maxParticipants: undefined,
+    showSurvey: false,
+    selectedSurvey: undefined,
+    balance: undefined,
+    nrOfUserSurveys: undefined,
+    surveyContractApproved: undefined,
+    pollContractApproved: undefined
+  });
 
-  const [title, setTitle] = useState(undefined);
-  const [questions, setQuestions] = useState(undefined);
-  const [value, setValue] = useState(undefined);
-  const [maxParticipants, setMaxParticipants] = useState(undefined);
-
-  const [surveyTitles, setSurveyTitles] = useState(undefined);
-  const [surveyQuestions, setSurveyQuestions] = useState(undefined);
-  const [surveyAnswers, setSurveyAnswers] = useState(undefined);
-
-  const [showSurvey, setShowSurvey] = useState(false);
-  const [selectedSurvey, setSelectedSurvey] = useState(undefined);
-
-  const [balance, setBalance] = useState(undefined);
-  const [nrOfUserSurveys, setNrOfUserSurveys] = useState(undefined);
-
-  const [surveyContractApproved, setSurveyContractApproved] = useState(true);
-  const [pollContractApproved, setPollContractApproved] = useState(true);
+  const resetState = () => setStorage({
+    ...storage,
+    searchVal: '',
+    titles: undefined,
+    questions: undefined,
+    answers: undefined,
+    value: undefined,
+    maxParticipants: undefined,
+    nrOfUserSurveys: undefined
+  });
 
   const getUserAddress = async () => {
+    setStorage({
+      ...storage,
+      loading: true
+    });
     const accounts = await window.ethereum.enable();
-    setUserAddress(accounts[0]);
+    setStorage({
+      ...storage,
+      userAddress: accounts[0],
+      loading: false
+    });
   }
   useEffect(() => {
-    if (userAddress === undefined) {
+    if (storage.userAddress === undefined) {
       getUserAddress();
     }
-  });
+  }, []);
 
   return (
     <Router>
       <Header
-        balance={balance}
-        setBalance={setBalance}
-
-        loading={loading}
-        setLoading={setLoading}
-
-        surveyTitles={surveyTitles}
-        setSearchVal={setSearchVal}
-
+        storage={storage}
+        setStorage={setStorage}
         tokenContract={tokenContract}
-        userAddress={userAddress}
       />
       <Switch>
         <Body>
-          <Route exact path="/">
-            <h1>this is home page</h1>
-          </Route>
+          <Route
+            exact path="/"
+            render={() =>
+              <h1>this is home page</h1>
+            }
+          />
 
-          <Route path="/startSurveys">
-            <SET_SURVEY_BODY
-              title={title}
-              setTitle={setTitle}
+          <Route
+            exact path="/startSurveys"
+            render={(res) =>
+              <SET_SURVEY_BODY
+                storage={storage}
+                setStorage={setStorage}
+                resetState={resetState}
+                surveysAddress={surveysAddress}
+                surveysContract={surveysContract}
+                tokenContract={tokenContract}
+              />
+            }
+          />
 
-              questions={questions}
-              setQuestions={setQuestions}
+          <Route
+            exact path="/participateSurveys"
+            render={() =>
+              <GET_SURVEYS_BODY
+                storage={storage}
+                setStorage={setStorage}
+                resetState={resetState}
+                surveysContract={surveysContract}
+              />
+            }
+          />
 
-              value={value}
-              setValue={setValue}
+          <Route
+            exact path="/aboutUs"
+            render={() =>
+              <ABOUT_US_BODY />
+            }
+          />
 
-              maxParticipants={maxParticipants}
-              setMaxParticipants={setMaxParticipants}
-
-              loading={loading}
-              setLoading={setLoading}
-
-              surveysAddress={surveysAddress}
-              surveysContract={surveysContract}
-              tokenContract={tokenContract}
-              userAddress={userAddress}
-            />
-          </Route>
-
-          <Route path="/participateSurveys">
-            <GET_SURVEYS_BODY
-              surveyTitles={surveyTitles}
-              setSurveyTitles={setSurveyTitles}
-
-              surveyQuestions={surveyQuestions}
-              setSurveyQuestions={setSurveyQuestions}
-
-              surveyAnswers={surveyAnswers}
-              setSurveyAnswers={setSurveyAnswers}
-
-              showSurvey={showSurvey}
-              setShowSurvey={setShowSurvey}
-
-              selectedSurvey={selectedSurvey}
-              setSelectedSurvey={setSelectedSurvey}
-
-              loading={loading}
-              setLoading={setLoading}
-
-              searchVal={searchVal}
-
-              surveysContract={surveysContract}
-              userAddress={userAddress}
-            />
-          </Route>
-
-          <Route path="/aboutUs">
-            <ABOUT_US_BODY />
-          </Route>
-
-          <Route path="/accountSurveys">
-            <ACCOUNT_BODY
-              balance={balance}
-              setBalance={setBalance}
-
-              nrOfUserSurveys={nrOfUserSurveys}
-              setNrOfUserSurveys={setNrOfUserSurveys}
-
-              surveyTitles={surveyTitles}
-              setSurveyTitles={setSurveyTitles}
-
-              surveyQuestions={surveyQuestions}
-              setSurveyQuestions={setSurveyQuestions}
-
-              surveyAnswers={surveyAnswers}
-              setSurveyAnswers={setSurveyAnswers}
-
-              showSurvey={showSurvey}
-              setShowSurvey={setShowSurvey}
-
-              selectedSurvey={selectedSurvey}
-              setSelectedSurvey={setSelectedSurvey}
-
-              loading={loading}
-              setLoading={setLoading}
-
-              searchVal={searchVal}
-
-              surveysContract={surveysContract}
-              userAddress={userAddress}
-            />
-          </Route>
+          <Route
+            exact path="/accountSurveys"
+            render={() =>
+              <ACCOUNT_BODY
+                storage={storage}
+                setStorage={setStorage}
+                resetState={resetState}
+                surveysContract={surveysContract}
+              />
+            }
+          />
         </Body>
       </Switch>
       <Footer />

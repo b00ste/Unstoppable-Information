@@ -9,30 +9,49 @@ const Input = styled.input`
 	margin-bottom: 15px;
 `;
 
-function GetSurveyQuestions(props) {
+function GetSurveyQuestions({ storage, setStorage, updateAnswers, surveysContract }) {
 
-	const getSurveyQuestions = async () => {
-		props.setLoading(true);
-		let newSurveyQuestions = await props.surveysContract.methods.getSurveyQuestions(props.selectedSurvey).call({ from: props.userAddress });
-		props.setSurveyQuestions(newSurveyQuestions.replace(/\\"/g, '').replace(/"/g, ''));
-	}
+	/*const getSurveyQuestions = async () => {
+		setStorage({
+			...storage,
+			loading: true 
+		});
+		let newQuestions = await surveysContract.methods.getSurveyQuestions(storage.selectedSurvey).call({ from: storage.userAddress });
+		setStorage({
+			...storage,
+			loading: false,
+			questions: newQuestions.replace(/\\"/g, '').replace(/"/g, '')
+		});
+	}*/
 
 	useEffect(() => {
-		if (props.surveyQuestions === undefined && props.showSurvey && props.selectedSurvey !== undefined) {
-			getSurveyQuestions().then(() => props.setLoading(false));
+		if (storage.questions === undefined && storage.showSurvey && storage.selectedSurvey !== undefined) {
+			//getSurveyQuestions();
+			setStorage({
+				...storage,
+				loading: true
+			});
+			surveysContract.methods.getSurveyQuestions(storage.selectedSurvey).call({ from: storage.userAddress })
+			.then((newQuestions) => {
+				setStorage({
+					...storage,
+					loading: false,
+					questions: newQuestions.replace(/\\"/g, '').replace(/"/g, '')
+				});
+			});
 		}
-	});
+	}, [setStorage, storage, surveysContract.methods]);
 
 	return (
 		<>
-			
+
 			{
-				props.surveyQuestions !== undefined ?
-					props.surveyQuestions.split(',')
+				storage.questions !== undefined ?
+					storage.questions.split(',')
 						.map((val) =>
 							<React.Fragment key={uuidv4()}>
 								<h4 className="card-title">{val}</h4>
-								<Input type="text" className="form-control" name={val} placeholder="Your Answer" onChange={props.updateAnswers} />
+								<Input type="text" className="form-control" name={val} placeholder="Your Answer" onChange={updateAnswers} />
 							</React.Fragment>
 						)
 					: <></>

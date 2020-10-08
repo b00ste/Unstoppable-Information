@@ -25,34 +25,42 @@ const Container = styled.div`
 	}
 `;
 
-function GetUserSurveys(props) {
+function GetUserSurveys({ storage, setStorage, surveysContract }) {
 
 	const getUserSurveys = async () => {
-		const newNumberOfUserSurveys = await props.surveysContract.methods.getUserCreatedSurveys().call({ from: props.userAddress });
-		props.setNrOfUserSurveys(newNumberOfUserSurveys);
-		const newSurveyTitles = [];
-		for (let i = newNumberOfUserSurveys - 1; i >= 0; i--) {
-			newSurveyTitles.push(await props.surveysContract.methods.getUserNumberOfSurveys(i).call({ from: props.userAddress }));
+		setStorage({
+			...storage,
+			loading: true
+		});
+		const newNrOfUserSurveys = await surveysContract.methods.getUserCreatedSurveys().call({ from: storage.userAddress });
+		const newTitles = [];
+		for (let i = newNrOfUserSurveys - 1; i >= 0; i--) {
+			newTitles.push(await surveysContract.methods.getUserNumberOfSurveys(i).call({ from: storage.userAddress }));
 		}
-		props.setSurveyTitles(newSurveyTitles);
+		setStorage({
+			...storage,
+			nrOfUserSurveys: newNrOfUserSurveys,
+			titles: newTitles,
+			loading: false
+		});
 	}
 
 	useEffect(() => {
-		if (props.nrOfUserSurveys === undefined) {
+		if (storage.nrOfUserSurveys === undefined && storage.titles === undefined) {
 			getUserSurveys();
 		}
-	});
+	}, []);
 
 	return (
 		<>
 			<Container>
-				<h2>You have created {props.nrOfUserSurveys} surveys.</h2>
+				<h2>You have created {storage.nrOfUserSurveys} surveys.</h2>
 			</Container>
 			<Container>
 				{
-					props.surveyTitles !== undefined
-						? props.surveyTitles
-							.filter(val => val.includes(props.searchVal))
+					storage.titles !== undefined
+						? storage.titles
+							.filter(val => val.includes(storage.searchVal))
 							.map(val =>
 								<div key={uuidv4()} className="card text-white bg-primary mb-3">
 									<h4 className="card-title">{val}</h4>
@@ -60,8 +68,11 @@ function GetUserSurveys(props) {
 										type="button"
 										className="btn btn-secondary"
 										onClick={() => {
-											props.setShowSurvey(true);
-											props.setSelectedSurvey(val);
+											setStorage({
+												...storage,
+												showSurvey: true,
+												selectedSurvey: val
+											});
 										}}
 									>
 										Show details

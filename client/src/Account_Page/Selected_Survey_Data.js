@@ -10,33 +10,23 @@ const Table = styled.table`
 	}
 `;
 
-function Data(props) {
+function Data({ storage, setStorage, surveysContract }) {
 	return (
 		<Table className="table table-hover">
 			<thead>
 				<tr>
 					<SurveyQuestions
-						surveyQuestions={props.surveyQuestions}
-						setSurveyQuestions={props.setSurveyQuestions}
-						selectedSurvey={props.selectedSurvey}
-						showSurvey={props.showSurvey}
-
-						surveysContract={props.surveysContract}
-						userAddress={props.userAddress}
-						setLoading={props.setLoading}
+						storage={storage}
+						setStorage={setStorage}
+						surveysContract={surveysContract}
 					/>
 				</tr>
 			</thead>
 			<tbody>
 				<SurveyAnswers
-					surveyAnswers={props.surveyAnswers}
-					setSurveyAnswers={props.setSurveyAnswers}
-					selectedSurvey={props.selectedSurvey}
-					showSurvey={props.showSurvey}
-
-					surveysContract={props.surveysContract}
-					userAddress={props.userAddress}
-					setLoading={props.setLoading}
+					storage={storage}
+					setStorage={setStorage}
+					surveysContract={surveysContract}
 				/>
 			</tbody>
 		</Table>

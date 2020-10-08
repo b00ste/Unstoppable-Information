@@ -3,23 +3,25 @@ import Web3 from 'web3';
 
 const web3 = new Web3(Web3.givenProvider);
 
-function GetBalance(props) {
+function GetBalance({ storage, setStorage, tokenContract }) {
 	const getBalance = async () => {
-		props.setLoading(true);
-		let newBalance;
-		if (web3.utils.isAddress(props.userAddress))
-			newBalance = (await props.tokenContract.methods.balanceOf(props.userAddress).call() / 10 ** 18);
-		props.setBalance(newBalance);
+		setStorage({ ...storage, loading: true });
+		if (web3.utils.isAddress(storage.userAddress)) {
+			await tokenContract.methods.balanceOf(storage.userAddress).call().then((newBalance) => {
+				setStorage({ ...storage, balance: newBalance / 10 ** 18, loading: false });
+			})
+		}
 	}
 
 	useEffect(() => {
-		if (props.balance === undefined)
-			getBalance().then( () => props.setLoading(false) );
-	});
+		if (storage.balance === undefined) {
+			getBalance();
+		}
+	}, [getBalance, storage.balance]);
 
-	return(
+	return (
 		<>
-			{props.balance !== undefined ? <p className="balance">Balance: {props.balance} SVT</p> : <></>}
+			{storage.balance !== undefined ? <p className="balance">Balance: {storage.balance} SVT</p> : <></>}
 		</>
 	);
 }

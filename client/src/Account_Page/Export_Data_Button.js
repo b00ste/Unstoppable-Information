@@ -5,25 +5,13 @@ const Button = styled.button`
 	margin: 0 1em;
 `;
 
-/*const downloadCSV = (data) => {
-	const blob = new Blob([data], { type: 'text/csv' });
-	const url = window.URL.createObjectURL(blob);
-	const a = document.createElement('a');
-	a.setAttribute('hidden', '');
-	a.setAttribute('href', url);
-	a.setAttribute('downoad', 'download.csv')
-	document.body.appendChild(a);
-	a.click();
-	document.body.removeChild(a);
-}*/
-
-function ExportData(props) {
+function ExportData({ answers, questions, selectedSurvey }) {
 
 	const exportJSON = () => {
 		const data = [];
-		props.surveyAnswers.map(aVal => {
+		answers.map(aVal => {
 			let newData = {};
-			props.surveyQuestions.split(',').map((val, i) => {
+			questions.split(',').map((val, i) => {
 				newData[val] = aVal.split(',')[i];
 				return 0;
 			});
@@ -38,7 +26,7 @@ function ExportData(props) {
 		const a = document.createElement('a');
 		a.setAttribute('hidden', '');
 		a.setAttribute('href', url);
-		a.setAttribute('download', `${props.selectedSurvey}.json`)
+		a.setAttribute('download', `${selectedSurvey}.json`)
 		document.body.appendChild(a);
 		a.click();
 		document.body.removeChild(a);
@@ -46,10 +34,10 @@ function ExportData(props) {
 
 	const exportCSV = () => {
 		const csvRows = [];
-		csvRows.push(props.surveyQuestions);
+		csvRows.push(questions);
 
-		for (let i = 0; i < props.surveyAnswers.length; i++) {
-			csvRows.push(props.surveyAnswers[i]);
+		for (let i = 0; i < answers.length; i++) {
+			csvRows.push(answers[i]);
 		}
 
 		const data = csvRows.join('\n');
@@ -59,7 +47,7 @@ function ExportData(props) {
 		const a = document.createElement('a');
 		a.setAttribute('hidden', '');
 		a.setAttribute('href', url);
-		a.setAttribute('download', `${props.selectedSurvey}.csv`)
+		a.setAttribute('download', `${selectedSurvey}.csv`)
 		document.body.appendChild(a);
 		a.click();
 		document.body.removeChild(a);

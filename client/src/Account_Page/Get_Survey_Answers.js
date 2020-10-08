@@ -1,34 +1,40 @@
 import React, { useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-function GetSurveyAnswers(props) {
+function GetSurveyAnswers({ storage, setStorage, surveysContract }) {
 
 	const getSurveyAnswers = async () => {
-		props.setLoading(true)
-		let newSurveyAnswers;
-		let surveyTotalParticipants = await props.surveysContract.methods.getSurveyTotalParticipants(props.selectedSurvey).call({ from: props.userAddress });
-		newSurveyAnswers = [];
+		setStorage({
+			...storage,
+			loading: true
+		});
+		let newAnswers = [];
+		let surveyTotalParticipants = await surveysContract.methods.getSurveyTotalParticipants(storage.selectedSurvey).call({ from: storage.userAddress });
 		for (let i = 0; i < surveyTotalParticipants; i++) {
-			let surveyAnswer = await props.surveysContract.methods.getSurveyAnswers(props.selectedSurvey, i).call({ from: props.userAddress });
-			newSurveyAnswers.push(surveyAnswer.replace(/\\"/g, ''));
+			let surveyAnswer = await surveysContract.methods.getSurveyAnswers(storage.selectedSurvey, i).call({ from: storage.userAddress });
+			newAnswers.push(surveyAnswer.replace(/\\"/g, ''));
 		}
-		props.setSurveyAnswers(newSurveyAnswers);
+		setStorage({
+			...storage,
+			answers: newAnswers,
+			loading: false
+		});
 	}
 
 	useEffect(() => {
-		if (props.surveyAnswers === undefined && props.showSurvey) {
-			getSurveyAnswers().then(() => props.setLoading(false));
+		if (storage.answers === undefined && storage.showSurvey) {
+			getSurveyAnswers();
 		}
-	});
+	}, [getSurveyAnswers, storage.answers, storage.showSurvey]);
 
 	return (
 		<>
 			{
-				props.surveyAnswers !== undefined
-					? props.surveyAnswers.map(val1 =>
+				storage.answers !== undefined
+					? storage.answers.map(val1 =>
 						<tr className="table-light" key={uuidv4()}>
 							{
-								val1.split(',').map(val2 =>
+								val1.split('","').map(val2 =>
 									<th scope="col" key={uuidv4()}>{val2.replace(/"/g, '')}</th>
 								)
 							}

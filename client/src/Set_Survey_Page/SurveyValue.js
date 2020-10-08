@@ -1,10 +1,10 @@
 import React from 'react'
 
-function SurveyValue(props) {
+function SurveyValue({ storage, setStorage }) {
 
   const saveNewValue = (event) => {
     event.preventDefault();
-    props.setValue(event.target.value);
+    setStorage({ ...storage, value: event.target.value });
   }
 
   return (
@@ -12,8 +12,8 @@ function SurveyValue(props) {
       <div className="card border-light mb-3">
         <div className="card-body">
           {
-            props.value
-              ? <p className="card-text">Your survey has {props.value} SVT for distribution</p>
+            storage.value
+              ? <p className="card-text">Your survey has {storage.value} SVT for distribution</p>
               : <h4 className="card-title">Set survey value.</h4>
           }
           <input type="number" className="form-control" placeholder="Value" onChange={saveNewValue} />
