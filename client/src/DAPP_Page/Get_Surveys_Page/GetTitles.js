@@ -9,7 +9,7 @@ const Survey = styled.div`
 	text-align: center;
 	button {
 		display: inline-block;
-		margin 5px;
+		margin: 2em !important;
 		width: 15rem;
 }
 `;
@@ -46,9 +46,8 @@ function GetTitles({ storage, setStorage, surveysContract }) {
 					? storage.allSurevyTitles
 						.filter(val => val.includes(storage.searchVal))
 						.map((val) =>
-							<Survey key={uuidv4()} className="card text-white bg-primary mb-3">
-								<div className="card-body">
-									<h4 className="card-title">{val}</h4>
+							<Survey key={uuidv4()} className="card-default">
+									<h4>{val}</h4>
 									<button
 										type="button"
 										className="btn btn-secondary"
@@ -62,7 +61,6 @@ function GetTitles({ storage, setStorage, surveysContract }) {
 									>
 										Participate
 								</button>
-								</div>
 							</Survey>
 						)
 					: <></>

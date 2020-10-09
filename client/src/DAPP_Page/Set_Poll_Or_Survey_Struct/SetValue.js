@@ -9,15 +9,13 @@ function Value({ storage, setStorage, is }) {
 
   return (
     <>
-      <div className="card border-light mb-3">
-        <div className="card-body">
-          {
-            storage.value
-              ? <p className="card-text">Your {is === "survey" ? "survey" : is === "poll" ? "poll" : ""} has {storage.value} SVT for distribution</p>
-              : <h4 className="card-title">Set {is === "survey" ? "survey" : is === "poll" ? "poll" : ""} value.</h4>
-          }
-          <input type="number" className="form-control" placeholder="Value" onChange={saveNewValue} />
-        </div>
+      <div className="card-default">
+        {
+          storage.value
+            ? <h4>Your {is === "survey" ? "survey" : is === "poll" ? "poll" : ""} has {storage.value} SVT for distribution</h4>
+            : <h4>Set {is === "survey" ? "survey" : is === "poll" ? "poll" : ""} value.</h4>
+        }
+        <input type="number" className="form-control" placeholder="Value" onChange={saveNewValue} />
       </div>
     </>
   );

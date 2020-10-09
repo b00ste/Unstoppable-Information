@@ -11,7 +11,7 @@ function Questions({ storage, setStorage, is }) {
   const addNewQuestion = (event) => {
     event.preventDefault();
     let newQuestions = [];
-    if(storage.questions !== undefined)
+    if (storage.questions !== undefined)
       newQuestions = [...storage.questions];
     newQuestions.push(newQuestionValue);
     setStorage({ ...storage, questions: newQuestions })
@@ -19,20 +19,18 @@ function Questions({ storage, setStorage, is }) {
 
   return (
     <>
-      <div className="card border-light mb-3">
-        <div className="card-body">
-          {
-            storage.questions === undefined
-              ? <h4 className="card-title">
-                  Choose {is === "survey" ? "questions" : is === "poll" ? "choices" : ""}.
+      <div className="card-default">
+        {
+          storage.questions === undefined
+            ? <h4>
+              Choose {is === "survey" ? "questions" : is === "poll" ? "choices" : ""}.
                 </h4>
-              : storage.questions.map((val) => <p key={uuidv4()} className="card-text">"{val}"</p>)
-          }
-          <input type="text" className="form-control" placeholder="Questions" onChange={saveNewQuestionValue} />
-          <button type="button" className="btn btn-primary" onClick={addNewQuestion}>
-            Save new {is === "survey" ? "questions" : is === "poll" ? "choices" : ""}
-          </button>
-        </div>
+            : <h4 key={uuidv4()}>{storage.questions.map((val) => (val+', '))}</h4>
+        }
+        <input type="text" className="form-control" placeholder="Questions" onChange={saveNewQuestionValue} />
+        <button type="button" className="btn btn-secondary" onClick={addNewQuestion}>
+          Save new {is === "survey" ? "questions" : is === "poll" ? "choices" : ""}
+        </button>
       </div>
     </>
   );

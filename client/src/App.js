@@ -66,100 +66,51 @@ function App() {
         setStorage={setStorage}
         tokenContract={tokenContract}
       />
-      {
-        storage.connected
-        ? <></>
-        : <Footer />
-      }
       <Switch>
         <Body>
-          <Route
-            exact path="/"
-            render={() =>
-              <>
-              <h1>this is home page</h1>
-              <Connect
-                storage={storage}
-                setStorage={setStorage}
-              />
-              </>
-            }
-          />
 
-          <Route
-            exact path="/App"
-            render={(res) =>
-              <>
-              <SET_SURVEY_BODY
-                storage={storage}
-                setStorage={setStorage}
-                tokenContract={tokenContract}
-                pollAddress={pollAddress}
-                pollContract={pollContract}
-                surveysAddress={surveysAddress}
-                surveysContract={surveysContract}
-              />
-              <Connect
-                storage={storage}
-                setStorage={setStorage}
-              />
-              </>
-            }
-          />
+          <Route exact path="/">
+            <h1>this is home page</h1>
+          </Route>
 
-          <Route
-            exact path="/participateSurveys"
-            render={() =>
-              <>
-              <GET_SURVEYS_BODY
-                storage={storage}
-                setStorage={setStorage}
-                surveysContract={surveysContract}
-              />
-              <Connect
-                storage={storage}
-                setStorage={setStorage}
-              />
-              </>
-            }
-          />
+          <Route exact path="/App">
+            <SET_SURVEY_BODY
+              storage={storage}
+              setStorage={setStorage}
+              tokenContract={tokenContract}
+              pollAddress={pollAddress}
+              pollContract={pollContract}
+              surveysAddress={surveysAddress}
+              surveysContract={surveysContract}
+            />
+          </Route>
 
-          <Route
-            exact path="/aboutUs"
-            render={() =>
-              <>
-              <ABOUT_US_BODY />
-              <Connect
-                storage={storage}
-                setStorage={setStorage}
-              />
-              </>
-            }
-          />
+          <Route exact path="/participateSurveys">
+            <GET_SURVEYS_BODY
+              storage={storage}
+              setStorage={setStorage}
+              surveysContract={surveysContract}
+            />
+          </Route>
 
-          <Route
-            exact path="/accountSurveys"
-            render={() =>
-              <>
-              <ACCOUNT_SURVEYS_BODY
-                storage={storage}
-                setStorage={setStorage}
-                surveysContract={surveysContract}
-              />
-              <Connect
-                storage={storage}
-                setStorage={setStorage}
-              />
-              </>
-            }
-          />
+          <Route exact path="/aboutUs">
+            <ABOUT_US_BODY />
+          </Route>
+
+          <Route exact path="/accountSurveys">
+            <ACCOUNT_SURVEYS_BODY
+              storage={storage}
+              setStorage={setStorage}
+              surveysContract={surveysContract}
+            />
+          </Route>
         </Body>
       </Switch>
-      {
-        storage.connected
-        ? <Footer />
-        : <></>
-      }
+      <Footer />
+      <Connect
+        storage={storage}
+        setStorage={setStorage}
+      />
     </Router>
   );
 }

@@ -18,6 +18,9 @@ const FooterStyle = styled.footer`
 	}
 	svg:hover {
 		color: rgb(170, 170, 170) !important;
+		background-color: #FA8BFF;
+		background-image: linear-gradient(45deg, #FA8BFF 0%, #2BD2FF 52%, #2BFF88 90%);
+
 		cursor: pointer;
 	}
 `

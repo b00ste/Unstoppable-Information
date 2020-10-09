@@ -9,19 +9,17 @@ function Participants({ storage, setStorage, is }) {
 
   return (
     <>
-      <div className="card border-light mb-3">
-        <div className="card-body">
-          {
-            storage.maxParticipants
-              ? <p className="card-text">
-                  Your {is === "survey" ? "survey" : is === "poll" ? "poll" : ""} allows {storage.maxParticipants} people to participate.
-                </p>
-              : <h4 className="card-title">
-                  Set {is === "survey" ? "survey" : is === "poll" ? "poll" : ""} total paricipants.
+      <div className="card-default">
+        {
+          storage.maxParticipants
+            ? <h4>
+              Your {is === "survey" ? "survey" : is === "poll" ? "poll" : ""} allows {storage.maxParticipants} people to participate.
                 </h4>
-          }
-          <input type="number" className="form-control" placeholder="Participants" onChange={saveNewMaxParticipants} />
-        </div>
+            : <h4>
+              Set {is === "survey" ? "survey" : is === "poll" ? "poll" : ""} total paricipants.
+                </h4>
+        }
+        <input type="number" className="form-control" placeholder="Participants" onChange={saveNewMaxParticipants} />
       </div>
     </>
   );

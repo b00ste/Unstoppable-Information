@@ -21,6 +21,7 @@ const Survey = styled.div`
 
 	button {
 		margin: 0.75em 0em 0.1em 0em;
+		box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.175);
 	}
 	p {
 		margin: 0.1em 0.75em;
@@ -29,7 +30,7 @@ const Survey = styled.div`
 
 const SurveyMask = styled.div`
 	position: fixed;
-	background-color: rgba(0,0,0,0.5);
+	background-color: rgba(0,0,0,0.6);
 	top: 0;
 	bottom: 0;
 	left: 0;

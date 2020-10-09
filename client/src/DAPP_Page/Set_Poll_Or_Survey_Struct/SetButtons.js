@@ -49,7 +49,7 @@ function SetButtons({
 		(!storage.pollContractApproved && is === "poll")
 	) {
 		approveButton =
-			<button type="button" className="btn btn-primary" onClick={approve}>
+			<button type="button" className="btn btn-secondary" onClick={approve}>
 				Approve
 			</button>
 	}
@@ -60,7 +60,7 @@ function SetButtons({
 	return (
 		<>
 			{approveButton}
-			<button type="button" className="btn btn-primary" onClick={sendToBC}>
+			<button type="button" className="btn btn-secondary" onClick={sendToBC}>
 				Let's go
 			</button>
 		</>

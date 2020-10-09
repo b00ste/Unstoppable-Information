@@ -1,21 +1,37 @@
 import React from 'react'
 import styled from 'styled-components';
+import Card from '../../Components/FlippingCard'
 
-const Component = styled.div`
+const Row = styled.div`
 	display: flex;
 	flex-direction: row;
 	background-color: blue
-	div {
-
-	}
+`;
+const Column = styled.div`
+	display: flex;
+	flex-direction: column;
 `;
 
 function AppBody() {
-	return(
-		<Component>
-			<div></div>
-			<div></div>
-		</Component>
+	return (
+		<>
+			<Row>
+				<Column>
+					<Card/>
+				</Column>
+				<Column>
+					<Card/>
+				</Column>
+			</Row>
+			<Row>
+				<Column>
+					<Card/>
+				</Column>
+				<Column>
+					<Card/>
+				</Column>
+			</Row>
+		</>
 	);
 }
 
