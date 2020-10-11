@@ -11,32 +11,18 @@ const Container = styled.div`
 	flex-wrap: wrap;
 	justify-content: center;
 	align-items: flex-end;
-	div {
-		width: 25em;
-		max-height: 23em;
-		margin-top: 2.5rem;
-		text-align: center;
-		div {
-			overflow-y: auto;
-		}
-	}
 	button {
-		display: inline-block;
-		margin 5px;
-		width: 23em;
+		display: block;
+		margin 2em;
+		width: 18em;
+		box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.175);
 	}
-	input {
-		display: inline-block;
-  	margin 5px;
-  	width: 20em;
-	}
-}
 `;
 
 function Body({
 	storage,
 	setStorage,
-	pollAddress
+	pollAddress,
 	pollContract,
 	tokenContract
 }) {

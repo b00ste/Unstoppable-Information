@@ -17,18 +17,10 @@ function Search({ storage, setStorage }) {
 		event.preventDefault();
 		setStorage({ ...storage, searchVal: event.target.value });
 	}
-
-	let displayInput;
-	if(storage.titles === undefined) {
-		displayInput = <></>;
-	}
-	else {
-		displayInput = <input className="form-control mr-sm-2" type="text" placeholder="Search" onChange={changeSearchVal} />;
-	}
-
+	
 	return (
 		<Div>
-			{displayInput}
+			<input className="form-control mr-sm-2" type="text" placeholder="Search" onChange={changeSearchVal} />
 		</Div>
 	);
 }

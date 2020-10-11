@@ -6,9 +6,6 @@ import {
 import Balance from './Balance.js';
 import Search from './Search.js'
 
-const Bar = styled.div`
-	width: 100%;
-`;
 const Dropdown = styled.div`
 	max-width: 140px;
 	.dropdown-menu {
@@ -33,17 +30,22 @@ const Div = styled.div`
 `;
 
 function Header({ storage, setStorage, tokenContract }) {
-	let loading = <></>
-	if (storage.loading && storage.selectedSurvey === undefined) {
-		loading =
+
+	let loadingDiv;
+	if (storage.loading && !storage.showSurvey) {
+		loadingDiv =
 			<div className="progress">
-				<Bar className="progress-bar progress-bar-striped progress-bar-animated"></Bar>
+				<div className="progress-bar progress-bar-striped progress-bar-animated bg-info" style={{ width: "100%" }}></div>
 			</div>
 	}
+	else {
+		loadingDiv = <></>
+	}
+
 	return (
-		<>
+		<div className="header">
 			<nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-				<Link className="navbar-brand" to="/">Survey App</Link>
+				<Link className="navbar-brand change-color-on-hover" to="/" style={{color: "#fdfcfa"}}>Unstopable information</Link>
 				<button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
 					<span className="navbar-toggler-icon"></span>
 				</button>
@@ -51,24 +53,18 @@ function Header({ storage, setStorage, tokenContract }) {
 				<div className="collapse navbar-collapse" id="navbarColor01">
 					<Div className="navbar-nav mr-auto">
 						<div className="nav-item">
-							<Link className="nav-link" to="/App"> App </Link>
-						</div>
-						<div className="nav-item">
-							<Link className="nav-link" to="/participateSurveys"> Participate at Surveys </Link>
-						</div>
-						<div className="nav-item">
-							<Link className="nav-link" to="/aboutUs"> About Us </Link>
+							<Link className="nav-link change-color-on-hover" to="/App"> App </Link>
 						</div>
 						<Dropdown className="nav-item dropdown">
-							<span className="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{storage.userAddress}</span>
+							<span className="nav-link change-color-on-hover dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{storage.userAddress}</span>
 							<div className="dropdown-menu">
 								<Balance
 									storage={storage}
 									setStorage={setStorage}
 									tokenContract={tokenContract}
 								/>
-								<Link className="dropdown-item" to="/accountSurveys">Your Surveys</Link>
-								<Link className="dropdown-item" to="/accountPolls">Your Polls</Link>
+								<Link className="dropdown-item change-color-on-hover" to="/accountSurveys">Your Surveys</Link>
+								<Link className="dropdown-item change-color-on-hover" to="/accountPolls">Your Polls</Link>
 							</div>
 						</Dropdown>
 					</Div>
@@ -78,8 +74,8 @@ function Header({ storage, setStorage, tokenContract }) {
 					/>
 				</div>
 			</nav>
-			{loading}
-		</>
+			{loadingDiv}
+		</div>
 	);
 }
 

@@ -3,8 +3,10 @@ import styled from 'styled-components';
 
 const CardFront = styled.div`
 	transform: rotateY(0deg);
-	background: lightblue;
 	border: 0;
+	h4 {
+		margin-top: 3em !important;
+	}
 `;
 const CardBack = styled.div`
 	position: absolute;
@@ -14,19 +16,19 @@ const CardBack = styled.div`
 	width: 100%;
 	height: 100%;
 	transform: rotateY(-180deg);
-	background: lightgreen;
 	border: 0;
+	background-image: linear-gradient( 135deg, #43CBFF 10%, #9708CC 100%) !important;
 `;
 const Card = styled.div`
 	position: relative;
 	margin: 1em;
+	transform-style: preserve-3d;
 	>${CardFront},
 	>${CardBack} {
 		display: block;
 		padding: 2em;
 		height: 18rem;
 		width: 20rem;
-		border-radius: 50%;
 		
 		transition-timing-function: cubic-bezier(.175, .885, .32, 1.275);
 		transition-duration: .5s;
@@ -52,7 +54,7 @@ function FlippingCard({ front, back }) {
 	return (
 		<Card onClick={() => setFlipped(!flipped)} className={flipped ? "flipped" : ""}>
 				<CardFront className="card-default">
-					{front}
+					<h4>{front}</h4>
 				</CardFront>
 				<CardBack className="card-default">
 					{back}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
 const Survey = styled.div`
@@ -61,6 +61,31 @@ function Connect({ storage, setStorage }) {
 			</Survey>
 		connectMask = <SurveyMask></SurveyMask>
 	}
+
+	useEffect(() => {
+		if (storage.userAddress === undefined) {
+			window.ethereum.send('eth_accounts')
+				.then((res) => {
+					if (res.result[0] !== undefined) {
+						setStorage({
+							...storage,
+							userAddress: res.result[0],
+							loading: false
+						});
+					}
+					else {
+						setStorage({ ...storage, connected: false });
+					}
+				}
+				).catch((err) => {
+					if (err.code === 4100) {
+						console.log('Please connect to MetaMask.')
+					} else {
+						console.error(err)
+					}
+				});
+		}
+	});
 
 	return (
 		<>

@@ -5,7 +5,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 import './Components/Icons';
-import Background from './Components/Background'
+import Background from './Components/Styling'
 
 import 'bootswatch/dist/lux/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.js';

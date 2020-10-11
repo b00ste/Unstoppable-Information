@@ -1,11 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
-import Questions from './GetQuestions'
-
-const Button = styled.button`
-	width: 29em;
-	display: block;
-`;
+import Questions from './GetQuestions';
 
 function Data({ storage, setStorage, surveysContract }) {
 
@@ -50,7 +44,7 @@ function Data({ storage, setStorage, surveysContract }) {
 				updateAnswers={updateAnswers}
 				surveysContract={surveysContract}
 			/>
-			<Button type="button" className="btn btn-primary" onClick={sendAnswer}>Submit</Button>
+			<button type="button" className="btn btn-primary" onClick={sendAnswer}>Submit</button>
 		</>
 	);
 }

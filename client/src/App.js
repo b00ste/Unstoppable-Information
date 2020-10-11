@@ -10,8 +10,10 @@ import {
 import Connect from './Components/Connect.js';
 import Header from './Components/Header.js';
 import Footer from './Components/Footer.js';
+import DAPP from './DAPP_Page/App_Page/Body.js';
 import SET_SURVEY_BODY from './DAPP_Page/Set_Survey_Page/Body.js';
 import GET_SURVEYS_BODY from './DAPP_Page/Get_Surveys_Page/Body.js';
+import SET_POLL_BODY from './DAPP_Page/Set_Poll_Page/Body.js';
 import ACCOUNT_SURVEYS_BODY from './Account_Page/Account_Surveys/Body.js';
 import ABOUT_US_BODY from './About_Us_Page/Body.js';
 
@@ -31,7 +33,8 @@ const pollAddress = '0x507Be3C79DAf1C7df43827F22A2114CeA60B0E6b';
 const pollContract = new web3.eth.Contract(surveyFunc.abi, surveysAddress);
 
 const Body = styled.div`
-  margin-bottom: 10em;
+  height: 100%;
+  margin: 8em 0 5em 0;
 `;
 
 function App() {
@@ -41,7 +44,7 @@ function App() {
     pollContractApproved: undefined,
     userAddress: undefined,
     balance: undefined,
-    connected: false,
+    connected: true,
     loading: false,
     searchVal: '',
     surveyTitle: undefined,
@@ -61,31 +64,32 @@ function App() {
 
   return (
     <Router>
-      <Header
-        storage={storage}
-        setStorage={setStorage}
-        tokenContract={tokenContract}
-      />
       <Switch>
         <Body>
 
-          <Route exact path="/">
-            <h1>this is home page</h1>
+          <Route exact path="/App">
+            <DAPP
+              storage={storage}
+              setStorage={setStorage}
+              surveysAddress={surveysAddress}
+              surveysContract={surveysContract}
+              pollAddress={pollAddress}
+              pollContract={pollContract}
+              tokenContract={tokenContract}
+            />
           </Route>
 
-          <Route exact path="/App">
+          <Route exact path="/App/Set_Survey">
             <SET_SURVEY_BODY
               storage={storage}
               setStorage={setStorage}
               tokenContract={tokenContract}
-              pollAddress={pollAddress}
-              pollContract={pollContract}
               surveysAddress={surveysAddress}
               surveysContract={surveysContract}
             />
           </Route>
 
-          <Route exact path="/participateSurveys">
+          <Route exact path="/App/Get_Surveys">
             <GET_SURVEYS_BODY
               storage={storage}
               setStorage={setStorage}
@@ -93,7 +97,17 @@ function App() {
             />
           </Route>
 
-          <Route exact path="/aboutUs">
+          <Route exact path="/App/Set_Poll">
+            <SET_POLL_BODY
+              storage={storage}
+              setStorage={setStorage}
+              tokenContract={tokenContract}
+              pollAddress={pollAddress}
+              pollContract={pollContract}
+            />
+          </Route>
+
+          <Route exact path="/">
             <ABOUT_US_BODY />
           </Route>
 
@@ -106,12 +120,17 @@ function App() {
           </Route>
         </Body>
       </Switch>
+      <Header
+        storage={storage}
+        setStorage={setStorage}
+        tokenContract={tokenContract}
+      />
       <Footer />
       <Connect
         storage={storage}
         setStorage={setStorage}
       />
-    </Router>
+    </Router >
   );
 }
 

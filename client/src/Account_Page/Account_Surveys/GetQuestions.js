@@ -23,7 +23,7 @@ function GetSurveyQuestions({ storage, setStorage, surveysContract }) {
 		if (storage.questions === undefined && storage.showSurvey) {
 			getSurveyQuestions();
 		}
-	}, [storage.showSurvey]);
+	});
 
 	return (
 		<>

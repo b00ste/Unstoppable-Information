@@ -10,6 +10,7 @@ const Container = styled.div`
 	word-wrap: break-word;
 	h2 {
 		padding: 1em 0 0em 0;
+		color: #fff;
 	}
 	div {
 		width: 20rem;
@@ -17,10 +18,10 @@ const Container = styled.div`
 		text-align: center;
 		margin: 2rem;
 		h4 {
-			margin: 1em 1em 0.5em 1em;
+			margin: 2em 1em 0.5em 1em;
 		}
 		button {
-			margin: 0.5em 1em 1em 1em;
+			margin: 2em 1em 1em 1em;
 		}
 	}
 `;
@@ -62,8 +63,8 @@ function GetUserSurveys({ storage, setStorage, surveysContract }) {
 						? storage.userSurveyTitles
 							.filter(val => val.includes(storage.searchVal))
 							.map(val =>
-								<div key={uuidv4()} className="card text-white bg-primary mb-3">
-									<h4 className="card-title">{val}</h4>
+								<div key={uuidv4()} className="card-default">
+									<h4>{val}</h4>
 									<button
 										type="button"
 										className="btn btn-secondary"

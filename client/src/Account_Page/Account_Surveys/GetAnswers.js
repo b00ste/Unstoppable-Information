@@ -25,7 +25,7 @@ function GetSurveyAnswers({ storage, setStorage, surveysContract }) {
 		if (storage.answers === undefined && storage.showSurvey) {
 			getSurveyAnswers();
 		}
-	}, [storage.showSurvey]);
+	});
 
 	return (
 		<>

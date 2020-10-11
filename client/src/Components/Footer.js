@@ -14,14 +14,6 @@ const FooterStyle = styled.footer`
 	align-items: flex-end;
 	svg {
 		margin: 0.6rem 0.7rem;
-		color: #fff;
-	}
-	svg:hover {
-		color: rgb(170, 170, 170) !important;
-		background-color: #FA8BFF;
-		background-image: linear-gradient(45deg, #FA8BFF 0%, #2BD2FF 52%, #2BFF88 90%);
-
-		cursor: pointer;
 	}
 `
 
@@ -29,11 +21,11 @@ function Footer() {
 
 	return (
 		<FooterStyle>
-			<FontAwesomeIcon icon={['fab', 'instagram']} size="3x" onClick={() => window.open("https://www.instagram.com/daniel_afteni", "_blank")} />
-			<FontAwesomeIcon icon={['fab', 'facebook-f']} size="3x" onClick={() => window.open("https://www.facebook.com", "_blank")} />
-			<FontAwesomeIcon icon={['fab', 'twitter']} size="3x" onClick={() => window.open("https://twitter.com/afteni_daniel", "_blank")} />
-			<FontAwesomeIcon icon={['fab', 'telegram-plane']} size="3x" onClick={() => window.open("https://telegram.org", "_blank")} />
-			<FontAwesomeIcon icon={['fab', 'github']} size="3x" onClick={() => window.open("https://github.com/b00ste", "_blank")} />
+			<FontAwesomeIcon icon={['fab', 'instagram']} size="3x" onClick={() => window.open("https://www.instagram.com/daniel_afteni", "_blank")} className="change-color-on-hover" />
+			<FontAwesomeIcon icon={['fab', 'facebook-f']} size="3x" onClick={() => window.open("https://www.facebook.com", "_blank")} className="change-color-on-hover" />
+			<FontAwesomeIcon icon={['fab', 'twitter']} size="3x" onClick={() => window.open("https://twitter.com/afteni_daniel", "_blank")} className="change-color-on-hover" />
+			<FontAwesomeIcon icon={['fab', 'telegram-plane']} size="3x" onClick={() => window.open("https://telegram.org", "_blank")} className="change-color-on-hover" />
+			<FontAwesomeIcon icon={['fab', 'github']} size="3x" onClick={() => window.open("https://github.com/b00ste", "_blank")} className="change-color-on-hover" />
 		</FooterStyle>
 	);
 }

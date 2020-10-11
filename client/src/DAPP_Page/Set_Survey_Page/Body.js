@@ -17,15 +17,14 @@ const Container = styled.div`
 		width: 18em;
 		box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.175);
 	}
-}
 `;
 
 function Body({
 	storage,
 	setStorage,
+	surveysAddress,
 	surveysContract,
-	tokenContract,
-	surveysAddress
+	tokenContract
 }) {
 	const approve = async () => {
 		await tokenContract.methods.authorizeOperator(surveysAddress).send({ from: storage.userAddress });
