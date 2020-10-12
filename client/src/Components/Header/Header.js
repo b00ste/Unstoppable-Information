@@ -69,7 +69,7 @@ const HeaderStyle = styled.div`
 	
 	.dropdown-menu {
 		position: fixed;
-		transform: translate3d(20%, 35%, 0);
+		transform: ${props => props.showResizedNav ? 'translate3d(0, 75%, 0)' : 'translate3d(20%, 70%, 0)'};
 		background-color: #eec0c6;
 		background-image: linear-gradient(315deg, #eec0c6 0%, #7ee8fa 74%);
 		box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.175);
