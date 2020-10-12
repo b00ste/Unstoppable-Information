@@ -10,20 +10,19 @@ const Global = createGlobalStyle`
 		filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#a6c0f0",endColorstr="#f68084",GradientType=1);
 		background-attachment:fixed;
 		height:100%;
+		svg {
+			color: #fdfcfa;
+		}
 	}
-	body {
-		background: transparent;
+
+	*, *:before, *:after {
+		box-sizing: border-box;
 	}
+
 	nav {
 		box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.5), 0 0 6px 0 rgba(0, 0, 0, 0.4);
 	}
-	.header {
-		box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.5), 0 0 4px 0 rgba(0, 0, 0, 0.4);
-		position: fixed !important;
-		top: 0;
-		left: 0;
-		right: 0;
-	}
+
 	footer {
 		box-shadow: 6px 6px 6px 6px rgba(0, 0, 0, 0.5), 4px 4px 4px 4px rgba(0, 0, 0, 0.4);
 	}
@@ -69,18 +68,6 @@ const Global = createGlobalStyle`
 	.change-color-on-hover:hover {
 		color: #B3315F !important;
 		cursor: pointer;
-	}
-	.dropdown-menu {
-		background-color: #eec0c6;
-		background-image: linear-gradient(315deg, #eec0c6 0%, #7ee8fa 74%);
-		box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.175);
-		border-radius: 5px;
-		a {
-			background: transparent !important;
-		}
-	}
-	svg {
-		color: #fdfcfa;
 	}
 `;
 

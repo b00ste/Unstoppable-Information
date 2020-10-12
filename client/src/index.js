@@ -7,9 +7,6 @@ import * as serviceWorker from './serviceWorker';
 import './Components/Icons';
 import Background from './Components/Styling'
 
-import 'bootswatch/dist/lux/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.js';
-
 ReactDOM.render(
   <React.StrictMode>
     <Background />

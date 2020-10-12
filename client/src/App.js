@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import useAsyncReference from './Components/useAsyncReference.js'
 import styled from 'styled-components';
 import {
@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom';
 
 import Connect from './Components/Connect.js';
-import Header from './Components/Header.js';
+import Header from './Components/Header/Header.js';
 import Footer from './Components/Footer.js';
 import DAPP from './DAPP_Page/App_Page/Body.js';
 import SET_SURVEY_BODY from './DAPP_Page/Set_Survey_Page/Body.js';
@@ -34,7 +34,7 @@ const pollContract = new web3.eth.Contract(surveyFunc.abi, surveysAddress);
 
 const Body = styled.div`
   height: 100%;
-  margin: 8em 0 5em 0;
+  margin: ${props => props.showResizedNav ? '16em' : '6em' } 0 5em 0;
 `;
 
 function App() {
@@ -46,6 +46,7 @@ function App() {
     balance: undefined,
     connected: true,
     loading: false,
+    showResizedNav: false,
     searchVal: '',
     surveyTitle: undefined,
     allSurevyTitles: undefined,
@@ -59,13 +60,24 @@ function App() {
     maxParticipants: undefined,
     showSurvey: false,
     selectedSurvey: undefined,
-    nrOfUserSurveys: undefined
+    nrOfUserSurveys: undefined,
+    windowWidth: 0
   });
+
+	let resizeWindow = () => {
+		setStorage({ ...storage, windowWidth: window.innerWidth });
+	};
+
+	useEffect(() => {
+		resizeWindow();
+		window.addEventListener("resize", resizeWindow);
+		return () => window.removeEventListener("resize", resizeWindow);
+	}, []);
 
   return (
     <Router>
       <Switch>
-        <Body>
+        <Body showResizedNav={storage.showResizedNav}>
 
           <Route exact path="/App">
             <DAPP
