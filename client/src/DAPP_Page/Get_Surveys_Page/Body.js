@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
-import SelectedSurvey from '../../Components/SelectedSurvey/PollWindow.js';
+import SelectedSurvey from '../../Components/SelectedSurevyOrPollWindow.js';
 import SelectedSurveyData from './SelectedSurveyData.js';
 import Titles from './GetTitles.js';
 

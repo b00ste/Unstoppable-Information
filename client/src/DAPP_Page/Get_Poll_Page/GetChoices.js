@@ -29,10 +29,9 @@ function GetChoices({ storage, setStorage, updateAnswers, pollContract }) {
 				storage.choices !== undefined ?
 					storage.choices.split(',')
 						.map((val) =>
-							<React.Fragment key={uuidv4()}>
-								<p>{val}</p>
-								<input type="checkbox" name={val} placeholder="Your Answer" onChange={updateAnswers} />
-							</React.Fragment>
+							<div key={uuidv4()} onChange={updateAnswers}>
+								<p>{val} <input type="radio" name={storage.selectedPoll} value={val}/> </p>
+							</div>
 						)
 					: <></>
 			}

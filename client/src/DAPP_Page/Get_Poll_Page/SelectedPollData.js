@@ -3,10 +3,10 @@ import Questions from './GetChoices';
 
 function Data({ storage, setStorage, pollContract }) {
 
-	let newAnswers = {};
+	let choice;
 	const updateAnswers = (event) => {
-		event.preventDefault();
-		newAnswers[event.target.name] = event.target.value;
+		event.stopPropagation();
+		choice = event.target.value;
 	}
 
 	const sendAnswer = async (event) => {
@@ -15,22 +15,16 @@ function Data({ storage, setStorage, pollContract }) {
 			...storage,
 			loading: true,
 		});
-		let questions = storage.questions.split(',');
-		let answer = [];
-		for (var i = 0; i < questions.length; i++) {
-			const escaped = ('' + newAnswers[questions[i]]).replace(/"/g, '\\"');
-			console.log(escaped);
-			answer.push(`"${escaped}"`);
-		}
-		console.log(answer.join());
-		await pollContract.methods.pollParticipation(storage.selectedSurvey, answer.join()).send({ from: storage.userAddress })
+		const escaped = ('' + choice.replace(/"/g, '\\"'));
+		const escapedChoice = ('' + `"${escaped}"`);
+		pollContract.methods.pollParticipation(storage.selectedPoll, escapedChoice).send({ from: storage.userAddress })
 			.then(() =>
 				setStorage({
 					...storage,
-					answers: undefined,
-					showSurvey: false,
-					selectedSurvey: undefined,
-					questions: undefined,
+					choice: undefined,
+					showPoll: false,
+					selectedPoll: undefined,
+					choices: undefined,
 					loading: false
 				})
 			);
@@ -44,7 +38,7 @@ function Data({ storage, setStorage, pollContract }) {
 				updateAnswers={updateAnswers}
 				pollContract={pollContract}
 			/>
-			<button type="button" className="btn btn-primary" onClick={sendAnswer}>Submit</button>
+			<button onClick={sendAnswer}>Submit</button>
 		</>
 	);
 }

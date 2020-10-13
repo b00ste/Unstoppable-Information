@@ -15,56 +15,62 @@ const Survey = styled.div`
 	width: 23em;
 
 	text-align: center;
-	.title {
-		width: 100%;
-		border-bottom: 1px solid black;
-		margin: 0;
-		box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.5), 0 0 4px 0 rgba(0, 0, 0, 0.4);
-		position: fixed !important;
-		top: 0;
-		left: 0;
-		right: 0;
-		P {
-			font-size: 1.75em;
-			padding: 0 2em;
-		}
-		svg {
-			position: fixed;
-			top: 0;
-			right: 0;
-			margin: 1.5rem 0.5rem;
-			color: #1a1a1a;
-		}
+`;
+const Title = styled.div`
+	width: 100%;
+	border-bottom: 1px solid black;
+	margin: 0;
+	box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.5), 0 0 4px 0 rgba(0, 0, 0, 0.4);
+	position: fixed !important;
+	top: 0;
+	left: 0;
+	right: 0;
+	P {
+		font-size: 1.75em;
+		padding: 0 2em;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		white-space: nowrap;
 	}
-	.body {
-		margin-top: 6em;
-		max-height: 30em;
-		overflow-y: scroll;
-		-ms-overflow-style: none;
-		scrollbar-width: none;
-		&::-webkit-scrollbar {
-			display: none;
-		}
-		p {
-			font-size: 1.4em;
-			margin: 0.5em 0 0 0;
-		}
-		input {
-			display: inline-block;
-			width: 70%;
-			margin: 0.6em 0;
-			box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.175);
-		}
-		button {
-			display: inline-block;
-			width: 50%;
-			margin: 1em 0;
-			box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.175);
-			background-color: #1a1a1a;
-			color: #fdfcfa;
-			&:hover {
-				background-color: #B3315F;
-			}
+	svg {
+		position: fixed;
+		top: 0;
+		right: 0;
+		margin: 1.5rem 0.5rem;
+		color: #1a1a1a;
+	}
+`;
+const Body = styled.div`
+	margin-top: 6em;
+	max-height: 30em;
+	overflow-y: scroll;
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+	&::-webkit-scrollbar {
+		display: none;
+	}
+	p {
+		font-size: 1.4em;
+		margin: 0.5em 0 0 0;
+	}
+	input[type="text"] {
+		display: inline;
+		width: 70%;
+		margin: 0.6em 0;
+		box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.175);
+	}
+	input[type="checkbox"] {
+		box-shadow: 0 0 black !important;
+	}
+	button {
+		display: inline-block;
+		width: 50%;
+		margin: 1em 0;
+		box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.175);
+		background-color: #1a1a1a;
+		color: #fdfcfa;
+		&:hover {
+			background-color: #B3315F;
 		}
 	}
 `;
@@ -93,7 +99,7 @@ function SelectedSurvey({ loading, showSurvey, selectedSurvey, showPoll, selecte
 	if (showSurvey || showPoll) {
 		survey =
 			<Survey>
-				<div className="title">
+				<Title className="title" id="title">
 					<FontAwesomeIcon
 						className="change-color-on-hover"
 						icon="times"
@@ -101,11 +107,11 @@ function SelectedSurvey({ loading, showSurvey, selectedSurvey, showPoll, selecte
 						onClick={exit}
 					/>
 					<p>{showSurvey ? selectedSurvey : showPoll ? selectedPoll : ''}</p>
-				</div>
-				<div className="body">
+				</Title>
+				<Body className="body">
 					{loadingBar}
 					{body}
-				</div>
+				</Body>
 			</Survey>
 		surveyMask = <SurveyMask onClick={exit}></SurveyMask>
 	}
