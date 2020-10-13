@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import Questions from '../Set_Poll_Or_Survey_Struct/SetQuestions.js';
-import Title from '../Set_Poll_Or_Survey_Struct/SetTitle.js';
-import Value from '../Set_Poll_Or_Survey_Struct/SetValue.js';
-import Participants from '../Set_Poll_Or_Survey_Struct/SetParticipants.js';
-import Buttons from '../Set_Poll_Or_Survey_Struct/SetButtons.js';
+import Questions from './SetQuestions.js';
+import Title from './SetTitle.js';
+import Value from './SetValue.js';
+import Participants from './SetParticipants.js';
+import Buttons from './SetButtons.js';
 
 const Container = styled.div`
 	display: flex;
@@ -32,8 +32,8 @@ function Body({
 	const setNewSurvey = async () => {
 		setStorage({ ...storage, loading: true });
 		let questions = [];
-		for (var i = 0; i < questions.length; i++) {
-			const escaped = ('' + questions[i]).replace(/"/g, '\\"');
+		for (var i = 0; i < storage.questions.length; i++) {
+			const escaped = ('' + storage.questions[i]).replace(/"/g, '\\"');
 			questions.push(`"${escaped}"`);
 		}
 		surveysContract.methods.setSurvey(storage.surveyTitle, questions.join(), storage.maxParticipants, storage.value).send({ from: storage.userAddress })
@@ -72,24 +72,20 @@ function Body({
 				<Title
 					storage={storage}
 					setStorage={setStorage}
-					is="survey"
 				/>
 				<Value
 					storage={storage}
 					setStorage={setStorage}
-					is="survey"
 				/>
 				<Participants
 					storage={storage}
 					setStorage={setStorage}
-					is="survey"
 				/>
 			</Container>
 			<Container>
 				<Questions
 					storage={storage}
 					setStorage={setStorage}
-					is="survey"
 				/>
 			</Container>
 			<Container>
@@ -98,7 +94,6 @@ function Body({
 					setStorage={setStorage}
 					surveysAddress={surveysAddress}
 					tokenContract={tokenContract}
-					is="survey"
 
 					approve={approve}
 					sendToBC={setNewSurvey}

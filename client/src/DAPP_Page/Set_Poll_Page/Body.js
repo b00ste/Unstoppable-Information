@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import Questions from '../Set_Poll_Or_Survey_Struct/SetQuestions.js';
-import Title from '../Set_Poll_Or_Survey_Struct/SetTitle.js';
-import Value from '../Set_Poll_Or_Survey_Struct/SetValue.js';
-import Participants from '../Set_Poll_Or_Survey_Struct/SetParticipants.js';
-import Buttons from '../Set_Poll_Or_Survey_Struct/SetButtons.js';
+import Questions from './SetChoices.js';
+import Title from './SetTitle.js';
+import Value from './SetValue.js';
+import Participants from './SetParticipants.js';
+import Buttons from './SetButtons.js';
 
 const Container = styled.div`
 	display: flex;
@@ -31,17 +31,17 @@ function Body({
 	}
 	const setNewPoll = async () => {
 		setStorage({ ...storage, loading: true });
-		let questions = [];
-		for (var i = 0; i < questions.length; i++) {
-			const escaped = ('' + questions[i]).replace(/"/g, '\\"');
-			questions.push(`"${escaped}"`);
+		let choices = [];
+		for (var i = 0; i < storage.choices.length; i++) {
+			const escaped = ('' + storage.choices[i]).replace(/"/g, '\\"');
+			choices.push(`"${escaped}"`);
 		}
-		pollContract.methods.setPoll(storage.pollTitle, questions.join(), storage.maxParticipants, storage.value).send({ from: storage.userAddress })
+		pollContract.methods.setPoll(storage.pollTitle, choices.join(), storage.maxParticipants, storage.value).send({ from: storage.userAddress })
 			.then(() => {
 				setStorage({
 					...storage,
 					pollTitle: undefined,
-					questions: undefined,
+					choices: undefined,
 					value: undefined,
 					maxParticipants: undefined,
 					loading: false
@@ -54,7 +54,7 @@ function Body({
 				setStorage({
 					...storage,
 					pollTitle: undefined,
-					questions: undefined,
+					choices: undefined,
 					value: undefined,
 					maxParticipants: undefined,
 					loading: false
@@ -72,24 +72,20 @@ function Body({
 				<Title
 					storage={storage}
 					setStorage={setStorage}
-					is="poll"
 				/>
 				<Value
 					storage={storage}
 					setStorage={setStorage}
-					is="poll"
 				/>
 				<Participants
 					storage={storage}
 					setStorage={setStorage}
-					is="poll"
 				/>
 			</Container>
 			<Container>
 				<Questions
 					storage={storage}
 					setStorage={setStorage}
-					is="poll"
 				/>
 			</Container>
 			<Container>
@@ -98,10 +94,9 @@ function Body({
 					setStorage={setStorage}
 					tokenContract={tokenContract}
 					pollAddress={pollAddress}
-					is="poll"
 
 					approve={approve}
-					sendToBC={setNewPoll}
+					setNewPoll={setNewPoll}
 				/>
 			</Container>
 		</>

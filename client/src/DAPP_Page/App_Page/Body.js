@@ -11,8 +11,11 @@ const Row = styled.div`
 `;
 const Column = styled.div`
 	display: flex;
-	a {
-		text-decoration: none;
+	h4 {
+		font-size: 1.3em;
+	}
+	h6 {
+		font-size: 0.8em;
 	}
 `;
 
@@ -30,8 +33,6 @@ function AppBody() {
 									Incentivate people to participate at your surveys, ask decent questions!
 								</h6>
 								<button
-									type="button"
-									className="btn btn-secondary"
 									onClick={(e) => {
 										e.preventDefault();
 										let flippedStatus = e.currentTarget.parentNode.parentNode.className.includes('flipped');
@@ -57,8 +58,6 @@ function AppBody() {
 									provide any informationthat can be used against you!
 								</h6>
 								<button
-									type="button"
-									className="btn btn-secondary"
 									onClick={(e) => {
 										e.preventDefault();
 										let flippedStatus = e.currentTarget.parentNode.parentNode.className.includes('flipped');
@@ -85,8 +84,6 @@ function AppBody() {
 									Incentivate people to participate at your surveys, set decent poll choices!
 								</h6>
 								<button
-									type="button"
-									className="btn btn-secondary"
 									onClick={(e) => {
 										e.preventDefault();
 										let flippedStatus = e.currentTarget.parentNode.parentNode.className.includes('flipped');
@@ -112,8 +109,6 @@ function AppBody() {
 									provide any informationthat can be used against you!
 								</h6>
 								<button
-									type="button"
-									className="btn btn-secondary"
 									onClick={(e) => {
 										e.preventDefault();
 										let flippedStatus = e.currentTarget.parentNode.parentNode.className.includes('flipped');

@@ -43,9 +43,6 @@ contract Storage
   }
   mapping (address => User) internal _userStorage;
 
-  //an array of strings, titles of surveys and titles of polls
-  string[] internal polls;
-
   //saving the surveys at which a certain user did participate
   mapping (address => mapping (string => bool)) internal userParticipatedSurveys;
 

@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Participants({ storage, setStorage, is }) {
+function Participants({ storage, setStorage }) {
 
   const saveNewMaxParticipants = (event) => {
     event.preventDefault();
@@ -13,13 +13,13 @@ function Participants({ storage, setStorage, is }) {
         {
           storage.maxParticipants
             ? <h4>
-              Your {is === "survey" ? "survey" : is === "poll" ? "poll" : ""} allows {storage.maxParticipants} people to participate.
+              Your poll allows {storage.maxParticipants} people to participate.
                 </h4>
             : <h4>
-              Set {is === "survey" ? "survey" : is === "poll" ? "poll" : ""} total paricipants.
+              Set poll total paricipants.
                 </h4>
         }
-        <input type="number" className="form-control" placeholder="Participants" onChange={saveNewMaxParticipants} />
+        <input type="number" placeholder="Participants" onChange={saveNewMaxParticipants} />
       </div>
     </>
   );

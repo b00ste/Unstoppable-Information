@@ -9,7 +9,7 @@ const Global = createGlobalStyle`
 		background: linear-gradient(45deg, rgba(166,192,240,1) 0%, rgba(208,159,184,0.9108018207282913) 50%, rgba(246,128,132,1) 100%);
 		filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#a6c0f0",endColorstr="#f68084",GradientType=1);
 		background-attachment:fixed;
-		height:100%;
+		font-family: 'Varela', sans-serif;
 		svg {
 			color: #fdfcfa;
 		}
@@ -19,19 +19,46 @@ const Global = createGlobalStyle`
 		box-sizing: border-box;
 	}
 
+	input {
+		border: 0;
+		height: 3.5em;
+		text-align: center;
+		background-color: #fdfcfa;
+		letter-spacing: 0.05em;
+		font-weight: 600;
+		&:focus {
+			outline: none;
+		}
+	}
+
+	button {
+		border: 0;
+		height: 3.5em;
+		text-align: center;
+		color: #1a1a1a;
+		background-color: #fdfcfa;
+		letter-spacing: 0.05em;
+		font-weight: 500;
+		&:focus {
+			outline: none;
+		}
+		&:hover {
+			background-color: #e8eae6;
+		}
+	}
+
 	nav {
 		box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.5), 0 0 6px 0 rgba(0, 0, 0, 0.4);
 	}
 
-	footer {
-		box-shadow: 6px 6px 6px 6px rgba(0, 0, 0, 0.5), 4px 4px 4px 4px rgba(0, 0, 0, 0.4);
-	}
 	footer, .header {
 		opacity: 0.95;
 	}
+
 	footer:hover, .header:hover {
 		opacity: 1;
 	}
+
 	.card-default {
 		background-color: #87004c;
 		background-image: linear-gradient(225deg, #87004c 0%, #784BA0 50%, #2B86C5 100%);
@@ -40,24 +67,27 @@ const Global = createGlobalStyle`
 		margin: 1em 1em;
 		border-radius: 25px;
 
-		width: 25em;
-		height: 14em;
+		width: 21em;
 		text-align: center;
 		overflow-y: auto;
 		button {
-			width: 18em;
+			width: 16em;
 		}
 		input {
 			width: 20em;
-			margin: em !important;
+			margin: 2em !important;
 		}
 		h4 {
 			color: #fff;
-			margin-top: 2em;
+			margin: 2em 2em 0 2em;
+			font-weight: 500;
+			letter-spacing: 0.1em;
 		}
 		h6 {
 			color: #fff;
 			margin-top: 2em;
+			font-weight: 500;
+			letter-spacing: 0.05em;
 		}
 		button, input {
 			box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.175);

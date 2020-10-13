@@ -89,7 +89,7 @@ contract PollFunc is Storage, Ownable
     //sending the rewards to the creator of the contract and setting the value of the poll
     _token.operatorSend(msgSender, address(this), _actualValueOfPoll, "", "");
     _token.operatorSend(msgSender, Ownable.owner(), _actualValueOfPoll/10, "", "");
-    //emiting the number of the survey in the array of surveys
+    //emiting the number of the poll in the array of polls
     emit pollNumber(_stringArrayStorage['polls'].length - 1);
   }
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
-import SelectedSurvey from '../../Components/SelectedSurvey/PollWindow.js';
-import SelectedSurveyData from './SelectedSurveyData.js';
+import SelectedPoll from '../../Components/SelectedSurvey/PollWindow.js';
+import SelectedPollData from './SelectedPollData.js';
 import Titles from './GetTitles.js';
 
 const Container = styled.div`
@@ -11,25 +11,25 @@ const Container = styled.div`
 	align-items: flex-end;
 `;
 
-function Body({ storage, setStorage, surveysContract }) {
+function Body({ storage, setStorage, pollContract }) {
 	return (
 		<>
 			<Container>
 				<Titles
 					storage={storage}
 					setStorage={setStorage}
-					surveysContract={surveysContract}
+					pollContract={pollContract}
 				/>
-				<SelectedSurvey
+				<SelectedPoll
 					loading={storage.loading}
-					showSurvey={storage.showSurvey}
-					selectedSurvey={storage.selectedSurvey}
+					showPoll={storage.showPoll}
+					selectedPoll={storage.selectedPoll}
 					body=
 					{
-						<SelectedSurveyData
+						<SelectedPollData
 							storage={storage}
 							setStorage={setStorage}
-							surveysContract={surveysContract}
+							pollContract={pollContract}
 						/>
 					}
 					exit=
@@ -37,9 +37,9 @@ function Body({ storage, setStorage, surveysContract }) {
 						() => {
 							setStorage({
 								...storage,
-								showSurvey: false,
-								selectedSurvey: undefined,
-								questions: undefined,
+								showPoll: false,
+								selectedPoll: undefined,
+								choices: undefined,
 								answers: undefined
 							});
 						}

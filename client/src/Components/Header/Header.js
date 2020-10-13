@@ -21,6 +21,9 @@ const HeaderStyle = styled.div`
 	flex-direction: ${props => props.showResizedNav ? 'column' : 'row'};
 	justify-content: space-around;
 	align-items: center;
+	
+	letter-spacing: 0.05em;
+	font-weight: 300;
 
 	.brand {
 		display: flex;
@@ -58,13 +61,8 @@ const HeaderStyle = styled.div`
 	}
 
 	.nav-input {
-		height: 3em;
 		width: 15em;
 		margin: 1em;
-		text-align: center;
-		&:focus {
-			outline: none;
-		}
 	}
 	
 	.dropdown-menu {
@@ -81,7 +79,7 @@ const HeaderStyle = styled.div`
 
 	.balance {
 		color: #1a1a1a;
-		font-weight: bold;
+		font-weight: 500;
 	}
 	
 	.dropdown-item {

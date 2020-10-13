@@ -1,5 +1,5 @@
 import React from 'react';
-import SelectedSurvey from '../../Components/SelectedSurvey.js';
+import SelectedSurvey from '../../Components/SelectedSurvey/PollWindow.js';
 import Surveys from './GetSurveys.js';
 import Data from './SelectedSurveyData.js';
 import Buttons from '../ExportDataButton.js';

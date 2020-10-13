@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const FooterStyle = styled.footer`
 	background-color: #1a1a1a;
+	box-shadow: 6px 6px 6px 6px rgba(0, 0, 0, 0.5), 4px 4px 4px 4px rgba(0, 0, 0, 0.4);
 	position: fixed;
 	bottom: 0;
 	left: 0;
