@@ -55,7 +55,9 @@ function GetUserSurveys({ storage, setStorage, surveysContract }) {
 	return (
 		<>
 			<Container>
-				<h2>You have created {storage.nrOfUserSurveys} surveys.</h2>
+				<h2>
+					You have created {storage.nrOfUserSurveys} {storage.nrOfUserPolls !== undefined && (storage.nrOfUserPolls.lenght > 1 || storage.nrOfUserPolls.lenght === 0) ? 'surveys' : 'survey'}.
+				</h2>
 			</Container>
 			<Container>
 				{

@@ -16,7 +16,8 @@ import GET_SURVEYS_BODY from './DAPP_Page/Get_Surveys_Page/Body.js';
 import SET_POLL_BODY from './DAPP_Page/Set_Poll_Page/Body.js';
 import GET_POLLS_BODY from './DAPP_Page/Get_Poll_Page/Body.js';
 import ACCOUNT_SURVEYS_BODY from './Account_Page/Account_Surveys/Body.js';
-import ABOUT_US_BODY from './About_Us_Page/Body.js';
+import ACCOUNT_POLLS_BODY from './Account_Page/Account_Polls/Body.js';
+import HOME_BODY from './Home_Page/Body.js';
 
 import Web3 from 'web3';
 import surveyFunc from './contracts/FunctionalSurveys.json';
@@ -64,6 +65,7 @@ function App() {
 
     answers: undefined,
     choice: undefined,
+    votes: undefined,
 
     value: undefined,
     maxParticipants: undefined,
@@ -75,6 +77,7 @@ function App() {
     selectedPoll: undefined,
 
     nrOfUserSurveys: undefined,
+    nrOfUserPolls: undefined,
 
     windowWidth: window.innerWidth
   });
@@ -93,6 +96,10 @@ function App() {
     <Router>
       <Switch>
         <Body showResizedNav={storage.showResizedNav}>
+
+          <Route exact path="/">
+            <HOME_BODY />
+          </Route>
 
           <Route exact path="/App">
             <DAPP
@@ -142,10 +149,6 @@ function App() {
             />
           </Route>
 
-          <Route exact path="/">
-            <ABOUT_US_BODY />
-          </Route>
-
           <Route exact path="/accountSurveys">
             <ACCOUNT_SURVEYS_BODY
               storage={storage}
@@ -155,7 +158,7 @@ function App() {
           </Route>
 
           <Route exact path="/accountPolls">
-            <ACCOUNT_SURVEYS_BODY
+            <ACCOUNT_POLLS_BODY
               storage={storage}
               setStorage={setStorage}
               pollContract={pollContract}

@@ -1,34 +1,34 @@
 import React from 'react';
-import SelectedSurvey from '../../Components/SelectedSurevyOrPollWindow.js';
-import Surveys from './GetSurveys.js';
-import Data from './SelectedSurveyData.js';
+import SelectedPoll from '../../Components/SelectedSurevyOrPollWindow.js';
+import Surveys from './GetPolls.js';
+import Data from './SelectedPollData.js';
 import Buttons from '../ExportDataButton.js';
 
 
-function Body({ storage, setStorage, surveysContract }) {
+function Body({ storage, setStorage, pollContract }) {
 	
 	return (
 		<>
 			<Surveys
 				storage={storage}
 				setStorage={setStorage}
-				surveysContract={surveysContract}
+				pollContract={pollContract}
 			/>
-			<SelectedSurvey
-				showSurvey={storage.showSurvey}
-				selectedSurvey={storage.selectedSurvey}
+			<SelectedPoll
+				showPoll={storage.showPoll}
+				selectedPoll={storage.selectedPoll}
 				loading={storage.loading}
 				body={
 					<>
 						<Data
 							storage={storage}
 							setStorage={setStorage}
-							surveysContract={surveysContract}
+							pollContract={pollContract}
 						/>
 						<Buttons
 							answers={storage.answers}
 							questions={storage.questions}
-							selectedSurvey={storage.selectedSurvey}
+							selectedPoll={storage.selectedPoll}
 						/>
 					</>
 				}
@@ -37,8 +37,8 @@ function Body({ storage, setStorage, surveysContract }) {
 					() => {
 						setStorage({
 							...storage,
-							showSurvey: false,
-							selectedSurvey: undefined,
+							showPoll: false,
+							selectedPoll: undefined,
 							questions: undefined,
 							answers: undefined
 						});
