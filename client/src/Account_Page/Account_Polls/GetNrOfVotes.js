@@ -1,20 +1,25 @@
 import React, { useEffect } from 'react';
 
-function GetNrOfVotes({ name, storage, setStorage, pollContract }) {
+function GetNrOfVotes({ storage, setStorage, pollContract }) {
 
 	const getNrOfVotes = async () => {
 		setStorage({
 			...storage,
 			loading: true
 		});
-		let nrOfVotes = await pollContract.methods.getPollChoiceVotes(storage.selectedPoll, name).call({ from: storage.userAddress });
-		setStorage({
-			...storage,
-			votes: {
-				[name]: nrOfVotes
-			},
-			loading: false
-		});
+		let newVotes = {};
+		for (const choice of storage.choices) {
+			pollContract.methods.getPollChoiceVotes(storage.selectedPoll, choice).call({ from: storage.userAddress })
+				.then(nrOfVotes => {
+					console.log(nrOfVotes);
+					newVotes[choice] = nrOfVotes;
+					setStorage({
+						...storage,
+						votes: newVotes,
+						loading: false
+					});
+				});
+		}
 	}
 
 	useEffect(() => {
@@ -23,11 +28,7 @@ function GetNrOfVotes({ name, storage, setStorage, pollContract }) {
 		}
 	});
 
-	return (
-		<>
-			{storage.votes !== undefined ? storage.votes[name] : ''}
-		</>
-	);
+	return (<></>);
 }
 
 export default GetNrOfVotes;

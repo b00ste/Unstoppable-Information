@@ -19,7 +19,7 @@ const Global = createGlobalStyle`
 		box-sizing: border-box;
 	}
 
-	input[type="text"] {
+	input[type="text"], input[type="number"] {
 		border: 0;
 		height: 3.5em;
 		text-align: center;
@@ -73,7 +73,7 @@ const Global = createGlobalStyle`
 		button {
 			width: 16em;
 		}
-		input[type="text"] {
+		input[type="text"], input[type="number"] {
 			width: 20em;
 			margin: 2em !important;
 		}
@@ -89,7 +89,7 @@ const Global = createGlobalStyle`
 			font-weight: 500;
 			letter-spacing: 0.05em;
 		}
-		button, input[type="text"] {
+		button, input[type="text"], input[type="number"] {
 			box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.175);
 			display: inline-block;
 			margin 0.5em;

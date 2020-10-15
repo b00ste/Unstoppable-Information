@@ -66,48 +66,68 @@ contract SurveyFunc is Storage, Ownable
 
 // General app functions
 
-  function setSurvey(string memory _name, string memory _questions, uint256 _participantsAllowed, uint256 _valueOfSurvey) public payable
+  function setSurvey(bytes32 _name, bytes32[] memory _questions, uint256 _maxParticipants, uint256 _valueOfSurvey) public
   {
-    //saving the value of survey with 18 decimals
-    uint256 _actualValueOfSurvey = _valueOfSurvey * (10 ** 18);
-    //require that every user that participates at the survey gets at least 0.0001 coins
-    require(_actualValueOfSurvey/_participantsAllowed >= 10 ** 14);
-    address msgSender = msg.sender;
-    //saving the new survey name to the array and saving the total number of surveys
-    _stringArrayStorage['surveys'].push(_name);
-    _uintStorage['totalSurveys']++;
-    //creating a survey with it's properties
-    _surveyStorage[_name]._addressStorage['surveyOwner'] = msgSender;
-    _surveyStorage[_name]._stringStorage['questions'] = _questions;
-    _surveyStorage[_name]._boolStorage['stoppedStatus'] = false;
-    _surveyStorage[_name]._uintStorage['value'] = _actualValueOfSurvey - _actualValueOfSurvey/10;
-    _surveyStorage[_name]._uintStorage['participantsAllowed'] = _participantsAllowed;
-    _surveyStorage[_name]._uintStorage['totalParticipated'] = 0;
-    //creating user account
-    _userStorage[msgSender].surevysTitles[_userStorage[msgSender]._uintStorage['surveysCreated']] = _name;
-    _userStorage[msgSender]._uintStorage['surveysCreated']++;
-    //sending the rewards to the creator of the contract and setting the value of the survey
-    _token.operatorSend(msgSender, address(this), _actualValueOfSurvey, "", "");
-    _token.operatorSend(msgSender, Ownable.owner(), _actualValueOfSurvey/10, "", "");
-    //emiting the number of the survey in the array of surveys
-    emit surveyNumber(_stringArrayStorage['surveys'].length - 1);
+    require(_valueOfSurvey/_maxParticipants >= 10 ** 14, "Participant's bounty should be bigger"); //participants bounty >= 0.0001
+    _stringToBytes32ArrayStorage['surveys'].push(_name); //save new survey name
+    require(!_surveyStorage[_name]._boolStorage['initialized'], "There is another survey with te same name"); //create unique surveys
+    _surveyStorage[_name]._boolStorage['initialized'] = true; //initialize the survey
+    _surveyStorage[_name]._stringToBytes32ArrayStorage['questions'] = _questions; //save questions
+    _surveyStorage[_name]._addressStorage['owner'] = msg.sender; //save owner
+    _surveyStorage[_name]._boolStorage['stoppedStatus'] = false; //set stop status for new survey
+    _surveyStorage[_name]._uintStorage['value'] = _valueOfSurvey; //set the value of survey in UFO tokens
+    _surveyStorage[_name]._uintStorage['maxParticipants'] = _maxParticipants; //set max participants allowed
+    _surveyStorage[_name]._uintStorage['totalParticipated'] = 0; //set total participants for new survey
+    _surveyStorage[_name]._uintStorage['surveyIndexInAllSurveysArray'] = _stringToBytes32ArrayStorage['surveys'].length - 1; //set index in all surveys array
+    _userStorage[msg.sender]._stringToBytes32ArrayStorage['surveys'].push(_name); //add new survey to user account
+    _surveyStorage[_name]._uintStorage['surveyIndexInUserCreatedSurveysArray'] = _userStorage[msg.sender]._stringToBytes32ArrayStorage['surveys'].length - 1; //set index in user created surveys array
+    _token.operatorSend(msg.sender, address(this), _valueOfSurvey, "", ""); //send tokens to Smart Contract
+    emit surveyNumber(_stringToBytes32ArrayStorage['surveys'].length); //emit total number of surveys
   }
 
-  function surveyParticipation(string memory _name, string memory _answers) public
+  function surveyParticipation(bytes32 _name, bytes32[] memory _answers) public
   {
-    //require that the survey has participation slots free and didn't stop
-    require(!_surveyStorage[_name]._boolStorage['stoppedStatus']);
-    //require that the user didn't participate at this survey and setting it's participation
-    require(!userParticipatedSurveys[msg.sender][_name]);
-    userParticipatedSurveys[msg.sender][_name] = true;
-    //updating the number of participants
-    _surveyStorage[_name]._uintStorage['totalParticipated']++;
-    //if the free slots for participation at this survey are filled stop the contract
-    if(_surveyStorage[_name]._uintStorage['totalParticipated'] == _surveyStorage[_name]._uintStorage['participantsAllowed']) _surveyStorage[_name]._boolStorage['stoppedStatus'] = true;
-    //setting new answers to the survey
-    _surveyStorage[_name]._stringArrayStorage['answers'].push(_answers);
-    //sending the rewards for participating at the survey
-    _token.operatorSend(address(this), msg.sender, _surveyStorage[_name]._uintStorage['value'] / _surveyStorage[_name]._uintStorage['participantsAllowed'], '', '');
+    require(!_surveyStorage[_name]._boolStorage['stoppedStatus']); //require that the survey is still active
+    require(!_userStorage[msg.sender].participatedSurveys[_name]); //require that the user did not participate at this survey
+    require(_surveyStorage[_name]._addressStorage['owner'] != msg.sender); //the owner cannot participate at his survey
+    _userStorage[msg.sender].participatedSurveys[_name] = true; //set participation
+    _surveyStorage[_name]._uintStorage['totalParticipated']++; //increase participants
+    if(_surveyStorage[_name]._uintStorage['maxParticipants'] == _surveyStorage[_name]._uintStorage['totalParticipated']) {
+      _surveyStorage[_name]._boolStorage['stoppedStatus'] = true; //if max participants number is reached, stop the survey
+    }
+    _surveyStorage[_name]._uintToBytes32ArrayStorage[(_surveyStorage[_name]._uintStorage['totalParticipated'] - 1)] = _answers; //add new answers
+    uint256 _dappCreatorsReward = (_surveyStorage[_name]._uintStorage['value'] / _surveyStorage[_name]._uintStorage['participantsAllowed'])/10;
+    _token.operatorSend(address(this), Ownable.owner(), _dappCreatorsReward, '', ''); //send rewards to owner
+    _token.operatorSend(address(this), msg.sender, _dappCreatorsReward * 9, '', ''); //send bounty to participants
+  }
+
+  function deleteSurvey(bytes32 _name) public
+  {
+    require(_surveyStorage[_name]._addressStorage['owner'] == msg.sender); //only the owner of the survey can delete the survey
+    //delete the survey
+    delete _surveyStorage[_name]._boolStorage['initialized'];
+    for (uint256 i = 0; i < _surveyStorage[_name]._uintStorage['totalParticipated']; i++) {
+      for (uint256 j = 0; j < _surveyStorage[_name]._stringToBytes32ArrayStorage['questions'].length; j++) {
+        delete _surveyStorage[_name]._uintToBytes32ArrayStorage[i][j];
+      }
+      delete _surveyStorage[_name]._uintToBytes32ArrayStorage[i];
+    }
+    delete _surveyStorage[_name]._stringToBytes32ArrayStorage['questions'];
+    delete _surveyStorage[_name]._addressStorage['owner'];
+    delete _surveyStorage[_name]._boolStorage['stoppedStatus'];
+    delete _surveyStorage[_name]._uintStorage['value'];
+    delete _surveyStorage[_name]._uintStorage['maxParticipants'];
+    delete _surveyStorage[_name]._uintStorage['totalParticipated'];
+    for (uint256 i = _surveyStorage[_name]._uintStorage['surveyIndexInAllSurveysArray']; i < _stringToBytes32ArrayStorage['surveys'].length - 1; i++) {
+      _stringToBytes32ArrayStorage['surveys'][i] = _stringToBytes32ArrayStorage['surveys'][i + 1];
+    }
+    _stringToBytes32ArrayStorage['surveys'].pop();
+    delete _surveyStorage[_name]._uintStorage['surveyIndexInAllSurveysArray'];
+    for (uint256 i = _surveyStorage[_name]._uintStorage['surveyIndexInUserCreatedSurveysArray']; i < _userStorage[msg.sender]._stringToBytes32ArrayStorage['surveys'].length - 1; i++) {
+      _userStorage[msg.sender]._stringToBytes32ArrayStorage['surveys'][i] = _userStorage[msg.sender]._stringToBytes32ArrayStorage['surveys'][i + 1];
+    }
+    delete _surveyStorage[_name]._uintStorage['surveyIndexInUserCreatedSurveysArray'];
+    delete _surveyStorage[_name];
   }
 
 }

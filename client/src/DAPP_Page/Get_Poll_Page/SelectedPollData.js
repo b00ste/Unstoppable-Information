@@ -17,6 +17,7 @@ function Data({ storage, setStorage, pollContract }) {
 		});
 		const escaped = ('' + choice.replace(/"/g, '\\"'));
 		const escapedChoice = ('' + `"${escaped}"`);
+		console.log(escapedChoice);
 		pollContract.methods.pollParticipation(storage.selectedPoll, escapedChoice).send({ from: storage.userAddress })
 			.then(() =>
 				setStorage({

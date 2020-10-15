@@ -13,7 +13,7 @@ function GetPollChoices({ storage, setStorage, pollContract }) {
 			.then((newChoices) => {
 				setStorage({
 					...storage,
-					choices: newChoices.replace(/\\"/g, '').replace(/"/g, ''),
+					choices: newChoices.replace(/\\"/g, '').replace(/"/g, '').split(','),
 					loading: false
 				});
 			});
@@ -28,10 +28,11 @@ function GetPollChoices({ storage, setStorage, pollContract }) {
 
 	return (
 		<>
+			<NrOfVotes storage={storage} setStorage={setStorage} pollContract={pollContract} />
 			{
 				storage.choices !== undefined
-					? storage.choices.split(',').map(val =>
-						<p key={uuidv4()}>{val}: <NrOfVotes name={val} storage={storage} setStorage={setStorage} pollContract={pollContract} /></p>
+					? storage.choices.map(val =>
+						<p key={uuidv4()}>{val}: </p>
 					)
 					: ''
 			}

@@ -7,9 +7,10 @@ function GetBalance({ storage, setStorage, tokenContract }) {
 	const getBalance = async () => {
 		setStorage({ ...storage, loading: true });
 		if (web3.utils.isAddress(storage.userAddress)) {
-			tokenContract.methods.balanceOf(storage.userAddress).call().then((newBalance) => {
-				setStorage({ ...storage, balance: newBalance / 10 ** 18, loading: false });
-			})
+			tokenContract.methods.balanceOf(storage.userAddress).call()
+				.then((newBalance) => {
+					setStorage({ ...storage, balance: newBalance / 10 ** 18, loading: false });
+				})
 		}
 	}
 

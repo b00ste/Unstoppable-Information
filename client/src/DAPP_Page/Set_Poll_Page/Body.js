@@ -6,6 +6,11 @@ import Value from './SetValue.js';
 import Participants from './SetParticipants.js';
 import Buttons from './SetButtons.js';
 
+import bigInt from 'big-integer';
+import Web3 from 'web3';
+
+const web3 = new Web3(Web3.givenProvider);
+
 const Container = styled.div`
 	display: flex;
 	flex-wrap: wrap;
@@ -31,12 +36,17 @@ function Body({
 	}
 	const setNewPoll = async () => {
 		setStorage({ ...storage, loading: true });
-		let choices = [];
-		for (var i = 0; i < storage.choices.length; i++) {
-			const escaped = ('' + storage.choices[i]).replace(/"/g, '\\"');
-			choices.push(`"${escaped}"`);
-		}
-		pollContract.methods.setPoll(storage.pollTitle, choices.join(), storage.maxParticipants, storage.value).send({ from: storage.userAddress })
+		const bytes32Chices = [];
+		storage.choices.forEach(choice => {
+			bytes32Chices.push(web3.utils.toHex(choice));
+		});
+		const bytes32Title = web3.utils.toHex(storage.pollTitle);
+		pollContract.methods.setPoll(
+			bytes32Title,
+			bytes32Chices,
+			storage.maxParticipants,
+			bigInt(storage.value).multiply(bigInt(10).pow(18)).toString()
+		).send({ from: storage.userAddress })
 			.then(() => {
 				setStorage({
 					...storage,
@@ -46,7 +56,7 @@ function Body({
 					maxParticipants: undefined,
 					loading: false
 				});
-				for(let i = 0; i < 4; i++){
+				for (let i = 0; i < 4; i++) {
 					document.getElementsByTagName('input')[i].value = '';
 				}
 			})
@@ -59,7 +69,7 @@ function Body({
 					maxParticipants: undefined,
 					loading: false
 				});
-				for(let i = 0; i < 4; i++){
+				for (let i = 0; i < 4; i++) {
 					document.getElementsByTagName('input')[i].value = '';
 				}
 				alert(err.message);

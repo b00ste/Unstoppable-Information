@@ -2,150 +2,118 @@
 
 pragma solidity 0.6.12;
 
-contract Storage
-{
+contract Storage {
   //creating a sruct with all properties of a survey and saving all the properties of a survey in a mapping
   struct Survey
   {
+    mapping (uint256 => bytes32[]) _uintToBytes32ArrayStorage;
+    mapping (string => bytes32[]) _stringToBytes32ArrayStorage;
+    mapping (bytes32 => uint256) _bytes32ToUintStorage;
     mapping (string => uint256) _uintStorage;
     mapping (string => string) _stringStorage;
-    mapping (string => string[]) _stringArrayStorage;
     mapping (string => bool) _boolStorage;
     mapping (string => address) _addressStorage;
     mapping (string => bytes4) _bytesStorage;
   }
-  mapping (string => Survey) internal _surveyStorage;
+  mapping (bytes32 => Survey) internal _surveyStorage;
 
   //creating a sruct with all properties of a poll and saving all the properties of a poll in a mapping
   struct Poll
   {
+    mapping (uint256 => bytes32[]) _uintToBytes32ArrayStorage;
+    mapping (string => bytes32[]) _stringToBytes32ArrayStorage;
+    mapping (bytes32 => uint256) _bytes32ToUintStorage;
     mapping (string => uint256) _uintStorage;
     mapping (string => string) _stringStorage;
-    mapping (string => string[]) _stringArrayStorage;
     mapping (string => bool) _boolStorage;
     mapping (string => address) _addressStorage;
     mapping (string => bytes4) _bytesStorage;
   }
-  mapping (string => Poll) internal _pollStorage;
+  mapping (bytes32 => Poll) internal _pollStorage;
 
   //struct with user properties with a mapping saving info about all users
   struct User
   {
+    mapping (bytes32 => bool) participatedSurveys;
+    mapping (bytes32 => bool) participatedPolls;
+
+    mapping (string => bytes32[]) _stringToBytes32ArrayStorage;
     mapping (string => uint256) _uintStorage;
     mapping (string => string) _stringStorage;
-    mapping (string => string[]) _stringArrayStorage;
     mapping (string => bool) _boolStorage;
     mapping (string => address) _addressStorage;
     mapping (string => bytes4) _bytesStorage;
-
-    mapping (uint256 => string) surevysTitles;
-    mapping (uint256 => string) pollTitles;
   }
   mapping (address => User) internal _userStorage;
 
-  //saving the surveys at which a certain user did participate
-  mapping (address => mapping (string => bool)) internal userParticipatedSurveys;
-
-  //saving the polls at which a certain user did participate
-  mapping (address => mapping (string => bool)) internal userParticipatedPolls;
-
   //setting all possible variables needed in future
+  mapping (string => bytes32[]) internal _stringToBytes32ArrayStorage;
   mapping (string => uint256) internal _uintStorage;
   mapping (string => string) internal _stringStorage;
-  mapping (string => string[]) internal _stringArrayStorage;
   mapping (string => bool) internal _boolStorage;
   mapping (string => address) internal _addressStorage;
   mapping (string => bytes4) internal _bytesStorage;
 
-  //survey properties getters
-  function getSurveyName(uint256 _ofNumber) public view returns(string memory)
-  {
-    return(_stringArrayStorage['surveys'][_ofNumber]);
-  }
-  function getSurveyQuestions(string memory _name) public view returns(string memory)
-  {
-    return(_surveyStorage[_name]._stringStorage['questions']);
-  }
-  function getSurveyParticipantsAllowed(string memory _name) public view returns(uint256)
-  {
-    return(_surveyStorage[_name]._uintStorage['participantsAllowed']);
-  }
-  function getSurveyTotalParticipants(string memory _name) public view returns(uint256)
-  {
-    return(_surveyStorage[_name]._uintStorage['totalParticipated']);
-  }
-  function getSurveyAnswers(string memory _name, uint256 _ofNumber) public view returns(string memory)
-  {
-    return(_surveyStorage[_name]._stringArrayStorage['answers'][_ofNumber]);
-  }
-  function getSurveyValue(string memory _name) public view returns(uint256)
-  {
-    return(_surveyStorage[_name]._uintStorage['value']);
-  }
-  function getSurveyStoppedStatus(string memory _name) public view returns(bool)
-  {
-    return(_surveyStorage[_name]._boolStorage['stoppedStatus']);
-  }
-  function getSurveyOwner(string memory _name) public view returns(address)
-  {
-    return(_surveyStorage[_name]._addressStorage['surveyOwner']);
+  //getters for variables
+  function getStringToBytes32ArrayStorrage(string memory _arrayName) public view returns(bytes32[] memory) {
+    return (_stringToBytes32ArrayStorage[_arrayName]);
   }
 
-  //poll properties getters
-  function getPollName(uint256 _ofNumber) public view returns(string memory)
-  {
-    return(_stringArrayStorage['polls'][_ofNumber]);
+  //getters for surveys
+  function getSurveyUintStorage(bytes32 _surveyName, string memory _variableName) public view returns(uint) {
+    return (_surveyStorage[_surveyName]._uintStorage[_variableName]);
   }
-  function getPollChoices(string memory _name) public view returns(string memory)
-  {
-    return(_pollStorage[_name]._stringStorage['choices']);
+  function getSurveyStringStorage(bytes32 _surveyName, string memory _variableName) public view returns(string memory) {
+    return (_surveyStorage[_surveyName]._stringStorage[_variableName]);
   }
-  function getPollParticipantsAllowed(string memory _name) public view returns(uint256)
-  {
-    return(_pollStorage[_name]._uintStorage['participantsAllowed']);
+  function getSurveyBoolStorage(bytes32 _surveyName, string memory _variableName) public view returns(bool) {
+    return (_surveyStorage[_surveyName]._boolStorage[_variableName]);
   }
-  function getPollTotalParticipants(string memory _name) public view returns(uint256)
-  {
-    return(_pollStorage[_name]._uintStorage['totalParticipated']);
+  function getSurveyAddressStorage(bytes32 _surveyName, string memory _variableName) public view returns(address) {
+    return (_surveyStorage[_surveyName]._addressStorage[_variableName]);
   }
-  function getPollChoiceVotes(string memory _name, string memory _choice) public view returns(uint256)
-  {
-    return(_pollStorage[_name]._uintStorage[_choice]);
+  function getSurveyStringToBytes32ArrayStorage(bytes32 _surveyName, string memory _variableName) public view returns(bytes32[] memory) {
+    return (_surveyStorage[_surveyName]._stringToBytes32ArrayStorage[_variableName]);
   }
-  function getPollValue(string memory _name) public view returns(uint256)
-  {
-    return(_pollStorage[_name]._uintStorage['value']);
+  function getSurveyUintToBytes32ArrayStorage(bytes32 _surveyName, uint256 _variableNumber) public view returns(bytes32[] memory) {
+    return (_surveyStorage[_surveyName]._uintToBytes32ArrayStorage[_variableNumber]);
   }
-  function getPollStoppedStatus(string memory _name) public view returns(bool)
-  {
-    return(_pollStorage[_name]._boolStorage['stoppedStatus']);
-  }
-  function getPollOwner(string memory _name) public view returns(address)
-  {
-    return(_pollStorage[_name]._addressStorage['pollOwner']);
+  function getSurveyBytes32UintStorage(bytes32 _surveyName, bytes32 _variableName) public view returns(uint) {
+    return (_surveyStorage[_surveyName]._bytes32ToUintStorage[_variableName]);
   }
 
-  //storage getters
-  function getUintStorage(string memory _valueName) public view returns(uint256)
-  {
-    return(_uintStorage[_valueName]);
+  //getters for polls
+  function getPollUintStorage(bytes32 _pollName, string memory _variableName) public view returns(uint) {
+    return (_pollStorage[_pollName]._uintStorage[_variableName]);
+  }
+  function getPollStringStorage(bytes32 _pollName, string memory _variableName) public view returns(string memory) {
+    return (_pollStorage[_pollName]._stringStorage[_variableName]);
+  }
+  function getPollBoolStorage(bytes32 _pollName, string memory _variableName) public view returns(bool) {
+    return (_pollStorage[_pollName]._boolStorage[_variableName]);
+  }
+  function getPollAddressStorage(bytes32 _pollName, string memory _variableName) public view returns(address) {
+    return (_pollStorage[_pollName]._addressStorage[_variableName]);
+  }
+  function getPollStringToBytes32ArrayStorage(bytes32 _pollName, string memory _variableName) public view returns(bytes32[] memory) {
+    return (_pollStorage[_pollName]._stringToBytes32ArrayStorage[_variableName]);
+  }
+  function getPollUintToBytes32ArrayStorage(bytes32 _pollName, uint256 _variableNumber) public view returns(bytes32[] memory) {
+    return (_pollStorage[_pollName]._uintToBytes32ArrayStorage[_variableNumber]);
+  }
+  function getPollBytes32UintStorage(bytes32 _pollName, bytes32 _variableName) public view returns(uint) {
+    return (_pollStorage[_pollName]._bytes32ToUintStorage[_variableName]);
   }
 
-  //user properties getteres
-  function getUserCreatedSurveys() public view returns(uint256)
-  {
-    return(_userStorage[msg.sender]._uintStorage['surveysCreated']);
+  //getters for user
+  function getUserStringToBytes32ArrayStorage(string memory _variableName) public view returns(bytes32[] memory) {
+    return (_userStorage[msg.sender]._stringToBytes32ArrayStorage[_variableName]);
   }
-  function getUserNumberOfSurveys(uint256 _index) public view returns(string memory)
-  {
-    return(_userStorage[msg.sender].surevysTitles[_index]);
+  function getUserParticipatedSurveyStatus(bytes32 _surveyName) public view returns(bool) {
+    return (_userStorage[msg.sender].participatedSurveys[_surveyName]);
   }
-  function getUserCreatedPolls() public view returns(uint256)
-  {
-    return(_userStorage[msg.sender]._uintStorage['pollsCreated']);
+  function getUserParticipatedPollStatus(bytes32 _pollName) public view returns(bool) {
+    return (_userStorage[msg.sender].participatedPolls[_pollName]);
   }
-  function getUserNumberOfPolls(uint256 _index) public view returns(string memory)
-  {
-    return(_userStorage[msg.sender].pollTitles[_index]);
-  }
+
 }

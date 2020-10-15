@@ -9,7 +9,7 @@ contract Token is ERC777, Ownable
 {
   constructor(uint256 initialSupply, address[] memory defaultOperators)
     public
-    ERC777("SurveyToken", "SVT", defaultOperators)
+    ERC777("Unstopable Information", "UFO", defaultOperators)
   {
     _mint(msg.sender, initialSupply * 10 ** 18, "", "");
   }

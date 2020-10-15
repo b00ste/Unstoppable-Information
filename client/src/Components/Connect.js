@@ -39,14 +39,7 @@ const SurveyMask = styled.div`
 
 function Connect({ storage, setStorage }) {
 	const _connect = async () => {
-		window.ethereum.request({ method: 'eth_requestAccounts' })
-			.then((accounts) => {
-				setStorage({
-					...storage,
-					userAddress: accounts[0],
-					connected: true
-				});
-			});
+		await window.ethereum.request({ method: 'eth_requestAccounts' });
 	}
 
 	let connect;
@@ -63,29 +56,51 @@ function Connect({ storage, setStorage }) {
 	}
 
 	useEffect(() => {
-		if (storage.userAddress === undefined) {
-			window.ethereum.send('eth_accounts')
-				.then((res) => {
-					if (res.result[0] !== undefined) {
-						setStorage({
-							...storage,
-							userAddress: res.result[0],
-							loading: false
-						});
+		if (typeof window.ethereum !== 'undefined'
+			|| (typeof window.web3 !== 'undefined')) {
+			if (storage.userAddress === undefined) {
+				setStorage({ ...storage, connected: false, provider: window.ethereum })
+				window.ethereum.send('eth_accounts')
+					.then((res) => {
+						if (res.result[0] !== undefined) {
+							setStorage({
+								...storage,
+								userAddress: res.result[0],
+								loading: false,
+								connected: true
+							});
+						}
+						else {
+							setStorage({ ...storage, connected: false });
+						}
 					}
-					else {
-						setStorage({ ...storage, connected: false });
-					}
-				}
-				).catch((err) => {
-					if (err.code === 4100) {
-						console.log('Please connect to MetaMask.')
-					} else {
-						console.error(err)
-					}
-				});
+					).catch((err) => {
+						if (err.code === 4100) {
+							console.log('Please connect to MetaMask.')
+						} else {
+							console.error(err)
+						}
+					});
+			}
+
+			const provider = window.ethereum;
+			console.log(provider);
+
+			provider.on('accountsChanged', function (accounts) {
+				console.log("accounts changed");
+				setStorage({ ...storage, userAddress: accounts[0] });
+				console.log(accounts[0]);
+			});
+
+			provider.on('chainChanged', function (chain) {
+				console.log('chain changed');
+				console.log(chain);
+			});
 		}
-	});
+		else {
+			console.log('MetaMask is not installed!');
+		}
+	}, [window['ethereum']]);
 
 	return (
 		<>

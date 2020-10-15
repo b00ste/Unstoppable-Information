@@ -113,10 +113,10 @@ function Header({ storage, setStorage, tokenContract }) {
 	}
 
 	let loadingDiv;
-	if (storage.loading && !storage.showSurvey) {
+	if (/*storage.loading && !storage.showSurvey*/true) {
 		loadingDiv =
-			<div className="progress">
-				<div className="progress-bar progress-bar-striped progress-bar-animated bg-info" style={{ width: "100%" }}></div>
+			<div className="progress-bar">
+				<span style={{ width: "100%" }}></span>
 			</div>
 	}
 	else {
@@ -168,14 +168,16 @@ function Header({ storage, setStorage, tokenContract }) {
 	}
 
 	return (
-		<HeaderStyle className="header" showResizedNav={storage.showResizedNav}>
-			<div className="brand">
-				<Link className="change-color-on-hover nav-link" to="/" style={{ color: "#fdfcfa" }}>Unstopable information</Link>
-			</div>
-			{nav}
-			{resizedNav}
+		<div>
+			<HeaderStyle className="header" showResizedNav={storage.showResizedNav}>
+				<div className="brand">
+					<Link className="change-color-on-hover nav-link" to="/" style={{ color: "#fdfcfa" }}>Unstopable information</Link>
+				</div>
+				{nav}
+				{resizedNav}
+			</HeaderStyle>
 			{loadingDiv}
-		</HeaderStyle>
+		</div>
 	);
 }
 

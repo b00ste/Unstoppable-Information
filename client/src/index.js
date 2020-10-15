@@ -5,11 +5,11 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 import './Components/Icons';
-import Background from './Components/Styling'
+import Styling from './Components/Styling.js';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Background />
+    <Styling />
     <App />
   </React.StrictMode>,
   document.getElementById('root')

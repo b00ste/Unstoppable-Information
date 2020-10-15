@@ -1,10 +1,10 @@
-import React from 'react'
+import React from 'react';
 import Choices from './GetChoices';
 
 function Data({ storage, setStorage, pollContract }) {
 	return (
 		<>
-			<Choices 
+			<Choices
 				storage={storage}
 				setStorage={setStorage}
 				pollContract={pollContract}
