@@ -1,18 +1,24 @@
 import React, { useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import Web3 from 'web3';
+const web3 = new Web3(Web3.givenProvider);
 
 function GetQuestions({ storage, setStorage, updateAnswers, surveysContract }) {
 
 	const getSurveyQuestions = async () => {
 		setStorage({
 			...storage,
-			loading: true 
+			loading: true
 		});
-		let newQuestions = await surveysContract.methods.getSurveyQuestions(storage.selectedSurvey).call({ from: storage.userAddress });
+		const newBytes32Questions = await surveysContract.methods.getSurveyStringToBytes32ArrayStorage(web3.utils.asciiToHex(storage.selectedSurvey), 'questions').call();
+		const newStringQuestions = [];
+		newBytes32Questions.forEach(question => {
+			newStringQuestions.push(web3.utils.hexToUtf8(question));
+		});
 		setStorage({
 			...storage,
 			loading: false,
-			questions: newQuestions.replace(/\\"/g, '').replace(/"/g, '')
+			questions: newStringQuestions
 		});
 	}
 
@@ -27,11 +33,11 @@ function GetQuestions({ storage, setStorage, updateAnswers, surveysContract }) {
 
 			{
 				storage.questions !== undefined ?
-					storage.questions.split(',')
+					storage.questions
 						.map((val) =>
 							<React.Fragment key={uuidv4()}>
 								<p>{val}</p>
-								<input type="text" className="form-control" name={val} placeholder="Your Answer" onChange={updateAnswers} />
+								<input type="text" name={val} placeholder="Your Answer" onChange={updateAnswers} />
 							</React.Fragment>
 						)
 					: <></>

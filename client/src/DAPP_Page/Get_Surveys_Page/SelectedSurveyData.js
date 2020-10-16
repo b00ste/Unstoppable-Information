@@ -1,5 +1,7 @@
 import React from 'react';
 import Questions from './GetQuestions';
+import Web3 from 'web3';
+const web3 = new Web3(Web3.givenProvider);
 
 function Data({ storage, setStorage, surveysContract }) {
 
@@ -15,15 +17,16 @@ function Data({ storage, setStorage, surveysContract }) {
 			...storage,
 			loading: true,
 		});
-		let questions = storage.questions.split(',');
-		let answer = [];
-		for (var i = 0; i < questions.length; i++) {
-			const escaped = ('' + newAnswers[questions[i]]).replace(/"/g, '\\"');
-			console.log(escaped);
-			answer.push(`"${escaped}"`);
-		}
-		console.log(answer.join());
-		await surveysContract.methods.surveyParticipation(storage.selectedSurvey, answer.join()).send({ from: storage.userAddress })
+		let bytes32Answers = [];
+		storage.questions.forEach(question => {
+			const stringAnswer = newAnswers[question];
+			console.log(stringAnswer);
+			const bytes32Answer = web3.utils.asciiToHex(stringAnswer);
+			console.log(bytes32Answer);
+			bytes32Answers.push(bytes32Answer);
+		});
+		console.log(bytes32Answers);
+		await surveysContract.methods.surveyParticipation(web3.utils.asciiToHex(storage.selectedSurvey), bytes32Answers).send({ from: storage.userAddress })
 			.then(() =>
 				setStorage({
 					...storage,

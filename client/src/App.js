@@ -14,13 +14,13 @@ import token from './contracts/Token.json';
 
 const web3 = new Web3(Web3.givenProvider);
 
-const tokenAddress = '0x4eC6500ec08DdD7200774Ee6d6701A131E5D2911';
+const tokenAddress = '0x9F668FaeA6ef654279A7d4e8Cd545cD85A0FE845';
 const tokenContract = new web3.eth.Contract(token.abi, tokenAddress);
 
-const surveysAddress = '0xB06936eB744ddC8653a5c2b2D742cDe33363eb0c';
+const surveysAddress = '0x1bF57A4cB06fD0f759cb4dcB7c9D00526dfbcBe4';
 const surveysContract = new web3.eth.Contract(surveyFunc.abi, surveysAddress);
 
-const pollAddress = '0x9a7e625aC7393Ec5203F3A71D08E577b7C01C50b';
+const pollAddress = '0xF07d94D4e395EA9039FB1fFe4d28477a9a00bE1B';
 const pollContract = new web3.eth.Contract(pollFunc.abi, pollAddress);
 
 function App() {

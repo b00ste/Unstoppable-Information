@@ -87,16 +87,16 @@ contract SurveyFunc is Storage, Ownable
 
   function surveyParticipation(bytes32 _name, bytes32[] memory _answers) public
   {
-    require(!_surveyStorage[_name]._boolStorage['stoppedStatus']); //require that the survey is still active
-    require(!_userStorage[msg.sender].participatedSurveys[_name]); //require that the user did not participate at this survey
-    require(_surveyStorage[_name]._addressStorage['owner'] != msg.sender); //the owner cannot participate at his survey
+    require(!_surveyStorage[_name]._boolStorage['stoppedStatus'], "This survey is no longer active"); //require that the survey is still active
+    require(!_userStorage[msg.sender].participatedSurveys[_name], "You already did participate once at this survey"); //require that the user did not participate at this survey
+    require(_surveyStorage[_name]._addressStorage['owner'] != msg.sender, "You are the owner of this survey, you cannot participate"); //the owner cannot participate at his survey
     _userStorage[msg.sender].participatedSurveys[_name] = true; //set participation
-    _surveyStorage[_name]._uintStorage['totalParticipated']++; //increase participants
+    _surveyStorage[_name]._uintStorage['totalParticipated'] ++; //increase participants
     if(_surveyStorage[_name]._uintStorage['maxParticipants'] == _surveyStorage[_name]._uintStorage['totalParticipated']) {
       _surveyStorage[_name]._boolStorage['stoppedStatus'] = true; //if max participants number is reached, stop the survey
     }
     _surveyStorage[_name]._uintToBytes32ArrayStorage[(_surveyStorage[_name]._uintStorage['totalParticipated'] - 1)] = _answers; //add new answers
-    uint256 _dappCreatorsReward = (_surveyStorage[_name]._uintStorage['value'] / _surveyStorage[_name]._uintStorage['participantsAllowed'])/10;
+    uint256 _dappCreatorsReward = (_surveyStorage[_name]._uintStorage['value'] / _surveyStorage[_name]._uintStorage['maxParticipants'])/10;
     _token.operatorSend(address(this), Ownable.owner(), _dappCreatorsReward, '', ''); //send rewards to owner
     _token.operatorSend(address(this), msg.sender, _dappCreatorsReward * 9, '', ''); //send bounty to participants
   }

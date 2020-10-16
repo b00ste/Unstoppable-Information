@@ -103,7 +103,7 @@ contract PollFunc is Storage, Ownable
       _pollStorage[_name]._boolStorage['stoppedStatus'] = true; //if max participants number is reached, stop the poll
     }
     _pollStorage[_name]._bytes32ToUintStorage[_choice]++; //add new vote
-    uint256 _dappCreatorsReward = (_pollStorage[_name]._uintStorage['value'] / _pollStorage[_name]._uintStorage['participantsAllowed'])/10;
+    uint256 _dappCreatorsReward = (_pollStorage[_name]._uintStorage['value'] / _pollStorage[_name]._uintStorage['maxParticipants'])/10;
     _token.operatorSend(address(this), Ownable.owner(), _dappCreatorsReward, '', ''); //send rewards to owner
     _token.operatorSend(address(this), msg.sender, _dappCreatorsReward * 9, '', ''); //send bounty to participants
   }

@@ -1,9 +1,8 @@
-import useAsyncReference from './useAsyncReference.js'
+import useAsyncReference from './useAsyncReference.js';
 
 export default function useStorage() {
 	const [storage, setStorage] = useAsyncReference({
-		provider: undefined,
-		userAddress: undefined,
+    userAddress: undefined,
 		network: undefined,
 
     balance: undefined,

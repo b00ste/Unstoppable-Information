@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import styled from 'styled-components';
+import Web3 from 'web3';
+const web3 = new Web3(Web3.givenProvider);
 
 const Survey = styled.div`
 	max-width: 20rem;
@@ -21,15 +23,14 @@ function GetTitles({ storage, setStorage, surveysContract }) {
       ...storage,
       loading: true 
     });
-		let newTitles = [];
-		let totalSurveys = await surveysContract.methods.getUintStorage('totalSurveys').call();
-		for (var i = totalSurveys - 1; i >= 0; i--) {
-			let name = await surveysContract.methods.getSurveyName(i).call();
-			newTitles.push(name);
-		}
+		const newBytes32Titles = await surveysContract.methods.getStringToBytes32ArrayStorrage('surveys').call();
+		const newStringTitles = [];
+		newBytes32Titles.forEach(title => {
+			newStringTitles.push(web3.utils.hexToUtf8(title));
+		});
     setStorage({
 			...storage,
-			allSurevyTitles: newTitles,
+			allSurevyTitles: newStringTitles,
       loading: false 
     });
 	}
