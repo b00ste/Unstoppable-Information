@@ -1,7 +1,12 @@
 import useAsyncReference from './useAsyncReference.js';
+import bigInteger from 'big-integer';
+import Web3 from 'web3';
+const web3 = new Web3(Web3.givenProvider);
 
 export default function useStorage() {
 	const [storage, setStorage] = useAsyncReference({
+    utils: web3.utils,
+    bigInt: bigInteger,
     userAddress: undefined,
 		network: undefined,
 

@@ -47,7 +47,7 @@ function Data({ storage, setStorage, surveysContract }) {
 				updateAnswers={updateAnswers}
 				surveysContract={surveysContract}
 			/>
-			<button type="button" className="btn btn-primary" onClick={sendAnswer}>Submit</button>
+			<button type="button" onClick={sendAnswer}>Submit</button>
 		</>
 	);
 }

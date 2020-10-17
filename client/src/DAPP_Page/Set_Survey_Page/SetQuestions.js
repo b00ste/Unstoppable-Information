@@ -50,7 +50,7 @@ function Questions({ storage, setStorage }) {
           <input type="text" placeholder="Questions" onChange={saveNewQuestionValue} />
         </div>
         <div className="button">
-          <button onClick={addNewQuestion}>
+          <button type="button" onClick={addNewQuestion}>
             Save new questions
           </button>
         </div>

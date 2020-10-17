@@ -103,7 +103,7 @@ contract SurveyFunc is Storage, Ownable
 
   function deleteSurvey(bytes32 _name) public
   {
-    require(_surveyStorage[_name]._addressStorage['owner'] == msg.sender); //only the owner of the survey can delete the survey
+    require(_surveyStorage[_name]._addressStorage['owner'] == msg.sender, "You are not the owner of this survey! You cannot delete it!"); //only the owner of the survey can delete the survey
     //delete the survey
     delete _surveyStorage[_name]._boolStorage['initialized'];
     for (uint256 i = 0; i < _surveyStorage[_name]._uintStorage['totalParticipated']; i++) {

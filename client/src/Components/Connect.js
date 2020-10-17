@@ -50,7 +50,7 @@ function Connect({ storage, setStorage }) {
 				<p>In order for you to use this app, you need to connect to your ethereum wallet through metamask.</p>
 				<p>By using our app you agree that any information you submit is public information and anyone can use it for or against you.</p>
 				<p>We are not responsible for the misuse of the informations you provide our app.</p>
-				<button type="button" className="btn btn-info" onClick={_connect}>Connect</button>
+				<button type="button" onClick={_connect}>Connect</button>
 			</Survey>
 		connectMask = <SurveyMask></SurveyMask>
 	}

@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import Web3 from 'web3';
-const web3 = new Web3(Web3.givenProvider);
 
 function GetQuestions({ storage, setStorage, updateAnswers, surveysContract }) {
 
@@ -10,10 +8,10 @@ function GetQuestions({ storage, setStorage, updateAnswers, surveysContract }) {
 			...storage,
 			loading: true
 		});
-		const newBytes32Questions = await surveysContract.methods.getSurveyStringToBytes32ArrayStorage(web3.utils.asciiToHex(storage.selectedSurvey), 'questions').call();
+		const newBytes32Questions = await surveysContract.methods.getSurveyStringToBytes32ArrayStorage(storage.utils.asciiToHex(storage.selectedSurvey), 'questions').call();
 		const newStringQuestions = [];
 		newBytes32Questions.forEach(question => {
-			newStringQuestions.push(web3.utils.hexToUtf8(question));
+			newStringQuestions.push(storage.utils.hexToUtf8(question));
 		});
 		setStorage({
 			...storage,

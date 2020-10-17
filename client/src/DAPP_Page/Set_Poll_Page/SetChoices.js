@@ -50,7 +50,7 @@ function Choices({ storage, setStorage }) {
           <input type="text" className="form-control" placeholder="Choices" onChange={saveNewChoiceValue} />
         </div>
         <div className="button">
-          <button onClick={addNewChoice}>
+          <button type="button" onClick={addNewChoice}>
             Save new choices
           </button>
         </div>

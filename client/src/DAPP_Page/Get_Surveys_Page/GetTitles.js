@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import styled from 'styled-components';
-import Web3 from 'web3';
-const web3 = new Web3(Web3.givenProvider);
 
 const Survey = styled.div`
 	max-width: 20rem;
@@ -26,7 +24,7 @@ function GetTitles({ storage, setStorage, surveysContract }) {
 		const newBytes32Titles = await surveysContract.methods.getStringToBytes32ArrayStorrage('surveys').call();
 		const newStringTitles = [];
 		newBytes32Titles.forEach(title => {
-			newStringTitles.push(web3.utils.hexToUtf8(title));
+			newStringTitles.push(storage.utils.hexToUtf8(title));
 		});
     setStorage({
 			...storage,
@@ -50,6 +48,7 @@ function GetTitles({ storage, setStorage, surveysContract }) {
 							<Survey key={uuidv4()} className="card-default">
 									<h4>{val}</h4>
 									<button
+										type="button"
 										onClick={() => {
 											setStorage({
 												...storage,

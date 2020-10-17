@@ -6,11 +6,6 @@ import Value from './SetValue.js';
 import Participants from './SetParticipants.js';
 import Buttons from './SetButtons.js';
 
-import bigInt from 'big-integer';
-import Web3 from 'web3';
-
-const web3 = new Web3(Web3.givenProvider);
-
 const Container = styled.div`
 	display: flex;
 	flex-wrap: wrap;
@@ -38,15 +33,15 @@ function Body({
 		setStorage({ ...storage, loading: true });
 		const bytes32Questions = [];
 		storage.questions.forEach(question => {
-			bytes32Questions.push(web3.utils.toHex(question));
+			bytes32Questions.push(storage.utils.toHex(question));
 		});
-		const bytes32Title = web3.utils.toHex(storage.surveyTitle);
+		const bytes32Title = storage.utils.toHex(storage.surveyTitle);
 		surveysContract.methods.setSurvey(
-				bytes32Title,
-				bytes32Questions,
-				storage.maxParticipants,
-				bigInt(storage.value).multiply(bigInt(10).pow(18)).toString()
-			).send({ from: storage.userAddress })
+			bytes32Title,
+			bytes32Questions,
+			storage.maxParticipants,
+			storage.bigInt(storage.value).multiply(storage.bigInt(10).pow(18)).toString()
+		).send({ from: storage.userAddress })
 			.then(() => {
 				setStorage({
 					...storage,

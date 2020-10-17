@@ -26,7 +26,7 @@ function SetButtons({
 	let approveButton;
 	if (!storage.pollContractApproved) {
 		approveButton =
-			<button onClick={approve}>
+			<button type="button" onClick={approve}>
 				Approve
 			</button>
 	}
@@ -37,7 +37,7 @@ function SetButtons({
 	return (
 		<>
 			{approveButton}
-			<button onClick={setNewPoll}>
+			<button type="button" onClick={setNewPoll}>
 				Let's go
 			</button>
 		</>

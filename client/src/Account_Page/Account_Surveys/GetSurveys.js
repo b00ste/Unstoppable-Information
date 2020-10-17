@@ -33,15 +33,15 @@ function GetUserSurveys({ storage, setStorage, surveysContract }) {
 			...storage,
 			loading: true
 		});
-		const newNrOfUserSurveys = await surveysContract.methods.getUserCreatedSurveys().call({ from: storage.userAddress });
-		const newTitles = [];
-		for (let i = newNrOfUserSurveys - 1; i >= 0; i--) {
-			newTitles.push(await surveysContract.methods.getUserNumberOfSurveys(i).call({ from: storage.userAddress }));
-		}
+		const newBytes32Titles = await surveysContract.methods.getUserStringToBytes32ArrayStorage('surveys').call({ from: storage.userAddress });
+		const newStringTitles = [];
+		newBytes32Titles.forEach(title => {
+			newStringTitles.push(storage.utils.hexToUtf8(title));
+		});
 		setStorage({
 			...storage,
-			nrOfUserSurveys: newNrOfUserSurveys,
-			userSurveyTitles: newTitles,
+			nrOfUserSurveys: newStringTitles.length,
+			userSurveyTitles: newStringTitles,
 			loading: false
 		});
 	}
@@ -69,7 +69,6 @@ function GetUserSurveys({ storage, setStorage, surveysContract }) {
 									<h4>{val}</h4>
 									<button
 										type="button"
-										className="btn btn-secondary"
 										onClick={() => {
 											setStorage({
 												...storage,

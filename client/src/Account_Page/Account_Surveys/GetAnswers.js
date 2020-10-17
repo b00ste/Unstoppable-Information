@@ -8,15 +8,19 @@ function GetSurveyAnswers({ storage, setStorage, surveysContract }) {
 			...storage,
 			loading: true
 		});
-		let newAnswers = [];
-		let surveyTotalParticipants = await surveysContract.methods.getSurveyTotalParticipants(storage.selectedSurvey).call({ from: storage.userAddress });
+		let surveyTotalParticipants = await surveysContract.methods.getSurveyUintStorage(storage.utils.asciiToHex(storage.selectedSurvey), 'totalParticipated').call();
+		let newStringAnswers = [];
 		for (let i = 0; i < surveyTotalParticipants; i++) {
-			let surveyAnswer = await surveysContract.methods.getSurveyAnswers(storage.selectedSurvey, i).call({ from: storage.userAddress });
-			newAnswers.push(surveyAnswer.replace(/\\"/g, ''));
+			const newBytes32OneUserAnswers = await surveysContract.methods.getSurveyUintToBytes32ArrayStorage(storage.utils.asciiToHex(storage.selectedSurvey), i).call();
+			newStringAnswers[i] = [];
+			newBytes32OneUserAnswers.forEach(oneUserAnswer => {
+				newStringAnswers[i].push(storage.utils.hexToUtf8(oneUserAnswer));
+			});
 		}
+		console.log(newStringAnswers);
 		setStorage({
 			...storage,
-			answers: newAnswers,
+			answers: newStringAnswers,
 			loading: false
 		});
 	}
@@ -32,10 +36,10 @@ function GetSurveyAnswers({ storage, setStorage, surveysContract }) {
 			{
 				storage.answers !== undefined
 					? storage.answers.map(val1 =>
-						<tr className="table-light" key={uuidv4()}>
+						<tr key={uuidv4()}>
 							{
-								val1.split('","').map(val2 =>
-									<th scope="col" key={uuidv4()}>{val2.replace(/"/g, '')}</th>
+								val1.map(val2 =>
+									<th scope="col" key={uuidv4()}>{val2}</th>
 								)
 							}
 						</tr>

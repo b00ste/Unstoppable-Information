@@ -26,7 +26,7 @@ function SetButtons({
 	let approveButton;
 	if (!storage.surveyContractApproved) {
 		approveButton =
-			<button onClick={approve}>
+			<button type="button" onClick={approve}>
 				Approve
 			</button>
 	}
@@ -37,7 +37,7 @@ function SetButtons({
 	return (
 		<>
 			{approveButton}
-			<button onClick={sendToBC}>
+			<button type="button" onClick={sendToBC}>
 				Let's go
 			</button>
 		</>

@@ -55,8 +55,8 @@ function ExportData({ answers, questions, selectedSurvey }) {
 
 	return (
 		<>
-			<Button type="button" className="btn btn-success" onClick={exportJSON}>Export JSON</Button>
-			<Button type="button" className="btn btn-success" onClick={exportCSV}>Export CSV</Button>
+			<Button type="button" onClick={exportJSON}>Export JSON</Button>
+			<Button type="button" onClick={exportCSV}>Export CSV</Button>
 		</>
 	);
 }

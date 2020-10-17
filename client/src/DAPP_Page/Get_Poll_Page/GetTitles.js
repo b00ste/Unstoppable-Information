@@ -49,6 +49,7 @@ function GetTitles({ storage, setStorage, pollContract }) {
 							<Survey key={uuidv4()} className="card-default">
 									<h4>{val}</h4>
 									<button
+										type="button"
 										onClick={() => {
 											setStorage({
 												...storage,

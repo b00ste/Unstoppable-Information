@@ -39,7 +39,7 @@ function Data({ storage, setStorage, pollContract }) {
 				updateAnswers={updateAnswers}
 				pollContract={pollContract}
 			/>
-			<button onClick={sendAnswer}>Submit</button>
+			<button type="button" onClick={sendAnswer}>Submit</button>
 		</>
 	);
 }
