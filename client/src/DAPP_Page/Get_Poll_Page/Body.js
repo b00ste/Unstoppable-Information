@@ -40,7 +40,7 @@ function Body({ storage, setStorage, pollContract }) {
 								showPoll: false,
 								selectedPoll: undefined,
 								choices: undefined,
-								answers: undefined
+								choice: undefined
 							});
 						}
 					}

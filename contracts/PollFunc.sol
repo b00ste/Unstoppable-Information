@@ -87,9 +87,9 @@ contract PollFunc is Storage, Ownable
 
   function pollParticipation(bytes32 _name, bytes32 _choice) public
   {
-    require(!_pollStorage[_name]._boolStorage['stoppedStatus']); //require that the poll is still active
-    require(!_userStorage[msg.sender].participatedPolls[_name]); //require that the user did not participate at this poll
-    require(_pollStorage[_name]._addressStorage['owner'] != msg.sender); //the owner cannot participate at his poll
+    require(!_pollStorage[_name]._boolStorage['stoppedStatus'], "This poll is no longer active"); //require that the poll is still active
+    require(!_userStorage[msg.sender].participatedPolls[_name], "You already did participate once at this poll"); //require that the user did not participate at this poll
+    require(_pollStorage[_name]._addressStorage['owner'] != msg.sender, "You are the owner of this poll, you cannot participate"); //the owner cannot participate at his poll
     bool found = false;
     for(uint i = 0; !found && i < _pollStorage[_name]._stringToBytes32ArrayStorage['choices'].length; i++) {
       if(_pollStorage[_name]._stringToBytes32ArrayStorage['choices'][i] == _choice) {
@@ -110,7 +110,7 @@ contract PollFunc is Storage, Ownable
 
   function deletePoll(bytes32 _name) public
   {
-    require(_pollStorage[_name]._addressStorage['owner'] == msg.sender); //only the owner of the poll can delete the poll
+    require(_pollStorage[_name]._addressStorage['owner'] == msg.sender, "You are not the owner of this poll! You cannot delete it!"); //only the owner of the poll can delete the poll
     //delete the poll
     delete _pollStorage[_name]._boolStorage['initialized'];
     for(uint256 i = 0; i < _pollStorage[_name]._stringToBytes32ArrayStorage['choices'].length; i++) {

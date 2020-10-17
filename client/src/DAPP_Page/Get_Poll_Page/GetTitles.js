@@ -21,15 +21,14 @@ function GetTitles({ storage, setStorage, pollContract }) {
       ...storage,
       loading: true 
     });
-		let newTitles = [];
-		let totalSurveys = await pollContract.methods.getUintStorage('totalPolls').call();
-		for (var i = totalSurveys - 1; i >= 0; i--) {
-			let name = await pollContract.methods.getPollName(i).call();
-			newTitles.push(name);
-		}
+		let newBytes32Titles = await pollContract.methods.getStringToBytes32ArrayStorrage('polls').call();
+		let newStringTitles = [];
+		newBytes32Titles.forEach(title => {
+			newStringTitles.push(storage.utils.hexToUtf8(title));
+		});
     setStorage({
 			...storage,
-			allPollTitles: newTitles,
+			allPollTitles: newStringTitles,
       loading: false 
     });
 	}

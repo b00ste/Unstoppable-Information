@@ -1,13 +1,7 @@
 import React from 'react';
-import Questions from './GetChoices';
+import Choices from './GetChoices';
 
 function Data({ storage, setStorage, pollContract }) {
-
-	let choice;
-	const updateAnswers = (event) => {
-		event.stopPropagation();
-		choice = event.target.value;
-	}
 
 	const sendAnswer = async (event) => {
 		event.preventDefault();
@@ -15,17 +9,14 @@ function Data({ storage, setStorage, pollContract }) {
 			...storage,
 			loading: true,
 		});
-		const escaped = ('' + choice.replace(/"/g, '\\"'));
-		const escapedChoice = ('' + `"${escaped}"`);
-		console.log(escapedChoice);
-		pollContract.methods.pollParticipation(storage.selectedPoll, escapedChoice).send({ from: storage.userAddress })
+		pollContract.methods.pollParticipation(storage.utils.asciiToHex(storage.selectedPoll), storage.utils.asciiToHex(storage.choice)).send({ from: storage.userAddress })
 			.then(() =>
 				setStorage({
 					...storage,
-					choice: undefined,
 					showPoll: false,
 					selectedPoll: undefined,
 					choices: undefined,
+					choice: undefined,
 					loading: false
 				})
 			);
@@ -33,10 +24,9 @@ function Data({ storage, setStorage, pollContract }) {
 
 	return (
 		<>
-			<Questions
+			<Choices
 				storage={storage}
 				setStorage={setStorage}
-				updateAnswers={updateAnswers}
 				pollContract={pollContract}
 			/>
 			<button type="button" onClick={sendAnswer}>Submit</button>

@@ -8,20 +8,24 @@ const Survey = styled.div`
 	top: 50%;
 	transform: translate(-50%, -50%);
 
-	background-color #20bf55;
-	background-image linear-gradient(315deg, #20bf55 0%, #01baef 74%);
+	background-color: #3EECAC;
+	background-image: linear-gradient(19deg, #3EECAC 0%, #EE74E1 100%);
 
 	box-shadow: 1px 5px 7px 0px rgba(0, 0, 0, 0.3), 1px 3px 5px 0px rgba(0, 0, 0, 0.15);
 	width: 23em;
 
 	text-align: center;
+	.clickable:hover {
+		color: #3e005c;
+		cursor: pointer;
+	}
 `;
 const Title = styled.div`
 	width: 100%;
 	border-bottom: 1px solid black;
 	margin: 0;
 	box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.5), 0 0 4px 0 rgba(0, 0, 0, 0.4);
-	position: fixed !important;
+	position: fixed;
 	top: 0;
 	left: 0;
 	right: 0;
@@ -101,7 +105,7 @@ function SelectedSurvey({ loading, showSurvey, selectedSurvey, showPoll, selecte
 			<Survey>
 				<Title className="title" id="title">
 					<FontAwesomeIcon
-						className="change-color-on-hover"
+						className="clickable"
 						icon="times"
 						size="3x"
 						onClick={exit}

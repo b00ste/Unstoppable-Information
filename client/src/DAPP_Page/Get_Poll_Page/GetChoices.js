@@ -1,18 +1,27 @@
 import React, { useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import styled from 'styled-components';
 
-function GetChoices({ storage, setStorage, updateAnswers, pollContract }) {
+const P = styled.p`
+	color: ${props => { if (props.choice == props.selectedChoice) return ('#3e005c') }};
+`;
+
+function GetChoices({ storage, setStorage, pollContract }) {
 
 	const getSurveyChoices = async () => {
 		setStorage({
 			...storage,
-			loading: true 
+			loading: true
 		});
-		let newChoices = await pollContract.methods.getPollChoices(storage.selectedPoll).call({ from: storage.userAddress });
+		let newBytes32Choices = await pollContract.methods.getPollStringToBytes32ArrayStorage(storage.utils.asciiToHex(storage.selectedPoll), 'choices').call();
+		let newStringChices = [];
+		newBytes32Choices.forEach(choice => {
+			newStringChices.push(storage.utils.hexToUtf8(choice));
+		});
 		setStorage({
 			...storage,
 			loading: false,
-			choices: newChoices.replace(/\\"/g, '').replace(/"/g, '')
+			choices: newStringChices
 		});
 	}
 
@@ -24,14 +33,21 @@ function GetChoices({ storage, setStorage, updateAnswers, pollContract }) {
 
 	return (
 		<>
-
 			{
 				storage.choices !== undefined ?
-					storage.choices.split(',')
+					storage.choices
 						.map((val) =>
-							<div key={uuidv4()} onChange={updateAnswers}>
-								<p>{val} <input type="radio" name={storage.selectedPoll} value={val}/> </p>
-							</div>
+							<P
+								className="clickable"
+								key={uuidv4()}
+								choice={val}
+								selectedChoice={storage.choice}
+								onClick={(res) =>
+									setStorage({ ...storage, choice: res.target.firstChild.nodeValue })
+								}
+							>
+								{val}
+							</P>
 						)
 					: <></>
 			}

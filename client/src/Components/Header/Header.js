@@ -74,7 +74,7 @@ const HeaderStyle = styled.div`
 		border-radius: 5px;
 		width: 10em;
 		height: 8em;
-		text-align: center
+		text-align: center;
 	}
 
 	.balance {
