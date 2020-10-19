@@ -59,7 +59,7 @@ function Connect({ storage, setStorage }) {
 		if (typeof window.ethereum !== 'undefined'
 			|| (typeof window.web3 !== 'undefined')) {
 			if (storage.userAddress === undefined) {
-				setStorage({ ...storage, connected: false, provider: window.ethereum })
+				setStorage({ ...storage, connected: false })
 				window.ethereum.send('eth_accounts')
 					.then((res) => {
 						if (res.result[0] !== undefined) {

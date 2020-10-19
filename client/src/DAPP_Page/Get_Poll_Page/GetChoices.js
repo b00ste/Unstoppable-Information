@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import styled from 'styled-components';
 
 const P = styled.p`
-	color: ${props => { if (props.choice == props.selectedChoice) return ('#3e005c') }};
+	color: ${props => { if (props.choice === props.selectedChoice) return ('#3e005c') }};
 `;
 
 function GetChoices({ storage, setStorage, pollContract }) {
@@ -26,7 +26,7 @@ function GetChoices({ storage, setStorage, pollContract }) {
 	}
 
 	useEffect(() => {
-		if (storage.choices === undefined && storage.showPoll && storage.selectedPoll !== undefined) {
+		if (storage.choices === undefined && storage.showPoll && storage.selectedPoll !== undefined && storage.userAddress !== undefined) {
 			getSurveyChoices();
 		}
 	}, []);
