@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Card from '../../Components/FlippingCard';
+import { Link } from 'react-router-dom';
 
 const Row = styled.div`
 	display: flex;
@@ -17,9 +18,25 @@ const Column = styled.div`
 	h6 {
 		font-size: 0.8em;
 	}
+	a {
+		box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.175);
+		background-color: #fdfcfa;
+		color: #1a1a1a;
+		text-decoration: none;
+		display: inline-block;
+		padding: 1em 5em;
+		margin-top: 0.7em;
+		&:visited {
+			color: #1a1a1a;
+		}
+		&:hover {
+			background-color: #e8eae6;
+		}
+	}
 `;
 
 function AppBody() {
+	const [link, setLink] = useState("/App");
 	return (
 		<>
 			<Row>
@@ -32,18 +49,21 @@ function AppBody() {
 									Be aware that any information you provide and ask from participants is public.
 									Incentivate people to participate at your surveys, ask decent questions!
 								</h6>
-								<button
-									type="button"
+								<Link
+									to={link}
 									onClick={(e) => {
-										e.preventDefault();
+										e.stopPropagation();
 										let flippedStatus = e.currentTarget.parentNode.parentNode.className.includes('flipped');
 										if (flippedStatus) {
-											window.location.href = '/App/Set_Survey';
+											setLink("/App/Set_Survey");
+										}
+										else {
+											return 0;
 										}
 									}}
 								>
 									Let's go!
-								</button>
+								</Link>
 							</>
 						}
 					/>
@@ -58,18 +78,21 @@ function AppBody() {
 									public and anyone can access it on blockchain. Please do not
 									provide any informationthat can be used against you!
 								</h6>
-								<button
-									type="button"
+								<Link
+									to={link}
 									onClick={(e) => {
-										e.preventDefault();
+										e.stopPropagation();
 										let flippedStatus = e.currentTarget.parentNode.parentNode.className.includes('flipped');
 										if (flippedStatus) {
-											window.location.href = '/App/Get_Surveys';
+											setLink("/App/Get_Surveys");
+										}
+										else {
+											return 0;
 										}
 									}}
 								>
 									Let's go!
-								</button>
+								</Link>
 							</>
 						}
 					/>
@@ -85,18 +108,21 @@ function AppBody() {
 									Be aware that any information you provide and ask from participants is public.
 									Incentivate people to participate at your surveys, set decent poll choices!
 								</h6>
-								<button
-									type="button"
+								<Link
+									to={link}
 									onClick={(e) => {
-										e.preventDefault();
+										e.stopPropagation();
 										let flippedStatus = e.currentTarget.parentNode.parentNode.className.includes('flipped');
 										if (flippedStatus) {
-											window.location.href = '/App/Set_Poll';
+											setLink("/App/Set_Poll");
+										}
+										else {
+											return 0;
 										}
 									}}
 								>
 									Let's go!
-								</button>
+								</Link>
 							</>
 						}
 					/>
@@ -111,18 +137,21 @@ function AppBody() {
 									public and anyone can access it on blockchain. Please do not
 									provide any informationthat can be used against you!
 								</h6>
-								<button
-									type="button"
+								<Link
+									to={link}
 									onClick={(e) => {
-										e.preventDefault();
+										e.stopPropagation();
 										let flippedStatus = e.currentTarget.parentNode.parentNode.className.includes('flipped');
 										if (flippedStatus) {
-											window.location.href = '/App/Get_Polls';
+											setLink("/App/Get_Polls");
+										}
+										else {
+											return 0;
 										}
 									}}
 								>
 									Let's go!
-								</button>
+								</Link>
 							</>
 						}
 					/>
