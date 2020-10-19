@@ -9,6 +9,8 @@ If you want to try the app the fast way, you can acces it here: https://b00ste.g
 To fork and develop or use my project in any way you need to:
 Firstly install node.js(https://nodejs.org/).
 Secondly install Truffle in terminal: "npm install truffle -g".
+After you can deploy your own contracts and change the addresses inside ./client/src/App.js.
+If you choose to use my contract addresses you can go directly to ./client inside a terminal and use "npm start".
 
 <br />
 
