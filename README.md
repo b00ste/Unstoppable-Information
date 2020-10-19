@@ -1,5 +1,6 @@
 ## Use my project with the my contracts
 
+In order for you to interact with the fronend you need to have metamask extension installed in your browser.
 If you want to try the app the fast way, you can acces it here: https://b00ste.github.io/Unstoppable-Information/
 
 <br />
