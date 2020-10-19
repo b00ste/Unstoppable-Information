@@ -33,24 +33,24 @@ function GetUserPolls({ storage, setStorage, pollContract }) {
 			...storage,
 			loading: true
 		});
-		const newNrOfUserPolls = await pollContract.methods.getUserCreatedPolls().call({ from: storage.userAddress });
-		const newTitles = [];
-		for (let i = newNrOfUserPolls - 1; i >= 0; i--) {
-			newTitles.push(await pollContract.methods.getUserNumberOfPolls(i).call({ from: storage.userAddress }));
-		}
+		const newBytes32Titles = await pollContract.methods.getUserStringToBytes32ArrayStorage('polls').call({ from: storage.userAddress });
+		const newStringTitles = [];
+		newBytes32Titles.forEach(title => {
+			newStringTitles.push(storage.utils.hexToUtf8(title))
+		});
 		setStorage({
 			...storage,
-			nrOfUserPolls: newNrOfUserPolls,
-			userPollTitles: newTitles,
+			nrOfUserPolls: newStringTitles.length,
+			userPollTitles: newStringTitles,
 			loading: false
 		});
 	}
 
 	useEffect(() => {
-		if (storage.nrOfUserPolls === undefined && storage.userPollTitles === undefined) {
+		if (storage.nrOfUserPolls === undefined && storage.userPollTitles === undefined && storage.userAddress !== undefined) {
 			getUserPolls();
 		}
-	}, [storage.userAddress]);
+	}, []);
 
 	return (
 		<>
@@ -68,6 +68,7 @@ function GetUserPolls({ storage, setStorage, pollContract }) {
 								<div key={uuidv4()} className="card-default">
 									<h4>{val}</h4>
 									<button
+									type="button"
 										onClick={() => {
 											setStorage({
 												...storage,

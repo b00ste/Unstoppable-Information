@@ -21,7 +21,7 @@ function GetQuestions({ storage, setStorage, updateAnswers, surveysContract }) {
 	}
 
 	useEffect(() => {
-		if (storage.questions === undefined && storage.showSurvey && storage.selectedSurvey !== undefined) {
+		if (storage.questions === undefined && storage.showSurvey && storage.selectedSurvey !== undefined && storage.userAddress !== undefined) {
 			getSurveyQuestions();
 		}
 	}, []);

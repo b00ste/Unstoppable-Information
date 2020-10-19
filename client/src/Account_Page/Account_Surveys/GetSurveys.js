@@ -47,10 +47,10 @@ function GetUserSurveys({ storage, setStorage, surveysContract }) {
 	}
 
 	useEffect(() => {
-		if (storage.nrOfUserSurveys === undefined && storage.userSurveyTitles === undefined) {
+		if (storage.nrOfUserSurveys === undefined && storage.userSurveyTitles === undefined && storage.userAddress !== undefined) {
 			getUserSurveys();
 		}
-	}, [storage.userAddress]);
+	}, []);
 
 	return (
 		<>

@@ -1,12 +1,12 @@
 import React from 'react';
 import SelectedPoll from '../../Components/SelectedSurevyOrPollWindow.js';
 import Surveys from './GetPolls.js';
-import Data from './SelectedPollData.js';
+import Choices from './GetChoices';
 import Buttons from '../ExportDataButton.js';
 
 
 function Body({ storage, setStorage, pollContract }) {
-	
+
 	return (
 		<>
 			<Surveys
@@ -20,7 +20,7 @@ function Body({ storage, setStorage, pollContract }) {
 				loading={storage.loading}
 				body={
 					<>
-						<Data
+						<Choices
 							storage={storage}
 							setStorage={setStorage}
 							pollContract={pollContract}
@@ -39,8 +39,8 @@ function Body({ storage, setStorage, pollContract }) {
 							...storage,
 							showPoll: false,
 							selectedPoll: undefined,
-							questions: undefined,
-							answers: undefined
+							choices: undefined,
+							votes: undefined
 						});
 					}
 				}
