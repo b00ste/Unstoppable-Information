@@ -2,6 +2,7 @@
 
 In order for you to interact with the fronend you need to have metamask extension installed in your browser.
 If you want to try the app the fast way, you can acces it here: https://b00ste.github.io/Unstoppable-Information/
+Do not forget to change the network in metamask to Ropsten.
 
 <br />
 
